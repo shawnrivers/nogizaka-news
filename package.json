@@ -1,0 +1,16 @@
+{
+  "name": "nogizaka-news",
+  "version": "1.0.0",
+  "description": "",
+  "main": "noginews.js",
+  "dependencies": {
+    "twit": "^2.2.11"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node noginews.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "shawnrivers",
+  "license": "MIT"
+}
