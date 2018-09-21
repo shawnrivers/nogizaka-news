@@ -1,8 +1,20 @@
 const Twit = require("twit");
 const config = require("./config");
 
-// Set an array to store gathered tweets.
-let tweetsList = [];
+const newsMedia = [
+  { id: "142921471", count: 30 }, // モデルプレス
+  { id: "24172196", count: 30 }, // MANTANWEB
+  { id: "95207674", count: 30 }, // ORICON NEWS
+  { id: "5649672", count: 30 }, // 音楽ナタリー
+  { id: "1516060316", count: 30 }, // LINE NEWS
+  { id: "46058599", count: 30 } // 日刊スポーツ
+];
+
+const nogizakaRelated = [
+  { id: "317684165", count: 10 }, // 乃木坂46
+  { id: "929625878249684992", count: 1 }, // 乃木坂工事中
+  { id: "1001065920234573824", count: 1 } // 乃木坂46新聞
+];
 
 const T = new Twit(config);
 
@@ -15,75 +27,36 @@ function checkNogizaka(text) {
   }
 }
 
-function retweet(tweetID, createdDate) {
-  T.post("statuses/retweet/:id", { id: tweetID }, (err, data, response) => {
-    if (err) {
-      console.log("Error code " + err.code + ": " + err.message + "\n");
-    } else {
-      console.log(
-        "Retweeted @" +
-          data.user.screen_name +
-          " tweeted at: " +
-          createdDate +
-          "\n" +
-          data.text +
-          "\n----------\n"
-      );
-    }
-  });
-}
-
 function getTimelinesAndRetweet() {
-  Promise.all([
-    T.get("statuses/user_timeline", {
-      user_id: "142921471", // モデルプレス
-      include_rts: false,
-      count: 10
-    }),
-    T.get("statuses/user_timeline", {
-      user_id: "24172196", // MANTANWEB
-      include_rts: false,
-      count: 10
-    }),
-    T.get("statuses/user_timeline", {
-      user_id: "95207674", // ORICON NEWS
-      include_rts: false,
-      count: 10
-    }),
-    T.get("statuses/user_timeline", {
-      user_id: "5649672", // 音楽ナタリー
-      include_rts: false,
-      count: 10
-    }),
-    T.get("statuses/user_timeline", {
-      user_id: "1516060316", // LINE NEWS
-      include_rts: false,
-      count: 10
-    }),
-    T.get("statuses/user_timeline", {
-      user_id: "46058599", // 日刊スポーツ
-      include_rts: false,
-      count: 10
-    }),
-    T.get("statuses/user_timeline", {
-      user_id: "317684165", // 乃木坂46
-      include_rts: false,
-      count: 10
-    }),
-    T.get("statuses/user_timeline", {
-      user_id: "929625878249684992", // 乃木坂工事中
-      include_rts: false,
-      count: 1
-    }),
-    T.get("statuses/user_timeline", {
-      user_id: "1001065920234573824", // 乃木坂46新聞
-      include_rts: false,
-      count: 3
-    })
-  ])
+  let getPromises = [];
+
+  for (let i = 0; i < newsMedia.length; i++) {
+    getPromises.push(
+      T.get("statuses/user_timeline", {
+        user_id: newsMedia[i].id,
+        include_rts: false,
+        count: newsMedia[i].count
+      })
+    );
+  }
+
+  for (let i = 0; i < nogizakaRelated.length; i++) {
+    getPromises.push(
+      T.get("statuses/user_timeline", {
+        user_id: nogizakaRelated[i].id,
+        include_rts: false,
+        count: nogizakaRelated[i].count
+      })
+    );
+  }
+
+  Promise.all(getPromises)
     .then(response => {
-      // Check whether the tweets are nogizaka-related.
-      for (let i = 0; i < 6; i++) {
+      // Clear tweetsList.
+      let tweetsList = [];
+
+      // News media
+      for (let i = 0; i < newsMedia.length; i++) {
         const timeline = response[i].data;
         for (let j = 0; j < timeline.length; j++) {
           const tweetID = timeline[j].id_str;
@@ -102,7 +75,12 @@ function getTimelinesAndRetweet() {
         }
       }
 
-      for (let i = 6; i < 9; i++) {
+      // Nogizaka-related
+      for (
+        let i = newsMedia.length;
+        i < newsMedia.length + nogizakaRelated.length;
+        i++
+      ) {
         const timeline = response[i].data;
         for (let j = 0; j < timeline.length; j++) {
           const tweetID = timeline[j].id_str;
@@ -125,14 +103,30 @@ function getTimelinesAndRetweet() {
       );
 
       // Retweet tweets.
-      for (let i = 0; i < tweetsList.length; i++) {
-        retweet(tweetsList[i].tweetID, tweetsList[i].createdDate);
-      }
+      retweetAll(tweetsList);
     })
     .catch(err => console.log(err));
 }
 
+async function retweet(tweet) {
+  const retweetResponse = await T.post("statuses/retweet/:id", {
+    id: tweet.tweetID
+  })
+    .then(() => console.log("Succeeded: Retweeted!"))
+    .catch(err => {
+      console.log("Error:", err.message);
+    });  
+}
+
+async function retweetAll(tweetsList) {
+  for (const tweet of tweetsList) {
+    await retweet(tweet);
+  }
+  console.log("Done!\n");
+}
+
+// Get and retweet when the app runs.
 getTimelinesAndRetweet();
 
 // Get and retweet every 15 min.
-setInterval(getTimelinesAndRetweet, 1000 * 60 * 15);
+setInterval(getTimelinesAndRetweet, 1000 * 60 * 30);
