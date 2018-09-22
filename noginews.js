@@ -20,7 +20,7 @@ const T = new Twit(config);
 
 // Check whether the text includes "乃木坂".
 function checkNogizaka(text) {
-  if (text.includes("乃木坂")) {
+  if (text.includes("乃木坂") || text.includes("生駒里奈")) {
     return true;
   } else {
     return false;
