@@ -20,7 +20,29 @@ const T = new Twit(config);
 
 // Check whether the text includes "乃木坂".
 function checkNogizaka(text) {
-  if (text.includes("乃木坂") || text.includes("生駒里奈")) {
+  if (
+    text.includes("乃木坂") ||
+    text.includes("西野七瀬") ||
+    text.includes("生駒里奈") ||
+    text.includes("川村真洋") ||
+    text.includes("斎藤ちはる") ||
+    text.includes("相楽伊織") ||
+    text.includes("伊藤万理華") ||
+    text.includes("中元日芽香") ||
+    text.includes("橋本奈々未") ||
+    text.includes("深川麻衣") ||
+    text.includes("永島聖羅") ||
+    text.includes("松井玲奈") ||
+    text.includes("畠中清羅") ||
+    text.includes("大和里菜") ||
+    text.includes("伊藤寧々") ||
+    text.includes("市來玲奈") ||
+    text.includes("宮沢セイラ") ||
+    text.includes("宮澤成良") ||
+    text.includes("柏幸奈") ||
+    text.includes("安藤美雲") ||
+    text.includes("岩瀬佑美子")
+  ) {
     return true;
   } else {
     return false;
@@ -115,7 +137,7 @@ async function retweet(tweet) {
     .then(() => console.log("Succeeded: Retweeted!"))
     .catch(err => {
       console.log("Error:", err.message);
-    });  
+    });
 }
 
 async function retweetAll(tweetsList) {
