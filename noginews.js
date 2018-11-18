@@ -18,11 +18,13 @@ const nogizakaRelated = [
 
 const T = new Twit(config);
 
-// Check whether the text includes "乃木坂".
+// Check whether the text includes "乃木坂" or names of former members.
 function checkNogizaka(text) {
   if (
     text.includes("乃木坂") ||
     text.includes("西野七瀬") ||
+    text.includes("若月佑美") ||
+    text.includes("能條愛未") ||
     text.includes("生駒里奈") ||
     text.includes("川村真洋") ||
     text.includes("斎藤ちはる") ||
