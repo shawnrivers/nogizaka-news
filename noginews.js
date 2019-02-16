@@ -23,6 +23,7 @@ function checkNogizaka(text) {
   if (
     text.includes("乃木坂46") ||
     text.includes("nogizaka46") ||
+    text.includes("衛藤美彩") ||
     text.includes("川後陽菜") ||
     text.includes("西野七瀬") ||
     text.includes("若月佑美") ||
