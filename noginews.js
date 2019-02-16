@@ -136,7 +136,7 @@ function getTimelinesAndRetweet() {
 }
 
 async function retweet(tweet) {
-  const retweetResponse = await T.post("statuses/retweet/:id", {
+  await T.post("statuses/retweet/:id", {
     id: tweet.tweetID
   })
     .then(() => console.log("Succeeded: Retweeted!"))
