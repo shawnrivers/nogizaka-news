@@ -149,7 +149,7 @@ async function retweetAll(tweetsList) {
   for (const tweet of tweetsList) {
     await retweet(tweet);
   }
-  console.log("Done!\n");
+  console.log("This Retweet cycle is done.");
 }
 
 // Get and retweet when the app runs.
