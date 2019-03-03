@@ -1,4 +1,7 @@
 /node_modules
 /.vscode
+/dist
 .prettierrc.js
 .eslintrc
+tsconfig.json
+.babelrc
