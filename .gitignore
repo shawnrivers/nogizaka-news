@@ -3,5 +3,3 @@
 /dist
 .prettierrc.js
 .eslintrc
-tsconfig.json
-.babelrc
