@@ -41,3 +41,29 @@ export const nogizakaNames = [
   '安藤美雲',
   '岩瀬佑美子',
 ];
+
+export enum ScheduleType {
+  Live = 'live',
+  Handshake = 'handshake',
+  Tv = 'tv',
+  Radio = 'radio',
+  Magazine = 'magazine',
+  Web = 'web',
+  Moive = 'movie',
+  Theatre = 'theatre',
+  Release = 'release',
+  Birthday = 'birthday',
+}
+
+export const scheduleTypes = [
+  { type: ScheduleType.Live, className: '.live', displayName: 'LIVE/EVENT' },
+  { type: ScheduleType.Handshake, className: '.handshake', displayName: '握手会' },
+  { type: ScheduleType.Tv, className: '.tv', displayName: 'TV' },
+  { type: ScheduleType.Radio, className: '.radio', displayName: 'RADIO' },
+  { type: ScheduleType.Magazine, className: '.magazine', displayName: 'MAGZINE' },
+  { type: ScheduleType.Web, className: '.web', displayName: 'WEB' },
+  { type: ScheduleType.Moive, className: '.movie', displayName: 'MOVIE' },
+  { type: ScheduleType.Theatre, className: '.theatre', displayName: 'THEATRE' },
+  { type: ScheduleType.Release, className: '.release', displayName: 'REALSE' },
+  { type: ScheduleType.Birthday, className: '.bd', displayName: '誕生日' },
+];
