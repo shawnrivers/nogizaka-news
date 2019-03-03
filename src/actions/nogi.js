@@ -1,12 +1,16 @@
 const { nogizakaNames } = require('../utils/constants');
 
 function relatesToNogizaka(text) {
-  for (const name of nogizakaNames) {
-    if (text.includes(name)) {
-      return true;
+  if (text !== undefined) {
+    for (const name of nogizakaNames) {
+      if (text.includes(name)) {
+        return true;
+      }
     }
+    return false;
+  } else {
+    return false;
   }
-  return false;
 }
 
 module.exports = {
