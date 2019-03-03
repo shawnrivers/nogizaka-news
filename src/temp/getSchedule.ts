@@ -1,23 +1,12 @@
 import * as req from 'request-promise';
 import * as cheerio from 'cheerio';
 import { day, month, year } from '../utils/date';
+import { scheduleTypes } from '../utils/constants';
+import { ITypeSchedules } from '../utils/types';
 
 const url = `http://www.nogizaka46.com/schedule/?to=${year}${month}`;
 
-const scheduleTypes = [
-  { type: 'live', className: '.live', displayName: 'LIVE/EVENT' },
-  { type: 'handshake', className: '.handshake', displayName: '握手会' },
-  { type: 'tv', className: '.tv', displayName: 'TV' },
-  { type: 'radio', className: '.radio', displayName: 'RADIO' },
-  { type: 'magazine', className: '.magazine', displayName: 'MAGZINE' },
-  { type: 'web', className: '.web', displayName: 'WEB' },
-  { type: 'movie', className: '.movie', displayName: 'MOVIE' },
-  { type: 'theatre', className: '.theatre', displayName: 'THEATRE' },
-  { type: 'release', className: '.release', displayName: 'REALSE' },
-  { type: 'birthday', className: '.bd', displayName: '誕生日' },
-];
-
-const getDaySchedules = (html: any) => {
+const getDaySchedules = (html: any): ITypeSchedules[] => {
   let schedules = [];
 
   const $ = cheerio.load(html);
