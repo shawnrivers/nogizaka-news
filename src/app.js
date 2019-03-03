@@ -1,5 +1,6 @@
 const Twit = require('twit');
 const config = require('./config');
+const nogizaka = require('./actions/nogi');
 
 const newsMedia = [
   { id: '142921471', count: 30 }, // モデルプレス
@@ -91,7 +92,7 @@ function getTimelinesAndRetweet() {
           const userName = timeline[j].user.screen_name;
           const createdDate = new Date(timeline[j].created_at);
 
-          if (checkNogizaka(text)) {
+          if (nogizaka.relatesToNogizaka(text)) {
             const tweetObj = {
               tweetID,
               createdDate,
