@@ -11,16 +11,22 @@
     "twit": "^2.2.11"
   },
   "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
+    "@babel/preset-typescript": "^7.3.3",
     "@types/cheerio": "^0.22.10",
     "@types/request": "^2.48.1",
     "@types/request-promise": "^4.1.42",
     "@types/twit": "^2.2.21",
+    "@typescript-eslint/parser": "^1.4.2",
     "eslint": "^5.15.0"
   },
   "scripts": {
-    "start": "node src/app.js",
+    "start": "tsc && node dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "git push heroku master"
+    "deploy": "git push heroku master",
+    "check-types": "tsc"
   },
   "author": "shawnrivers",
   "license": "MIT"
