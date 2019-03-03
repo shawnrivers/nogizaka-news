@@ -1,1 +1,1 @@
-worker: node src/noginews.js
+worker: node src/app.js
