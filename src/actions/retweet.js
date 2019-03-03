@@ -1,6 +1,6 @@
 const { T } = require('../utils/twit');
 const { newsMediaAccounts, nogizakaRelatedAccounts } = require('../utils/constants');
-const { relatesToNogizaka } = require('./nogi');
+const { relatesToNogizaka } = require('./nogizaka');
 
 const getTimeline = async account => {
   let timeline = [];
