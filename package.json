@@ -8,17 +8,17 @@
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
     "typescript": "^3.3.3333",
-    "twit": "^2.2.11"
+    "twit": "^2.2.11",
+    "@types/cheerio": "^0.22.10",
+    "@types/request": "^2.48.1",
+    "@types/request-promise": "^4.1.42",
+    "@types/twit": "^2.2.21"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
     "@babel/plugin-proposal-class-properties": "^7.3.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
     "@babel/preset-typescript": "^7.3.3",
-    "@types/cheerio": "^0.22.10",
-    "@types/request": "^2.48.1",
-    "@types/request-promise": "^4.1.42",
-    "@types/twit": "^2.2.21",
     "@typescript-eslint/parser": "^1.4.2",
     "eslint": "^5.15.0"
   },
