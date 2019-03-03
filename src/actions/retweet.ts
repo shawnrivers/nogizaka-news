@@ -1,6 +1,6 @@
 import { T } from '../utils/twit';
-const { newsMediaAccounts, nogizakaRelatedAccounts } = require('../utils/constants');
-const { relatesToNogizaka } = require('./nogizaka');
+import { newsMediaAccounts, nogizakaRelatedAccounts } from'../utils/constants';
+import { relatesToNogizaka } from'./nogizaka';
 
 const getTimeline = async (account: any) => {
   let timeline: any[] = [];
@@ -72,11 +72,8 @@ const retweetNogizakaRelated = async (nogizakaAccounts: any, mediaAccounts: any)
   console.log('Retweet cycle is done.\n');
 };
 
-const watchAndRetweet = (interval: number) => {
+export const watchAndRetweet = (interval: number) => {
   retweetNogizakaRelated(nogizakaRelatedAccounts, newsMediaAccounts);
   setInterval(() => retweetNogizakaRelated(nogizakaRelatedAccounts, newsMediaAccounts), interval);
 };
 
-module.exports = {
-  watchAndRetweet,
-};

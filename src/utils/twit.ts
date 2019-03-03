@@ -1,4 +1,5 @@
-const Twit = require('twit');
+import * as Twit from 'twit';
+
 const config = {
   consumer_key: '5M94fgNYJGWKmQEAJiAVlxyd1',
   consumer_secret: 'pbvUWwHLLOuF957m1dyf99hi3uNkSl3ARjSWqHOs7YQFm4bu1k',

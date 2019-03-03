@@ -1,6 +1,6 @@
 import { nogizakaNames } from '../utils/constants';
 
-function relatesToNogizaka(text: string) {
+export const relatesToNogizaka = (text: string): boolean => {
   if (text !== undefined) {
     for (const name of nogizakaNames) {
       if (text.includes(name)) {
@@ -11,8 +11,4 @@ function relatesToNogizaka(text: string) {
   } else {
     return false;
   }
-}
-
-module.exports = {
-  relatesToNogizaka,
 };

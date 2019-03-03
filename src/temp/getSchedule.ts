@@ -1,5 +1,5 @@
-const req = require('request-promise');
-const cheerio = require('cheerio');
+import * as req from 'request-promise';
+import * as cheerio from 'cheerio';
 import { day, month, year } from '../utils/date';
 
 const url = `http://www.nogizaka46.com/schedule/?to=${year}${month}`;

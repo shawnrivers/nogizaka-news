@@ -5,6 +5,6 @@ const tokyoDate = now.toLocaleString('en-US', {
   month: '2-digit',
   day: '2-digit',
 });
-const [month, day, year] = tokyoDate.split('/');
 
-export { day, month, year };
+export const [month, day, year] = tokyoDate.split('/');
+

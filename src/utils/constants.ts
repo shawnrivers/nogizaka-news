@@ -1,4 +1,4 @@
-const newsMediaAccounts = [
+export const newsMediaAccounts = [
   { id: '142921471', count: 30 }, // モデルプレス
   { id: '24172196', count: 30 }, // MANTANWEB
   { id: '95207674', count: 30 }, // ORICON NEWS
@@ -7,13 +7,13 @@ const newsMediaAccounts = [
   { id: '46058599', count: 30 }, // 日刊スポーツ
 ];
 
-const nogizakaRelatedAccounts = [
+export const nogizakaRelatedAccounts = [
   { id: '317684165', count: 10 }, // 乃木坂46
   { id: '929625878249684992', count: 1 }, // 乃木坂工事中
   { id: '1001065920234573824', count: 1 }, // 乃木坂46新聞
 ];
 
-const nogizakaNames = [
+export const nogizakaNames = [
   '乃木坂46',
   'nogizaka46',
   '衛藤美彩',
@@ -41,5 +41,3 @@ const nogizakaNames = [
   '安藤美雲',
   '岩瀬佑美子',
 ];
-
-export { newsMediaAccounts, nogizakaRelatedAccounts, nogizakaNames };
