@@ -7,9 +7,14 @@
     "cheerio": "^1.0.0-rc.2",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
+    "typescript": "^3.3.3333",
     "twit": "^2.2.11"
   },
   "devDependencies": {
+    "@types/cheerio": "^0.22.10",
+    "@types/request": "^2.48.1",
+    "@types/request-promise": "^4.1.42",
+    "@types/twit": "^2.2.21",
     "eslint": "^5.15.0"
   },
   "scripts": {
