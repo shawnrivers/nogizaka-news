@@ -1,1 +1,1 @@
-worker: tsc && node dist/app.js
+worker: npm install && tsc && node dist/app.js
