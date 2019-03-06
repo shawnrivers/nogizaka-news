@@ -8,7 +8,7 @@ T.get(
     screen_name: accountName,
     count: 1,
   },
-  (err: any, data: any, response: any) => {
+  (err, data: any, response) => {
     if (!err) {
       console.log(data[0].user.name + '(@' + data[0].user.screen_name + '): ' + data[0].user.id_str);
     } else {
