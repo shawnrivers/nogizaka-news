@@ -2,7 +2,7 @@ import { T } from '../utils/twit';
 import { newsMediaAccounts, nogizakaRelatedAccounts } from'../utils/constants';
 import { relatesToNogizaka } from'./nogizaka';
 
-const getTimeline = async (account: any) => {
+const getTimeline = async (account: any): Promise<any[]> => {
   let timeline: any[] = [];
   const getParams = {
     user_id: account.id,
@@ -20,14 +20,14 @@ const getTimeline = async (account: any) => {
         timeline.push(tweet);
       }
     })
-    .catch((err: any) => {
+    .catch((err) => {
       console.log('Error:', err);
     });
 
   return timeline;
 };
 
-const getTweets = async (accounts: any) => {
+const getTweets = async (accounts: any): Promise<any[]>  => {
   let tweets = [];
   for (const account of accounts) {
     const timeline = await getTimeline(account);
@@ -37,13 +37,13 @@ const getTweets = async (accounts: any) => {
   return tweets;
 };
 
-const getTweetsFromNogizaka = async (accounts: any) => {
+const getTweetsFromNogizaka = async (accounts: any): Promise<any[]>  => {
   const tweets = await getTweets(accounts);
 
   return tweets;
 };
 
-const getNogizakaTweetsFromMedia = async (accounts: any) => {
+const getNogizakaTweetsFromMedia = async (accounts: any): Promise<any[]>  => {
   const tweets = await getTweets(accounts);
   const nogizakaRelatedTweets = tweets.filter(tweet => relatesToNogizaka(tweet.text));
 
@@ -64,7 +64,7 @@ const retweetNogizakaRelated = async (nogizakaAccounts: any, mediaAccounts: any)
       id: tweet.id,
     })
       .then(() => console.log(`Retweet succeeded: ${tweet.id} from ${tweet.userName}`))
-      .catch((err: any) => {
+      .catch((err) => {
         console.log('Retweet failed:', err.message);
       });
   }
