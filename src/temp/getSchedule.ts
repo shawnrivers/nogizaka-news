@@ -1,13 +1,11 @@
 import * as req from 'request-promise';
 import * as cheerio from 'cheerio';
-import { day, month, year } from '../utils/date';
+import { IDate } from '../utils/date';
 import { scheduleTypes } from '../utils/constants';
 import { ITypeSchedules } from '../utils/types';
 
-const url = `http://www.nogizaka46.com/schedule/?to=${year}${month}`;
-
-const getDaySchedules = (html: any): ITypeSchedules[] => {
-  let schedules = [];
+const getDaySchedules = (html: any, day: string): ITypeSchedules[] => {
+  let schedules: ITypeSchedules[] = [];
 
   const $ = cheerio.load(html);
   const dayElement = $(`#d${day}`);
@@ -36,11 +34,18 @@ const getDaySchedules = (html: any): ITypeSchedules[] => {
   return schedules;
 };
 
-req(url)
-  .then((html: any) => {
-    console.log(getDaySchedules(html));
-  })
-  .catch((err: any) => {
-    console.log('Error:', err);
-    return null;
-  });
+export const getSchedules = async (date: IDate): Promise<ITypeSchedules[]> => {
+  let schedules: ITypeSchedules[] = [];
+
+  const url = `http://www.nogizaka46.com/schedule/?to=${date.year}${date.month}`;
+
+  await req(url)
+    .then(html => {
+      schedules = getDaySchedules(html, date.day);
+    })
+    .catch(err => {
+      console.log('Error:', err);
+    });
+
+  return schedules;
+};
