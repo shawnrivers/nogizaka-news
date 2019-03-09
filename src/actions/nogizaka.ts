@@ -1,4 +1,6 @@
+import * as req from 'request-promise';
 import * as cheerio from 'cheerio';
+import { IDate } from '../utils/date';
 import { scheduleTypes } from '../utils/constants';
 import { ITypeSchedules } from '../utils/types';
 import { nogizakaNames } from '../utils/constants';
@@ -46,3 +48,18 @@ const getDaySchedules = (html: any, day: string): ITypeSchedules[] => {
   return schedules;
 };
 
+export const getSchedules = async (date: IDate): Promise<ITypeSchedules[]> => {
+  let schedules: ITypeSchedules[] = [];
+
+  const url = `http://www.nogizaka46.com/schedule/?to=${date.year}${date.month}`;
+
+  await req(url)
+    .then(html => {
+      schedules = getDaySchedules(html, date.day);
+    })
+    .catch(err => {
+      console.log('Error:', err);
+    });
+
+  return schedules;
+};
