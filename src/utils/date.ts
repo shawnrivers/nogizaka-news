@@ -33,6 +33,26 @@ export const getCurrentFullDate = (): string => {
   return currentFullDate;
 };
 
+const getTimezoneOffsetFromTokyo = (date: Date): number => {
+  const TOKYO_TIMEZONE_OFFSET = -540;
+  const currentTimeZoneOffset = date.getTimezoneOffset();
+
+  const timezoneOffsetDiff = currentTimeZoneOffset - TOKYO_TIMEZONE_OFFSET;
+
+  console.log('Timezone offset from Tokyo time:', timezoneOffsetDiff);
+
+  return timezoneOffsetDiff;
+};
+
+const shiftToTokyoTimezone = (date: Date): Date => {
+  const timeZoneOffsetDiff = getTimezoneOffsetFromTokyo(date);
+
+  const shiftedDate = new Date();
+  shiftedDate.setTime(shiftedDate.getTime() + timeZoneOffsetDiff * 1000 * 60);
+
+  return shiftedDate;
+};
+
 export const getOneDigitDate = (date: string): string => {
   if (date[0] === '0') {
     return date.slice(1);
