@@ -15,7 +15,7 @@ export const nogizakaRelatedAccounts: IWatchedAccount[] = [
   { id: '1001065920234573824', count: 1 }, // 乃木坂46新聞
 ];
 
-export const showroomAccount: IWatchedAccount = { id: '2212674829', count: 15 };
+export const showroomAccount: IWatchedAccount = { id: '2212674829', count: 30 };
 
 export const NOGIZAKA_NAMES = [
   '乃木坂46',
