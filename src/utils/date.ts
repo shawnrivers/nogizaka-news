@@ -39,8 +39,6 @@ const getTimezoneOffsetFromTokyo = (date: Date): number => {
 
   const timezoneOffsetDiff = currentTimeZoneOffset - TOKYO_TIMEZONE_OFFSET;
 
-  console.log('Timezone offset from Tokyo time:', timezoneOffsetDiff);
-
   return timezoneOffsetDiff;
 };
 
