@@ -17,6 +17,7 @@ const getTimeline = async (account: IWatchedAccount): Promise<any[]> => {
           id: data.id_str,
           createdDate: new Date(data.created_at),
           userName: data.user.screen_name,
+          text: data.text,
         };
         timeline.push(tweet);
       }
