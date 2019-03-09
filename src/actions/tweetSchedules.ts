@@ -98,6 +98,8 @@ const tweetTodaySchedules = async () => {
 export const scheduleTweet = (hour: number) => {
   let nextTweetTimeout = getMillisecondsTilTomorrowAt(hour);
 
+  console.log(`Tomorrow's schedules will be tweeted after:', ${nextTweetTimeout / 1000} sec\n`);
+
   const timeoutTweet = async () => {
     console.log("Started tweeting today's schedules.");
 
