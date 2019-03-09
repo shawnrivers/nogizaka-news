@@ -53,6 +53,22 @@ const shiftToTokyoTimezone = (date: Date): Date => {
   return shiftedDate;
 };
 
+// NOTE: this returns the milliseconds til tomorrow based on Asia/Tokyo time.
+export const getMillisecondsTilTomorrowAt = (hour: number): number => {
+  if (Math.floor(hour) <= 23 && Math.floor(hour) >= 0) {
+    const currentDate = new Date();
+
+    const currentDateTokyoTime = shiftToTokyoTimezone(currentDate);
+    const tomorrowDateTokyoTime = shiftToTokyoTimezone(new Date());
+    tomorrowDateTokyoTime.setDate(currentDate.getDate() + 1);
+    tomorrowDateTokyoTime.setHours(hour, 0, 0, 0);
+
+    return tomorrowDateTokyoTime.getTime() - currentDateTokyoTime.getTime();
+  } else {
+    throw 'Error: Please use hour between 0 to 23.';
+  }
+};
+
 export const getOneDigitDate = (date: string): string => {
   if (date[0] === '0') {
     return date.slice(1);
