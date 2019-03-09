@@ -107,9 +107,7 @@ export const scheduleTweet = (hour: number) => {
 
     console.log('[Schedules] Today\'s schedules tweeting finished at Tokyo time:', getCurrentFullDate());
 
-    const currentDate = new Date();
-
-    nextTweetTimeout = getMillisecondsTilTomorrowAt(hour, currentDate);
+    nextTweetTimeout = getMillisecondsTilTomorrowAt(hour);
     console.log(`[Schedules] Tomorrow's schedules will be tweeted after ${nextTweetTimeout / 1000} sec\n`);
     setTimeout(timeoutTweet, nextTweetTimeout);
   };
