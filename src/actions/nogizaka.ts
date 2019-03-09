@@ -3,11 +3,11 @@ import * as cheerio from 'cheerio';
 import { IDate } from '../utils/date';
 import { scheduleTypes } from '../utils/constants';
 import { ITypeSchedules } from '../utils/types';
-import { nogizakaNames } from '../utils/constants';
+import { NOGIZAKA_NAMES } from '../utils/constants';
 
 export const relatesToNogizaka = (text: string): boolean => {
   if (text !== undefined) {
-    for (const name of nogizakaNames) {
+    for (const name of NOGIZAKA_NAMES) {
       if (text.includes(name)) {
         return true;
       }
