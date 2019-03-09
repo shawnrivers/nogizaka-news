@@ -1,11 +1,5 @@
 import { getSchedules } from '../actions/nogizaka';
-import {
-  getToday,
-  IDate,
-  getOneDigitDate,
-  getMillisecondsTilTomorrowAt,
-  getCurrentFullDate,
-} from '../utils/date';
+import { getToday, IDate, getOneDigitDate, getMillisecondsTilTomorrowAt, getCurrentFullDate } from '../utils/date';
 import { ITypeSchedules } from '../utils/types';
 import { getStringLength } from '../utils/string';
 import { T } from '../utils/twit';
