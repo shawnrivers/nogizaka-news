@@ -4,6 +4,7 @@ import { IDate } from '../utils/date';
 import { scheduleTypes } from '../utils/constants';
 import { ITypeSchedules } from '../utils/types';
 import { NOGIZAKA_NAMES } from '../utils/constants';
+import { containsHour } from '../utils/string';
 
 export const relatesToNogizaka = (text: string): boolean => {
   if (text !== undefined) {
@@ -16,6 +17,17 @@ export const relatesToNogizaka = (text: string): boolean => {
   } else {
     return false;
   }
+};
+
+export const containsShowroomSchedule = (text: string): boolean => {
+  if (text !== undefined) {
+    if (text.includes('のぎおび')) {
+      if (containsHour(text)) {
+        return true;
+      }
+    }
+  }
+  return false;
 };
 
 const getDaySchedules = (html: any, day: string): ITypeSchedules[] => {
