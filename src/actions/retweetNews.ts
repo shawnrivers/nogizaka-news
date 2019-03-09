@@ -1,6 +1,6 @@
 import { T } from '../utils/twit';
-import { newsMediaAccounts, nogizakaRelatedAccounts } from '../utils/constants';
-import { relatesToNogizaka } from './nogizaka';
+import { newsMediaAccounts, nogizakaRelatedAccounts, showroomAccount } from '../utils/constants';
+import { relatesToNogizaka, containsShowroomSchedule } from './nogizaka';
 import { IWatchedAccount, ITweet } from '../utils/types';
 
 const getTimeline = async (account: IWatchedAccount): Promise<ITweet[]> => {
@@ -52,12 +52,20 @@ const getNogizakaTweetsFromMedia = async (accounts: IWatchedAccount[]): Promise<
   return nogizakaRelatedTweets;
 };
 
-const retweetNogizakaRelated = async (nogizakaAccounts: IWatchedAccount[], mediaAccounts: IWatchedAccount[]) => {
+const getNogizakaShowroomSchedules = async (showroomAccount: IWatchedAccount): Promise<ITweet[]> => {
+  const tweets = await getTimeline(showroomAccount);
+  const nogizakaShowroomSchedules = tweets.filter(tweet => containsShowroomSchedule(tweet.text));
+
+  return nogizakaShowroomSchedules;
+};
+
+const retweetNogizakaRelated = async (nogizakaAccounts: IWatchedAccount[], mediaAccounts: IWatchedAccount[], showroomAccount: IWatchedAccount) => {
   console.log('[News] Retweet cycle starts.');
 
   const tweetsFromNogizaka = await getTweetsFromNogizaka(nogizakaAccounts);
   const nogizakaTweetsFromMedia = await getNogizakaTweetsFromMedia(mediaAccounts);
-  const nogizakaRelatedTweets = [...tweetsFromNogizaka, ...nogizakaTweetsFromMedia];
+  const showroomScheduleTweets = await getNogizakaShowroomSchedules(showroomAccount);
+  const nogizakaRelatedTweets = [...tweetsFromNogizaka, ...showroomScheduleTweets, ...nogizakaTweetsFromMedia];
 
   nogizakaRelatedTweets.sort((tweetA, tweetB) => (tweetA.createdDate > tweetB.createdDate ? 1 : -1));
 
@@ -75,6 +83,6 @@ const retweetNogizakaRelated = async (nogizakaAccounts: IWatchedAccount[], media
 };
 
 export const watchAndRetweet = (interval: number) => {
-  retweetNogizakaRelated(nogizakaRelatedAccounts, newsMediaAccounts);
-  setInterval(() => retweetNogizakaRelated(nogizakaRelatedAccounts, newsMediaAccounts), interval);
+  retweetNogizakaRelated(nogizakaRelatedAccounts, newsMediaAccounts, showroomAccount);
+  setInterval(() => retweetNogizakaRelated(nogizakaRelatedAccounts, newsMediaAccounts, showroomAccount), interval);
 };
