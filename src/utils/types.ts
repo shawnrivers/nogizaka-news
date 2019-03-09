@@ -9,3 +9,8 @@ export type ITypeSchedules = {
   type: IScheduleType;
   data: string[];
 };
+
+export type IWatchedAccount = {
+  id: string;
+  count: number;
+};

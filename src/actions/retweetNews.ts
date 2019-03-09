@@ -1,8 +1,9 @@
 import { T } from '../utils/twit';
-import { newsMediaAccounts, nogizakaRelatedAccounts } from'../utils/constants';
-import { relatesToNogizaka } from'./nogizaka';
+import { newsMediaAccounts, nogizakaRelatedAccounts } from '../utils/constants';
+import { relatesToNogizaka } from './nogizaka';
+import { IWatchedAccount } from '../utils/types';
 
-const getTimeline = async (account: any): Promise<any[]> => {
+const getTimeline = async (account: IWatchedAccount): Promise<any[]> => {
   let timeline: any[] = [];
   const getParams = {
     user_id: account.id,
@@ -20,14 +21,14 @@ const getTimeline = async (account: any): Promise<any[]> => {
         timeline.push(tweet);
       }
     })
-    .catch((err) => {
+    .catch(err => {
       console.log('Error:', err);
     });
 
   return timeline;
 };
 
-const getTweets = async (accounts: any): Promise<any[]>  => {
+const getTweets = async (accounts: IWatchedAccount[]): Promise<any[]> => {
   let tweets = [];
   for (const account of accounts) {
     const timeline = await getTimeline(account);
@@ -37,20 +38,20 @@ const getTweets = async (accounts: any): Promise<any[]>  => {
   return tweets;
 };
 
-const getTweetsFromNogizaka = async (accounts: any): Promise<any[]>  => {
+const getTweetsFromNogizaka = async (accounts: IWatchedAccount[]): Promise<any[]> => {
   const tweets = await getTweets(accounts);
 
   return tweets;
 };
 
-const getNogizakaTweetsFromMedia = async (accounts: any): Promise<any[]>  => {
+const getNogizakaTweetsFromMedia = async (accounts: IWatchedAccount[]): Promise<any[]> => {
   const tweets = await getTweets(accounts);
   const nogizakaRelatedTweets = tweets.filter(tweet => relatesToNogizaka(tweet.text));
 
   return nogizakaRelatedTweets;
 };
 
-const retweetNogizakaRelated = async (nogizakaAccounts: any, mediaAccounts: any) => {
+const retweetNogizakaRelated = async (nogizakaAccounts: IWatchedAccount[], mediaAccounts: IWatchedAccount[]) => {
   console.log('[News] Retweet cycle starts.');
 
   const tweetsFromNogizaka = await getTweetsFromNogizaka(nogizakaAccounts);
@@ -64,7 +65,7 @@ const retweetNogizakaRelated = async (nogizakaAccounts: any, mediaAccounts: any)
       id: tweet.id,
     })
       .then(() => console.log(`[News] Retweet succeeded: ${tweet.id} from ${tweet.userName}`))
-      .catch((err) => {
+      .catch(err => {
         console.log('[News] Retweet failed:', err.message);
       });
   }
@@ -76,4 +77,3 @@ export const watchAndRetweet = (interval: number) => {
   retweetNogizakaRelated(nogizakaRelatedAccounts, newsMediaAccounts);
   setInterval(() => retweetNogizakaRelated(nogizakaRelatedAccounts, newsMediaAccounts), interval);
 };
-

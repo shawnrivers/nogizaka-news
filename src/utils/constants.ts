@@ -1,4 +1,6 @@
-export const newsMediaAccounts = [
+import { IWatchedAccount } from './types';
+
+export const newsMediaAccounts: IWatchedAccount[] = [
   { id: '142921471', count: 30 }, // モデルプレス
   { id: '24172196', count: 30 }, // MANTANWEB
   { id: '95207674', count: 30 }, // ORICON NEWS
@@ -7,7 +9,7 @@ export const newsMediaAccounts = [
   { id: '46058599', count: 30 }, // 日刊スポーツ
 ];
 
-export const nogizakaRelatedAccounts = [
+export const nogizakaRelatedAccounts: IWatchedAccount[] = [
   { id: '317684165', count: 10 }, // 乃木坂46
   { id: '929625878249684992', count: 1 }, // 乃木坂工事中
   { id: '1001065920234573824', count: 1 }, // 乃木坂46新聞
