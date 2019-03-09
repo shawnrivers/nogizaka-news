@@ -1,6 +1,6 @@
 import { T } from '../utils/twit';
 
-const accountName = 'nikkansports';
+const accountName = 'SHOWROOM_jp';
 
 T.get(
   'statuses/user_timeline',
