@@ -51,7 +51,7 @@ const getNogizakaTweetsFromMedia = async (accounts: any): Promise<any[]>  => {
 };
 
 const retweetNogizakaRelated = async (nogizakaAccounts: any, mediaAccounts: any) => {
-  console.log('Retweet cycle starts.');
+  console.log('[News] Retweet cycle starts.');
 
   const tweetsFromNogizaka = await getTweetsFromNogizaka(nogizakaAccounts);
   const nogizakaTweetsFromMedia = await getNogizakaTweetsFromMedia(mediaAccounts);
@@ -63,13 +63,13 @@ const retweetNogizakaRelated = async (nogizakaAccounts: any, mediaAccounts: any)
     await T.post('statuses/retweet/:id', {
       id: tweet.id,
     })
-      .then(() => console.log(`Retweet succeeded: ${tweet.id} from ${tweet.userName}`))
+      .then(() => console.log(`[News] Retweet succeeded: ${tweet.id} from ${tweet.userName}`))
       .catch((err) => {
-        console.log('Retweet failed:', err.message);
+        console.log('[News] Retweet failed:', err.message);
       });
   }
 
-  console.log('Retweet cycle is done.\n');
+  console.log('[News] Retweet cycle finished.\n');
 };
 
 export const watchAndRetweet = (interval: number) => {
