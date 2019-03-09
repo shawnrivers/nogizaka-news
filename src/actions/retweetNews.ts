@@ -59,7 +59,11 @@ const getNogizakaShowroomSchedules = async (showroomAccount: IWatchedAccount): P
   return nogizakaShowroomSchedules;
 };
 
-const retweetNogizakaRelated = async (nogizakaAccounts: IWatchedAccount[], mediaAccounts: IWatchedAccount[], showroomAccount: IWatchedAccount) => {
+const retweetNogizakaRelated = async (
+  nogizakaAccounts: IWatchedAccount[],
+  mediaAccounts: IWatchedAccount[],
+  showroomAccount: IWatchedAccount,
+) => {
   console.log('[News] Retweet cycle starts.');
 
   const tweetsFromNogizaka = await getTweetsFromNogizaka(nogizakaAccounts);
