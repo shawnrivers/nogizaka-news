@@ -1,19 +1,19 @@
 import { T } from '../utils/twit';
 import { newsMediaAccounts, nogizakaRelatedAccounts } from '../utils/constants';
 import { relatesToNogizaka } from './nogizaka';
-import { IWatchedAccount } from '../utils/types';
+import { IWatchedAccount, ITweet } from '../utils/types';
 
-const getTimeline = async (account: IWatchedAccount): Promise<any[]> => {
-  let timeline: any[] = [];
-  const getParams = {
+const getTimeline = async (account: IWatchedAccount): Promise<ITweet[]> => {
+  let timeline: ITweet[] = [];
+  const params = {
     user_id: account.id,
     include_rts: false,
     count: account.count,
   };
-  await T.get('statuses/user_timeline', getParams)
+  await T.get('statuses/user_timeline', params)
     .then((res: any) => {
       for (const data of res.data) {
-        const tweet = {
+        const tweet: ITweet = {
           id: data.id_str,
           createdDate: new Date(data.created_at),
           userName: data.user.screen_name,
@@ -29,8 +29,8 @@ const getTimeline = async (account: IWatchedAccount): Promise<any[]> => {
   return timeline;
 };
 
-const getTweets = async (accounts: IWatchedAccount[]): Promise<any[]> => {
-  let tweets = [];
+const getTweets = async (accounts: IWatchedAccount[]): Promise<ITweet[]> => {
+  let tweets: ITweet[] = [];
   for (const account of accounts) {
     const timeline = await getTimeline(account);
     tweets.push(...timeline);
@@ -39,13 +39,13 @@ const getTweets = async (accounts: IWatchedAccount[]): Promise<any[]> => {
   return tweets;
 };
 
-const getTweetsFromNogizaka = async (accounts: IWatchedAccount[]): Promise<any[]> => {
+const getTweetsFromNogizaka = async (accounts: IWatchedAccount[]): Promise<ITweet[]> => {
   const tweets = await getTweets(accounts);
 
   return tweets;
 };
 
-const getNogizakaTweetsFromMedia = async (accounts: IWatchedAccount[]): Promise<any[]> => {
+const getNogizakaTweetsFromMedia = async (accounts: IWatchedAccount[]): Promise<ITweet[]> => {
   const tweets = await getTweets(accounts);
   const nogizakaRelatedTweets = tweets.filter(tweet => relatesToNogizaka(tweet.text));
 

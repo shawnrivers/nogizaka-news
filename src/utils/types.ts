@@ -14,3 +14,10 @@ export type IWatchedAccount = {
   id: string;
   count: number;
 };
+
+export type ITweet = {
+  id: string;
+  createdDate: Date;
+  userName: string;
+  text: string;
+};
