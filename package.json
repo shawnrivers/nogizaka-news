@@ -1,6 +1,6 @@
 {
   "name": "nogizaka-news",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "@NewsNogizaka is a Twitter bot focusing on retweeting news about Nogizaka46. We also recently added a function to tweet today's schedules of Nogizaka46 members every day.",
   "main": "dist/app.js",
   "dependencies": {
