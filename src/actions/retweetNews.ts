@@ -10,27 +10,30 @@ const getTimeline = async (account: IWatchedAccount): Promise<ITweet[]> => {
     include_rts: false,
     count: account.count,
   };
-  await T.get('statuses/user_timeline', params)
-    .then((res: any) => {
-      for (const data of res.data) {
-        const tweet: ITweet = {
-          id: data.id_str,
-          createdDate: new Date(data.created_at),
-          userName: data.user.screen_name,
-          text: data.text,
-        };
-        timeline.push(tweet);
-      }
-    })
-    .catch(err => {
-      console.log('Error:', err);
-    });
+
+  try {
+    const response: any = await T.get('statuses/user_timeline', params);
+
+    for (const data of response.data) {
+      const tweet: ITweet = {
+        id: data.id_str,
+        createdDate: new Date(data.created_at),
+        userName: data.user.screen_name,
+        text: data.text,
+      };
+
+      timeline.push(tweet);
+    }
+  } catch (err) {
+    console.log('Error:', err);
+  }
 
   return timeline;
 };
 
 const getTweets = async (accounts: IWatchedAccount[]): Promise<ITweet[]> => {
   let tweets: ITweet[] = [];
+
   for (const account of accounts) {
     const timeline = await getTimeline(account);
     tweets.push(...timeline);
@@ -74,13 +77,12 @@ const retweetNogizakaRelated = async (
   nogizakaRelatedTweets.sort((tweetA, tweetB) => (tweetA.createdDate > tweetB.createdDate ? 1 : -1));
 
   for (const tweet of nogizakaRelatedTweets) {
-    await T.post('statuses/retweet/:id', {
-      id: tweet.id,
-    })
-      .then(() => console.log(`[News] Retweet succeeded: ${tweet.id} from ${tweet.userName}`))
-      .catch(err => {
-        console.log('[News] Retweet failed:', err.message);
-      });
+    try {
+      await T.post('statuses/retweet/:id', { id: tweet.id });
+      console.log(`[News] Retweet succeeded: ${tweet.id} from ${tweet.userName}`);
+    } catch (err) {
+      console.log('[News] Retweet failed:', err.message);
+    }
   }
 
   console.log('[News] Retweet cycle finished.\n');

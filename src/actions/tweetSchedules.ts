@@ -70,27 +70,26 @@ const tweetTodaySchedules = async () => {
     };
 
     if (i === 0) {
-      await T.post('statuses/update', params)
-        .then((res: any) => {
-          firstTweetID = res.data.id_str;
-        })
-        .catch(err => {
-          console.log('Error:', err);
-          throw err;
-        });
+      try {
+        const response: any = await T.post('statuses/update', params);
+        firstTweetID = response.data.id_str;
+      } catch (err) {
+        console.log('Error:', err);
+        throw err;
+      }
     } else {
       const params = {
         status: formattedSchedule,
         in_reply_to_status_id: firstTweetID,
       };
-      await T.post('statuses/update', params)
-        .then((res: any) => {
-          firstTweetID = res.data.id_str;
-        })
-        .catch(err => {
-          console.log('Error:', err);
-          throw err;
-        });
+
+      try {
+        const response: any = await T.post('statuses/update', params);
+        firstTweetID = response.data.id_str;
+      } catch (err) {
+        console.log('Error:', err);
+        throw err;
+      }
     }
   }
 };
