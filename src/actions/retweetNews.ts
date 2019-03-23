@@ -1,5 +1,5 @@
 import { T } from '../utils/twit';
-import { newsMediaAccounts, nogizakaRelatedAccounts, showroomAccount } from '../utils/constants';
+import { NEWS_MEDIA_ACCOUNTS, NOGIZAKA_RELATED_ACCOUNTS, SHOWROOM_ACCOUNT } from '../utils/constants';
 import { relatesToNogizaka, containsShowroomSchedule } from './nogizaka';
 import { IWatchedAccount, ITweet } from '../utils/types';
 
@@ -55,8 +55,8 @@ const getNogizakaTweetsFromMedia = async (accounts: IWatchedAccount[]): Promise<
   return nogizakaRelatedTweets;
 };
 
-const getNogizakaShowroomSchedules = async (showroomAccount: IWatchedAccount): Promise<ITweet[]> => {
-  const tweets = await getTimeline(showroomAccount);
+const getNogizakaShowroomSchedules = async (account: IWatchedAccount): Promise<ITweet[]> => {
+  const tweets = await getTimeline(account);
   const nogizakaShowroomSchedules = tweets.filter(tweet => containsShowroomSchedule(tweet.text));
 
   return nogizakaShowroomSchedules;
@@ -89,6 +89,6 @@ const retweetNogizakaRelated = async (
 };
 
 export const watchAndRetweet = (interval: number) => {
-  retweetNogizakaRelated(nogizakaRelatedAccounts, newsMediaAccounts, showroomAccount);
-  setInterval(() => retweetNogizakaRelated(nogizakaRelatedAccounts, newsMediaAccounts, showroomAccount), interval);
+  retweetNogizakaRelated(NOGIZAKA_RELATED_ACCOUNTS, NEWS_MEDIA_ACCOUNTS, SHOWROOM_ACCOUNT);
+  setInterval(() => retweetNogizakaRelated(NOGIZAKA_RELATED_ACCOUNTS, NEWS_MEDIA_ACCOUNTS, SHOWROOM_ACCOUNT), interval);
 };
