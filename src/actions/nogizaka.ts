@@ -21,10 +21,8 @@ export const relatesToNogizaka = (text: string): boolean => {
 
 export const containsShowroomSchedule = (text: string): boolean => {
   if (text !== undefined) {
-    if (text.includes('のぎおび')) {
-      if (containsHour(text)) {
-        return true;
-      }
+    if (text.includes('のぎおび') && containsHour(text)) {
+      return true;
     }
   }
   return false;

@@ -5,7 +5,7 @@ import { getStringLength } from '../utils/string';
 import { T } from '../utils/twit';
 
 const formatSchedule = (schedules: ITypeSchedules[], today: IDate): string[] => {
-  let formattedTweets: string[] = [];
+  const formattedTweets: string[] = [];
 
   let threadCount = 1;
   const schedulesTextHeading = `${getOneDigitDate(today.month)}月${getOneDigitDate(today.day)}日のスケジュール\n`;

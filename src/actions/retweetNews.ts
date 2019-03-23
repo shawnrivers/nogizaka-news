@@ -4,7 +4,7 @@ import { relatesToNogizaka, containsShowroomSchedule } from './nogizaka';
 import { IWatchedAccount, ITweet } from '../utils/types';
 
 const getTimeline = async (account: IWatchedAccount): Promise<ITweet[]> => {
-  let timeline: ITweet[] = [];
+  const timeline: ITweet[] = [];
   const params = {
     user_id: account.id,
     include_rts: false,
@@ -32,7 +32,7 @@ const getTimeline = async (account: IWatchedAccount): Promise<ITweet[]> => {
 };
 
 const getTweets = async (accounts: IWatchedAccount[]): Promise<ITweet[]> => {
-  let tweets: ITweet[] = [];
+  const tweets: ITweet[] = [];
 
   for (const account of accounts) {
     const timeline = await getTimeline(account);
