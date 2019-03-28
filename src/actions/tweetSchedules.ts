@@ -1,5 +1,5 @@
 import { getSchedules } from '../actions/nogizaka';
-import { getToday, IDate, getOneDigitDate, getMillisecondsTilTomorrowAt, getCurrentFullDate } from '../utils/date';
+import { getToday, IDate, getOneDigitDate } from '../utils/date';
 import { ITypeSchedules } from '../utils/types';
 import { getStringLength } from '../utils/string';
 import { T } from '../utils/twit';
@@ -26,7 +26,7 @@ const formatSchedule = (schedules: ITypeSchedules[], today: IDate): string[] => 
 
           if (i === 0) {
             // If the text count exceeds the limits when only adding the schedule type text,
-            // then omit the schdule type text.
+            // then omit the schedule type text.
             formattedTweets.push(schedulesText.slice(0, -(typeScheduleHeading.length + 1)));
           } else {
             formattedTweets.push(schedulesText.slice(0, -1));
@@ -54,7 +54,7 @@ const formatSchedule = (schedules: ITypeSchedules[], today: IDate): string[] => 
   return formattedTweets;
 };
 
-const tweetTodaySchedules = async () => {
+export const tweetTodaySchedules = async () => {
   const today = getToday();
 
   const schedules = await getSchedules(today);
@@ -94,22 +94,3 @@ const tweetTodaySchedules = async () => {
   }
 };
 
-export const scheduleTweet = (hour: number) => {
-  let nextTweetTimeout = getMillisecondsTilTomorrowAt(hour);
-
-  console.log(`[Schedules] Tomorrow's schedules will be tweeted after ${nextTweetTimeout / 1000} sec\n`);
-
-  const timeoutTweet = async () => {
-    console.log("[Schedules] Started tweeting today's schedules.");
-
-    await tweetTodaySchedules();
-
-    console.log("[Schedules] Today's schedules tweeting finished at Tokyo time:", getCurrentFullDate());
-
-    nextTweetTimeout = getMillisecondsTilTomorrowAt(hour);
-    console.log(`[Schedules] Tomorrow's schedules will be tweeted after ${nextTweetTimeout / 1000} sec\n`);
-    setTimeout(timeoutTweet, nextTweetTimeout);
-  };
-
-  setTimeout(() => timeoutTweet(), nextTweetTimeout);
-};

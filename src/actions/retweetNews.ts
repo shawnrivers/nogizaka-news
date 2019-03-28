@@ -63,7 +63,7 @@ const getNogizakaShowroomSchedules = async (account: IWatchedAccount): Promise<I
   return nogizakaShowroomSchedules;
 };
 
-const retweetNogizakaRelated = async (
+export const retweetNogizakaRelated = async (
   nogizakaAccounts: IWatchedAccount[],
   mediaAccounts: IWatchedAccount[],
   showroomAccount: IWatchedAccount,
@@ -89,9 +89,4 @@ const retweetNogizakaRelated = async (
   console.log('[News] Retweet cycle finished.\n');
 
   console.log(`[Schedules] Tomorrow's schedules will be tweeted after ${getMillisecondsTilTomorrowAt(1) / 1000} sec\n`);
-};
-
-export const watchAndRetweet = (interval: number) => {
-  retweetNogizakaRelated(NOGIZAKA_RELATED_ACCOUNTS, NEWS_MEDIA_ACCOUNTS, SHOWROOM_ACCOUNT);
-  setInterval(() => retweetNogizakaRelated(NOGIZAKA_RELATED_ACCOUNTS, NEWS_MEDIA_ACCOUNTS, SHOWROOM_ACCOUNT), interval);
 };
