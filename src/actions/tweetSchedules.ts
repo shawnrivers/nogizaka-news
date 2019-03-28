@@ -19,7 +19,7 @@ const formatSchedule = (schedules: ITypeSchedules[], today: IDate): string[] => 
       for (let i = 0; i < typeSchedule.data.length; i++) {
         const schedule = typeSchedule.data[i];
 
-        if (getStringLength(schedulesText + schedule + '\n') <= 280) {
+        if (getStringLength(schedulesText + schedule + '\n') <= 275) {
           schedulesText += `${i + 1}. ${schedule}\n`;
         } else {
           threadCount += 1;
@@ -93,4 +93,3 @@ export const tweetTodaySchedules = async () => {
     }
   }
 };
-
