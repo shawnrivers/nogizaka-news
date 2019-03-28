@@ -2,6 +2,7 @@ import { T } from '../utils/twit';
 import { NEWS_MEDIA_ACCOUNTS, NOGIZAKA_RELATED_ACCOUNTS, SHOWROOM_ACCOUNT } from '../utils/constants';
 import { relatesToNogizaka, containsShowroomSchedule } from './nogizaka';
 import { IWatchedAccount, ITweet } from '../utils/types';
+import { getMillisecondsTilTomorrowAt } from '../utils/date';
 
 const getTimeline = async (account: IWatchedAccount): Promise<ITweet[]> => {
   const timeline: ITweet[] = [];
@@ -86,6 +87,8 @@ const retweetNogizakaRelated = async (
   }
 
   console.log('[News] Retweet cycle finished.\n');
+
+  console.log(`[Schedules] Tomorrow's schedules will be tweeted after ${getMillisecondsTilTomorrowAt(1) / 1000} sec\n`);
 };
 
 export const watchAndRetweet = (interval: number) => {
