@@ -1,5 +1,4 @@
 import { T } from '../utils/twit';
-import { NEWS_MEDIA_ACCOUNTS, NOGIZAKA_RELATED_ACCOUNTS, SHOWROOM_ACCOUNT } from '../utils/constants';
 import { relatesToNogizaka, containsShowroomSchedule } from './nogizaka';
 import { IWatchedAccount, ITweet } from '../utils/types';
 import { getMillisecondsTilTomorrowAt } from '../utils/date';
