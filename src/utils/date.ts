@@ -59,7 +59,7 @@ export const getMillisecondsTilNextTime = (hour: number): number => {
     const currentDateTokyoTime = shiftToTokyoTimezone(currentDate);
     const tomorrowDateTokyoTime = shiftToTokyoTimezone(currentDate);
 
-    if (currentDateTokyoTime.getHours() > hour) {
+    if (currentDateTokyoTime.getHours() >= hour) {
       tomorrowDateTokyoTime.setDate(currentDateTokyoTime.getDate() + 1);
     }
 
