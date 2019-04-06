@@ -23,7 +23,7 @@
     "eslint": "^5.15.0"
   },
   "scripts": {
-    "start": "tsc && node dist/src/app.js",
+    "start": "tsc && node dist/app.js",
     "deploy": "git push origin master",
     "deploy:heroku": "git push heroku master",
     "watch": "tsc --watch"
