@@ -4,13 +4,23 @@ import { relatesToNogizaka, containsShowroomSchedule } from './nogizaka';
 import { IWatchedAccount, ITweet } from '../utils/types';
 import { getMillisecondsTilTomorrowAt } from '../utils/date';
 
-const getTimeline = async (account: IWatchedAccount): Promise<ITweet[]> => {
+export const getTimeline = async (account: IWatchedAccount): Promise<ITweet[]> => {
   const timeline: ITweet[] = [];
-  const params = {
-    user_id: account.id,
-    include_rts: false,
-    count: account.count,
-  };
+  const lastTweetId = global.lastTweets[account.id];
+
+  const params =
+    lastTweetId !== ''
+      ? {
+          user_id: account.id,
+          include_rts: false,
+          count: account.count,
+          since_id: lastTweetId,
+        }
+      : {
+          user_id: account.id,
+          include_rts: false,
+          count: account.count,
+        };
 
   try {
     const response: any = await T.get('statuses/user_timeline', params);
@@ -24,6 +34,12 @@ const getTimeline = async (account: IWatchedAccount): Promise<ITweet[]> => {
       };
 
       timeline.push(tweet);
+    }
+
+    timeline.sort((tweetA, tweetB) => (tweetA.createdDate > tweetB.createdDate ? 1 : -1));
+
+    if (timeline.length > 0) {
+      global.lastTweets[account.id] = timeline.slice(-1)[0].id;
     }
   } catch (err) {
     console.log('Error:', err);
@@ -84,6 +100,10 @@ export const retweetNogizakaRelated = async (
     } catch (err) {
       console.log('[News] Retweet failed:', err.message);
     }
+  }
+
+  if (nogizakaRelatedTweets.length === 0) {
+    console.log('[News] No new tweets. \n');
   }
 
   console.log('[News] Retweet cycle finished.\n');
