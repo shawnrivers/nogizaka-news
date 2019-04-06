@@ -102,7 +102,7 @@ export const retweetNogizakaRelated = async (
   }
 
   if (nogizakaRelatedTweets.length === 0) {
-    console.log('[News] No new tweets. \n');
+    console.log('[News] No new tweets.');
   }
 
   console.log('[News] Retweet cycle finished.\n');
