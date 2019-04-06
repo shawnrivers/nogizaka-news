@@ -52,8 +52,8 @@ const shiftToTokyoTimezone = (date: Date): Date => {
 };
 
 // NOTE: this returns the milliseconds til tomorrow based on Asia/Tokyo time.
-export const getMillisecondsTilTomorrowAt = (hour: number): number => {
-  if (Math.floor(hour) <= 23 && Math.floor(hour) >= 0) {
+export const getMillisecondsTilNextTime = (hour: number): number => {
+  if (Math.floor(hour) >= 0 && Math.floor(hour) <= 23) {
     const currentDate = new Date();
 
     const currentDateTokyoTime = shiftToTokyoTimezone(currentDate);

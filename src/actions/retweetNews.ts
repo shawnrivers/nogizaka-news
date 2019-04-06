@@ -1,7 +1,7 @@
 import { T } from '../utils/twit';
 import { relatesToNogizaka, containsShowroomSchedule } from './nogizaka';
 import { IWatchedAccount, ITweet } from '../utils/types';
-import { getMillisecondsTilTomorrowAt } from '../utils/date';
+import { getMillisecondsTilNextTime } from '../utils/date';
 
 export const getTimeline = async (account: IWatchedAccount): Promise<ITweet[]> => {
   const timeline: ITweet[] = [];
@@ -107,5 +107,5 @@ export const retweetNogizakaRelated = async (
 
   console.log('[News] Retweet cycle finished.\n');
 
-  console.log(`[Schedules] Tomorrow's schedules will be tweeted after ${getMillisecondsTilTomorrowAt(1) / 1000} sec\n`);
+  console.log(`[Schedules] Tomorrow's schedules will be tweeted after ${getMillisecondsTilNextTime(1) / 1000} sec\n`);
 };

@@ -1,7 +1,7 @@
 import { retweetNogizakaRelated } from './actions/retweetNews';
 import { tweetTodaySchedules } from './actions/tweetSchedules';
 import { NOGIZAKA_RELATED_ACCOUNTS, NEWS_MEDIA_ACCOUNTS, SHOWROOM_ACCOUNT } from './utils/constants';
-import { getMillisecondsTilTomorrowAt, getCurrentFullDate } from './utils/date';
+import { getMillisecondsTilNextTime, getCurrentFullDate } from './utils/date';
 import { getInitialLastTweets } from './utils/lastTweets';
 
 const watchAndRetweet = (interval: number) => {
@@ -12,7 +12,7 @@ const watchAndRetweet = (interval: number) => {
 };
 
 const scheduleTweet = (hour: number) => {
-  let nextTweetTimeout = getMillisecondsTilTomorrowAt(hour);
+  let nextTweetTimeout = getMillisecondsTilNextTime(hour);
 
   console.log(`[Schedules] Tomorrow's schedules will be tweeted after ${nextTweetTimeout / 1000} sec\n`);
 
@@ -23,7 +23,7 @@ const scheduleTweet = (hour: number) => {
 
     console.log("[Schedules] Today's schedules tweeting finished at Tokyo time:", getCurrentFullDate());
 
-    nextTweetTimeout = getMillisecondsTilTomorrowAt(hour);
+    nextTweetTimeout = getMillisecondsTilNextTime(hour);
     console.log(`[Schedules] Tomorrow's schedules will be tweeted after ${nextTweetTimeout / 1000} sec\n`);
     setTimeout(timeoutTweet, nextTweetTimeout);
   };
