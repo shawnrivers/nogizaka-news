@@ -23,7 +23,16 @@ const scheduleTweet = (hour: number) => {
 
     console.log("[Schedules] Today's schedules tweeting finished at Tokyo time:", getCurrentFullDate());
 
-    nextTweetTimeout = getMillisecondsTilNextTime(hour);
+    /**
+     * Workaround
+     * nextTweetTimeout might be a negative number sometimes because of some server side
+     * time calculating issues. Here we provide a short timeout to calculate the next
+     * schedule tweeting time to avoid the negative number problem.
+     */
+    setTimeout(() => {
+      nextTweetTimeout = getMillisecondsTilNextTime(hour);
+    }, 1000 * 60 * 10);
+
     console.log(`[Schedules] Tomorrow's schedules will be tweeted after ${nextTweetTimeout / 1000} sec\n`);
     setTimeout(timeoutTweet, nextTweetTimeout);
   };
