@@ -1,19 +1,27 @@
-import { getSchedules } from '../actions/nogizaka';
-import { getToday, IDate, getOneDigitDate } from '../utils/date';
+import { getNogizakaSchedules, getGraduatesSchedules } from '../actions/nogizaka';
+import { getToday, getOneDigitDate, IDate } from '../utils/date';
 import { ITypeSchedules } from '../utils/types';
 import { getStringLength } from '../utils/string';
 import { T } from '../utils/twit';
 
-const formatSchedule = (schedules: ITypeSchedules[], today: IDate): string[] => {
+export const formatSchedules = (params: {
+  schedules: ITypeSchedules[];
+  date: IDate;
+  isGraduateSchedules?: boolean;
+}): string[] => {
+  const { schedules, date, isGraduateSchedules } = params;
+
   const formattedTweets: string[] = [];
 
   let threadCount = 1;
-  const schedulesTextHeading = `${getOneDigitDate(today.month)}月${getOneDigitDate(today.day)}日のスケジュール\n`;
+  const schedulesTextHeading = !isGraduateSchedules
+    ? `${getOneDigitDate(date.month)}月${getOneDigitDate(date.day)}日のスケジュール\n`
+    : `卒業生の${getOneDigitDate(date.month)}月${getOneDigitDate(date.day)}日のスケジュール\n`;
   let schedulesText = schedulesTextHeading;
 
   for (const typeSchedule of schedules) {
     if (typeSchedule.data.length > 0) {
-      const typeScheduleHeading = `\n【${typeSchedule.type.displayName}】\n`;
+      const typeScheduleHeading = `\n【${typeSchedule.type}】\n`;
       schedulesText += typeScheduleHeading;
 
       for (let i = 0; i < typeSchedule.data.length; i++) {
@@ -54,12 +62,7 @@ const formatSchedule = (schedules: ITypeSchedules[], today: IDate): string[] => 
   return formattedTweets;
 };
 
-export const tweetTodaySchedules = async () => {
-  const today = getToday();
-
-  const schedules = await getSchedules(today);
-  const formattedSchedules = formatSchedule(schedules, today);
-
+const tweetFormattedSchedules = async (formattedSchedules: string[]): Promise<void> => {
   let firstTweetID: string = '';
 
   for (let i = 0; i < formattedSchedules.length; i++) {
@@ -92,4 +95,24 @@ export const tweetTodaySchedules = async () => {
       }
     }
   }
+};
+
+export const tweetTodaysSchedules = async () => {
+  const today = getToday();
+
+  const nogizakaSchedules = await getNogizakaSchedules(today);
+  const graduatesSchedules = await getGraduatesSchedules(today);
+
+  const formattedNogizakaSchedules = formatSchedules({
+    schedules: nogizakaSchedules,
+    date: today,
+  });
+  const formattedGraduatesSchedules = formatSchedules({
+    schedules: graduatesSchedules,
+    date: today,
+    isGraduateSchedules: true,
+  });
+
+  await tweetFormattedSchedules(formattedNogizakaSchedules);
+  await tweetFormattedSchedules(formattedGraduatesSchedules);
 };
