@@ -1,12 +1,16 @@
-import { ScheduleType } from './constants';
+import { NogizakaScheduleType } from './constants';
 
-export type IScheduleType = {
-  name: ScheduleType;
-  displayName: string;
+export type ITypeSchedule = {
+  type: string;
+  schedule: {
+    date: string,
+    title: string,
+    memberName: string,
+  };
 };
 
 export type ITypeSchedules = {
-  type: IScheduleType;
+  type: string;
   data: string[];
 };
 

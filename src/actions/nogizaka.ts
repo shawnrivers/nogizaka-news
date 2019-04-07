@@ -1,9 +1,8 @@
 import * as req from 'request-promise';
 import * as cheerio from 'cheerio';
-import { IDate } from '../utils/date';
-import { scheduleTypes } from '../utils/constants';
-import { ITypeSchedules } from '../utils/types';
-import { NOGIZAKA_NAMES } from '../utils/constants';
+import { compareDates, IDate } from '../utils/date';
+import { NOGIZAKA_NAMES, NOGIZAKA_SCHEDULE_TYPES, GRADUATES_SCHEDULE_TYPE_LIST } from '../utils/constants';
+import { ITypeSchedules, ITypeSchedule } from '../utils/types';
 import { containsHour } from '../utils/string';
 
 export const relatesToNogizaka = (text: string): boolean => {
@@ -34,9 +33,9 @@ const getDaySchedules = (html: any, day: string): ITypeSchedules[] => {
   const $ = cheerio.load(html);
   const dayElement = $(`#d${day}`);
 
-  for (const scheduleType of scheduleTypes) {
+  for (const NogizakaScheduleType of NOGIZAKA_SCHEDULE_TYPES) {
     let typeSchedulesData = [];
-    const typeSchedulesElement = dayElement.find(scheduleType.className).get();
+    const typeSchedulesElement = dayElement.find(NogizakaScheduleType.className).get();
 
     if (typeSchedulesElement.length !== 0) {
       for (const typeScheduleElement of typeSchedulesElement) {
@@ -46,10 +45,7 @@ const getDaySchedules = (html: any, day: string): ITypeSchedules[] => {
     }
 
     const typeSchedules = {
-      type: {
-        name: scheduleType.type,
-        displayName: scheduleType.displayName,
-      },
+      type: NogizakaScheduleType.displayName,
       data: typeSchedulesData,
     };
     schedules.push(typeSchedules);

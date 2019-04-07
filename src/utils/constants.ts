@@ -48,31 +48,86 @@ export const NOGIZAKA_NAMES = [
   '岩瀬佑美子',
 ];
 
-export enum ScheduleType {
+export enum NogizakaScheduleType {
   Live = 'live',
   Handshake = 'handshake',
   Tv = 'tv',
   Radio = 'radio',
   Magazine = 'magazine',
   Web = 'web',
-  Moive = 'movie',
+  Movie = 'movie',
   Theatre = 'theatre',
   Release = 'release',
   Birthday = 'birthday',
 }
 
-export const scheduleTypes = [
-  { type: ScheduleType.Live, className: '.live', displayName: 'LIVE/EVENT' },
-  { type: ScheduleType.Handshake, className: '.handshake', displayName: '握手会' },
-  { type: ScheduleType.Tv, className: '.tv', displayName: 'TV' },
-  { type: ScheduleType.Radio, className: '.radio', displayName: 'RADIO' },
-  { type: ScheduleType.Magazine, className: '.magazine', displayName: 'MAGAZINE' },
-  { type: ScheduleType.Web, className: '.web', displayName: 'WEB' },
-  { type: ScheduleType.Moive, className: '.movie', displayName: 'MOVIE' },
-  { type: ScheduleType.Theatre, className: '.theatre', displayName: 'THEATRE' },
-  { type: ScheduleType.Release, className: '.release', displayName: 'RELEASE' },
-  { type: ScheduleType.Birthday, className: '.bd', displayName: '誕生日' },
+export enum NogizakaScheduleTypeName {
+  Live = 'LIVE/EVENT',
+  Handshake = '握手会',
+  Tv = 'TV',
+  Radio = 'RADIO',
+  Magazine = 'MAGAZINE',
+  Web = 'WEB',
+  Movie = 'MOVIE',
+  Theatre = 'THEATRE',
+  Release = 'RELEASE',
+  Birthday = '誕生日',
+}
+
+export const NOGIZAKA_SCHEDULE_TYPES = [
+  {
+    type: NogizakaScheduleType.Live,
+    className: '.live',
+    displayName: NogizakaScheduleTypeName.Live,
+  },
+  {
+    type: NogizakaScheduleType.Handshake,
+    className: '.handshake',
+    displayName: NogizakaScheduleTypeName.Handshake,
+  },
+  {
+    type: NogizakaScheduleType.Tv,
+    className: '.tv',
+    displayName: NogizakaScheduleTypeName.Tv,
+  },
+  {
+    type: NogizakaScheduleType.Radio,
+    className: '.radio',
+    displayName: NogizakaScheduleTypeName.Radio,
+  },
+  {
+    type: NogizakaScheduleType.Magazine,
+    className: '.magazine',
+    displayName: NogizakaScheduleTypeName.Magazine,
+  },
+  {
+    type: NogizakaScheduleType.Web,
+    className: '.web',
+    displayName: NogizakaScheduleTypeName.Web,
+  },
+  {
+    type: NogizakaScheduleType.Movie,
+    className: '.movie',
+    displayName: NogizakaScheduleTypeName.Movie,
+  },
+  {
+    type: NogizakaScheduleType.Theatre,
+    className: '.theatre',
+    displayName: NogizakaScheduleTypeName.Theatre,
+  },
+  {
+    type: NogizakaScheduleType.Release,
+    className: '.release',
+    displayName: NogizakaScheduleTypeName.Release,
+  },
+  {
+    type: NogizakaScheduleType.Birthday,
+    className: '.bd',
+    displayName: NogizakaScheduleTypeName.Birthday,
+  },
 ];
+
+export const GRADUATES_SCHEDULE_TYPE_LIST = ['TV', 'RADIO', 'MAGAZINE', 'WEB', 'STAGE', 'EVENT', 'OTHER'];
 
 export const HOURS = {
   jp: [
