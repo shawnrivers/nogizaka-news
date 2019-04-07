@@ -78,3 +78,30 @@ export const getOneDigitDate = (date: string): string => {
     return date;
   }
 };
+
+
+// Compare date in h:mm～h:mm format.
+export const compareDates = (dateA: string, dateB: string) => {
+  // '〜': this shit seems to have an alternative code so split both of them.
+  const startTimeA = dateA.split('～')[0].split('〜')[0];
+  const startTimeB = dateB.split('～')[0].split('〜')[0];
+
+  const hourA = Number(startTimeA.split(':')[0]);
+  const minuteA = Number(startTimeA.split(':')[1]);
+  const hourB = Number(startTimeB.split(':')[0]);
+  const minuteB = Number(startTimeB.split(':')[1]);
+
+  if (hourA > hourB) {
+    return 1;
+  } else if (hourA === hourB) {
+    if (minuteA > minuteB) {
+      return 1;
+    } else if (minuteA === minuteB) {
+      return 0;
+    } else {
+      return -1;
+    }
+  } else {
+    return -1;
+  }
+}
