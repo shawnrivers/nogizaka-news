@@ -13,7 +13,7 @@ This is a [Node.js](https://nodejs.org/en/) Twitter bot **Nogizaka News** ([@New
 * Retweet Nogizaka46 news
   * Retweet from Nogizaka46 official accounts:
     * 乃木坂46 ([@nogizaka46](https://twitter.com/nogizaka46))
-    * 乃木坂工事中 ([@nogikmax]((https://twitter.com/nogikmax)))
+    * 乃木坂工事中 ([@nogikmax](https://twitter.com/nogikmax))
   * Retweet Nogizaka46 relative tweets from media accounts
     * LINE NEWS ([@news_line_me](https://twitter.com/news_line_me))
     * ORICON NEWS ([@oricon](https://twitter.com/oricon))
