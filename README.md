@@ -1,4 +1,4 @@
-# Nogizaka News
+# [Nogizaka News](https://twitter.com/NewsNogizaka)
 
 This is a [Node.js](https://nodejs.org/en/) Twitter bot **Nogizaka News** ([@NewsNogizaka](https://twitter.com/NewsNogizaka)) for retweeting news about [Nogizaka46](https://www.wikiwand.com/ja/%E4%B9%83%E6%9C%A8%E5%9D%8246) and tweeting the schedules of its members.
 
