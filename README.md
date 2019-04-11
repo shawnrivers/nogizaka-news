@@ -21,10 +21,12 @@ This is a [Node.js](https://nodejs.org/en/) Twitter bot **Nogizaka News** ([@New
     * 日刊スポーツ ([@nikkansports](https://twitter.com/nikkansports))
     * 音楽ナタリー ([@natalie_mu](https://twitter.com/natalie_mu))
     * MANTANWEB ([@mantanweb](https://twitter.com/mantanweb))
-* Tweet the schedules of members every day at 1:00 a.m. Tokyo time.
+* Tweet the schedules of members every day at 1:00 a.m. Tokyo time
   * Schedules data of current members is from [Nogizaka46 official site](http://www.nogizaka46.com/).
   * Schedules data of graduated members is from their official websites:
     * [西野七瀬 Official Site](https://nishinonanase.com/)
     * [若月佑美 Official Site](https://wakatsukiyumi.jp/)
     * [生駒里奈 Official Site](https://ikomarina.com/)
   * *NOTE*: I only provide graduated members schedules of *西野七瀬*, *若月佑美*, *生駒里奈* currently. I will gradually add more supports to other graduates.
+* Retweet the schedules of [のぎおびShowroom](https://www.showroom-live.com/campaign/nogizaka46_sr)
+  * Retweet from SHOWROOM ([@SHOWROOM_jp](https://twitter.com/SHOWROOM_jp))
