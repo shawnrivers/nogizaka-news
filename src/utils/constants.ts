@@ -7,6 +7,7 @@ export const NEWS_MEDIA_ACCOUNTS: IWatchedAccount[] = [
   { id: '5649672', count: 30 }, // 音楽ナタリー
   { id: '1516060316', count: 30 }, // LINE NEWS
   { id: '46058599', count: 30 }, // 日刊スポーツ
+  { id: '88846085', count: 30 }, // Yahoo!ニュース
 ];
 
 export const NOGIZAKA_RELATED_ACCOUNTS: IWatchedAccount[] = [
