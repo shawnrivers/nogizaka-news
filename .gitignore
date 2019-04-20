@@ -1,7 +1,5 @@
 /node_modules
 /.vscode
 /dist
-.prettierrc.js
-.eslintrc
 /src/temp
 /src/utils/twitConfig.ts
