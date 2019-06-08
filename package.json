@@ -4,23 +4,23 @@
   "description": "@NewsNogizaka is a Twitter bot focusing on retweeting news about Nogizaka46. We also recently added a function to tweet today's schedules of Nogizaka46 members every day.",
   "main": "dist/app.js",
   "dependencies": {
-    "@types/cheerio": "^0.22.10",
+    "@types/cheerio": "^0.22.11",
     "@types/request": "^2.48.1",
-    "@types/request-promise": "^4.1.42",
-    "@types/twit": "^2.2.21",
-    "cheerio": "^1.0.0-rc.2",
+    "@types/request-promise": "^4.1.44",
+    "@types/twit": "^2.2.22",
+    "cheerio": "^1.0.0-rc.3",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
     "twit": "^2.2.11",
-    "typescript": "^3.3.3333"
+    "typescript": "^3.5.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.3.4",
-    "@babel/plugin-proposal-class-properties": "^7.3.4",
-    "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
     "@babel/preset-typescript": "^7.3.3",
-    "@typescript-eslint/parser": "^1.4.2",
-    "eslint": "^5.15.0"
+    "@typescript-eslint/parser": "^1.9.0",
+    "eslint": "^5.16.0"
   },
   "scripts": {
     "start": "tsc && node dist/app.js",
