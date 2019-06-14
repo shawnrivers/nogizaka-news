@@ -1,6 +1,8 @@
 # [Nogizaka News](https://twitter.com/NewsNogizaka)
 
-**Nogizaka News** ([@NewsNogizaka](https://twitter.com/NewsNogizaka)) is a [Node.js](https://nodejs.org/en/) Twitter Bot for retweeting news about [Nogizaka46](https://www.wikiwand.com/ja/%E4%B9%83%E6%9C%A8%E5%9D%8246) and tweeting the schedules of its members.
+**Nogizaka News** ([@NewsNogizaka](https://twitter.com/NewsNogizaka)) is a [Node.js](https://nodejs.org/en/) Twitter Bot for retweeting news about [Nogizaka46](https://en.wikipedia.org/wiki/Nogizaka46) and tweeting the schedules of its members.
+
+README: [English](https://github.com/shawnrivers/nogizaka-news/blob/master/README.md), [日本語](https://github.com/shawnrivers/nogizaka-news/blob/master/README.ja.md)
 
 ## Technologies
 
@@ -29,6 +31,6 @@
     - [西野七瀬 Official Site](https://nishinonanase.com/)
     - [若月佑美 Official Site](https://wakatsukiyumi.jp/)
     - [生駒里奈 Official Site](https://ikomarina.com/)
-  - *NOTE*: I only provide graduated members schedules of *西野七瀬*, *若月佑美*, *生駒里奈* currently. I will gradually add more supports to other graduates.
-- Retweet the schedules of [のぎおびShowroom](https://www.showroom-live.com/campaign/nogizaka46_sr)
+  - *NOTE*: I only provide graduated members schedules of 西野七瀬, 若月佑美, 生駒里奈 currently. I will gradually add more supports to other graduates.
+- Retweet the schedules of [のぎおびSHOWROOM](https://www.showroom-live.com/campaign/nogizaka46_sr)
   - Retweet from SHOWROOM ([@SHOWROOM_jp](https://twitter.com/SHOWROOM_jp))
