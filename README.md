@@ -1,8 +1,8 @@
 # [Nogizaka News](https://twitter.com/NewsNogizaka)
 
-**Nogizaka News** ([@NewsNogizaka](https://twitter.com/NewsNogizaka)) is a [Node.js](https://nodejs.org/en/) Twitter Bot for retweeting news about [Nogizaka46](https://en.wikipedia.org/wiki/Nogizaka46) and tweeting the schedules of its members.
-
 README: [English](https://github.com/shawnrivers/nogizaka-news/blob/master/README.md), [日本語](https://github.com/shawnrivers/nogizaka-news/blob/master/README.ja.md)
+
+**Nogizaka News** ([@NewsNogizaka](https://twitter.com/NewsNogizaka)) is a [Node.js](https://nodejs.org/en/) Twitter Bot for retweeting news about [Nogizaka46](https://en.wikipedia.org/wiki/Nogizaka46) and tweeting the schedules of its members.
 
 ## Technologies
 

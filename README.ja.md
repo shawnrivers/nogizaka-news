@@ -1,8 +1,8 @@
 # [Nogizaka News](https://twitter.com/NewsNogizaka)
 
-**Nogizaka News**（[@NewsNogizaka](https://twitter.com/NewsNogizaka)）は、[乃木坂46](https://ja.wikipedia.org/wiki/%E4%B9%83%E6%9C%A8%E5%9D%8246)関連のニュースとスケジュールをツイートする Node.js のボットである。
-
 README: [English](https://github.com/shawnrivers/nogizaka-news/blob/master/README.md), [日本語](https://github.com/shawnrivers/nogizaka-news/blob/master/README.ja.md)
+
+**Nogizaka News**（[@NewsNogizaka](https://twitter.com/NewsNogizaka)）は、[乃木坂46](https://ja.wikipedia.org/wiki/%E4%B9%83%E6%9C%A8%E5%9D%8246)関連のニュースとスケジュールをツイートする Node.js のツイーターボットである。
 
 ## 技術
 
