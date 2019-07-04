@@ -4,7 +4,7 @@
   "description": "@NewsNogizaka is a Twitter bot focusing on retweeting news about Nogizaka46. We also recently added a function to tweet today's schedules of Nogizaka46 members every day.",
   "main": "dist/app.js",
   "dependencies": {
-    "@types/cheerio": "^0.22.11",
+    "@types/cheerio": "^0.22.12",
     "@types/request": "^2.48.1",
     "@types/request-promise": "^4.1.44",
     "@types/twit": "^2.2.22",
