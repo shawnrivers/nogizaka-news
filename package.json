@@ -5,7 +5,7 @@
   "main": "dist/app.js",
   "dependencies": {
     "@types/cheerio": "^0.22.11",
-    "@types/request": "^2.48.1",
+    "@types/request": "^2.48.3",
     "@types/request-promise": "^4.1.44",
     "@types/twit": "^2.2.22",
     "cheerio": "^1.0.0-rc.3",
