@@ -75,7 +75,11 @@ export enum NogizakaScheduleTypeName {
   Birthday = '誕生日',
 }
 
-export const NOGIZAKA_SCHEDULE_TYPES = [
+export const NOGIZAKA_SCHEDULE_TYPES: {
+  type: NogizakaScheduleType;
+  className: string;
+  displayName: NogizakaScheduleTypeName;
+}[] = [
   {
     type: NogizakaScheduleType.Live,
     className: '.live',
