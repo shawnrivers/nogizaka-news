@@ -26,7 +26,8 @@
     "start": "tsc && node dist/app.js",
     "deploy": "git push origin master",
     "deploy:heroku": "git push heroku master",
-    "watch": "tsc --watch"
+    "watch": "tsc --watch",
+    "lint": "eslint --ignore-path .gitignore . --ext ts"
   },
   "author": "shawnrivers",
   "license": "MIT"
