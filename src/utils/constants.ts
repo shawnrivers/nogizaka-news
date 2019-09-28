@@ -20,6 +20,7 @@ export const SHOWROOM_ACCOUNT: IWatchedAccount = { id: '2212674829', count: 30 }
 export const NOGIZAKA_NAMES = [
   '乃木坂46',
   'nogizaka46',
+  '桜井玲香',
   '斉藤優里',
   '伊藤かりん',
   '衛藤美彩',
