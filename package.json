@@ -10,7 +10,7 @@
     "@types/twit": "^2.2.23",
     "cheerio": "^1.0.0-rc.3",
     "request": "^2.88.0",
-    "request-promise": "^4.2.4",
+    "request-promise": "^4.2.5",
     "twit": "^2.2.11",
     "typescript": "^3.7.2"
   },
