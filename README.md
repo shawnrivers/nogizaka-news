@@ -1,8 +1,8 @@
-# [Nogizaka News](https://twitter.com/NewsNogizaka)
+# [Nogizaka46 News](https://twitter.com/n46_news)
 
 README: [English](https://github.com/shawnrivers/nogizaka-news/blob/master/README.md), [日本語](https://github.com/shawnrivers/nogizaka-news/blob/master/README.ja.md)
 
-**Nogizaka News** ([@NewsNogizaka](https://twitter.com/NewsNogizaka)) is a [Node.js](https://nodejs.org/en/) Twitter Bot for retweeting news about [Nogizaka46](https://en.wikipedia.org/wiki/Nogizaka46) and tweeting the schedules of its members.
+**Nogizaka46 News** ([@n46_news](https://twitter.com/n46_news)) is a [Node.js](https://nodejs.org/en/) Twitter Bot for retweeting news about [Nogizaka46](https://en.wikipedia.org/wiki/Nogizaka46) and tweeting the schedules of its members.
 
 ## Technologies
 
@@ -15,7 +15,7 @@ README: [English](https://github.com/shawnrivers/nogizaka-news/blob/master/READM
 
 - Retweet Nogizaka46 news
   - Retweet from Nogizaka46 official accounts:
-    - 乃木坂46 ([@nogizaka46](https://twitter.com/nogizaka46))
+    - 乃木坂 46 ([@nogizaka46](https://twitter.com/nogizaka46))
     - 乃木坂工事中 ([@nogikmax](https://twitter.com/nogikmax))
   - Retweet Nogizaka46 relative tweets from media accounts
     - Yahoo!ニュース ([@YahooNewsTopics](https://twitter.com/YahooNewsTopics))
@@ -31,6 +31,6 @@ README: [English](https://github.com/shawnrivers/nogizaka-news/blob/master/READM
     - [西野七瀬 Official Site](https://nishinonanase.com/)
     - [若月佑美 Official Site](https://wakatsukiyumi.jp/)
     - [生駒里奈 Official Site](https://ikomarina.com/)
-  - *NOTE*: I only provide graduated members schedules of 西野七瀬, 若月佑美, 生駒里奈 currently. I will gradually add more supports to other graduates.
-- Retweet the schedules of [のぎおびSHOWROOM](https://www.showroom-live.com/campaign/nogizaka46_sr)
+  - _NOTE_: I only provide graduated members schedules of 西野七瀬, 若月佑美, 生駒里奈 currently. I will gradually add more supports to other graduates.
+- Retweet the schedules of [のぎおび SHOWROOM](https://www.showroom-live.com/campaign/nogizaka46_sr)
   - Retweet from SHOWROOM ([@SHOWROOM_jp](https://twitter.com/SHOWROOM_jp))
