@@ -103,7 +103,7 @@ export const getGraduatesSchedules = async (date: IDate): Promise<ITypeSchedules
       const dayElements = $(`[data-day=${dateDay}]`);
       const dayElement = dayElements.find('.list_card');
 
-      dayElement.map((index, element) => {
+      dayElement.map((_, element) => {
         const type = $(element)
           .find('.category')
           .text();
