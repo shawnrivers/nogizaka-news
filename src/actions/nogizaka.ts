@@ -1,14 +1,26 @@
 import * as req from 'request-promise';
 import * as cheerio from 'cheerio';
 import { compareDates, IDate } from '../utils/date';
-import { NOGIZAKA_NAMES, NOGIZAKA_SCHEDULE_TYPES, GRADUATES_SCHEDULE_TYPE_LIST } from '../utils/constants';
-import { ITypeSchedules, ITypeSchedule } from '../utils/types';
+import { NOGIZAKA_NAMES, NOGIZAKA_SCHEDULE_TYPES, GRADUATES_SCHEDULE_TYPE_LIST, AccountId } from '../utils/constants';
+import { ITypeSchedules, ITypeSchedule, ITweet } from '../utils/types';
 import { containsHour } from '../utils/string';
 
-export const relatesToNogizaka = (text: string): boolean => {
+export const relatesToNogizaka = (tweet: ITweet): boolean => {
+  const { text, id } = tweet;
+
   if (text !== undefined) {
     for (const name of NOGIZAKA_NAMES) {
       if (text.includes(name)) {
+        if (id === AccountId.ModelPress) {
+          if (text.includes('フォトランキング') || text.includes('このツイートをRT')) {
+            return false;
+          }
+        }
+        if (id === AccountId.NikkanSports) {
+          if (text.includes('芸能社会ニュース')) {
+            return false;
+          }
+        }
         return true;
       }
     }

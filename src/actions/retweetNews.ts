@@ -66,7 +66,7 @@ const getTweetsFromNogizaka = async (accounts: IWatchedAccount[]): Promise<ITwee
 
 const getNogizakaTweetsFromMedia = async (accounts: IWatchedAccount[]): Promise<ITweet[]> => {
   const tweets = await getTweets(accounts);
-  const nogizakaRelatedTweets = tweets.filter(tweet => relatesToNogizaka(tweet.text));
+  const nogizakaRelatedTweets = tweets.filter(relatesToNogizaka);
 
   return nogizakaRelatedTweets;
 };
