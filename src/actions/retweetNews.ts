@@ -1,7 +1,7 @@
-import { T } from '../utils/twit';
-import { relatesToNogizaka, containsShowroomSchedule } from './nogizaka';
-import { IWatchedAccount, ITweet } from '../utils/types';
 import { getMillisecondsTilNextTime } from '../utils/date';
+import { T } from '../utils/twit';
+import { ITweet, IWatchedAccount } from '../utils/types';
+import { containsShowroomSchedule, relatesToNogizaka } from './nogizaka';
 
 export const getTimeline = async (account: IWatchedAccount): Promise<ITweet[]> => {
   const timeline: ITweet[] = [];

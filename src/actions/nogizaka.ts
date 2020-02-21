@@ -1,9 +1,9 @@
-import * as req from 'request-promise';
 import * as cheerio from 'cheerio';
+import * as req from 'request-promise';
+import { AccountId, GRADUATES_SCHEDULE_TYPE_LIST, NOGIZAKA_NAMES, NOGIZAKA_SCHEDULE_TYPES } from '../utils/constants';
 import { compareDates, IDate } from '../utils/date';
-import { NOGIZAKA_NAMES, NOGIZAKA_SCHEDULE_TYPES, GRADUATES_SCHEDULE_TYPE_LIST, AccountId } from '../utils/constants';
-import { ITypeSchedules, ITypeSchedule, ITweet } from '../utils/types';
 import { containsHour } from '../utils/string';
+import { ITweet, ITypeSchedule, ITypeSchedules } from '../utils/types';
 
 export const relatesToNogizaka = (tweet: ITweet): boolean => {
   const { text, id } = tweet;

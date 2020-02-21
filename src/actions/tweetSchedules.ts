@@ -1,8 +1,8 @@
-import { getNogizakaSchedules, getGraduatesSchedules } from '../actions/nogizaka';
-import { getToday, getOneDigitDate, IDate } from '../utils/date';
-import { ITypeSchedules } from '../utils/types';
+import { getGraduatesSchedules, getNogizakaSchedules } from '../actions/nogizaka';
+import { getOneDigitDate, getToday, IDate } from '../utils/date';
 import { getStringLength } from '../utils/string';
 import { T } from '../utils/twit';
+import { ITypeSchedules } from '../utils/types';
 
 export const formatSchedules = (params: {
   schedules: ITypeSchedules[];

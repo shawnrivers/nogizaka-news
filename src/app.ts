@@ -1,7 +1,7 @@
 import { retweetNogizakaRelated } from './actions/retweetNews';
 import { tweetTodaysSchedules } from './actions/tweetSchedules';
-import { NOGIZAKA_RELATED_ACCOUNTS, NEWS_MEDIA_ACCOUNTS, SHOWROOM_ACCOUNT } from './utils/constants';
-import { getMillisecondsTilNextTime, getCurrentFullDate } from './utils/date';
+import { NEWS_MEDIA_ACCOUNTS, NOGIZAKA_RELATED_ACCOUNTS, SHOWROOM_ACCOUNT } from './utils/constants';
+import { getCurrentFullDate, getMillisecondsTilNextTime } from './utils/date';
 import { getInitialLastTweets } from './utils/lastTweets';
 
 const watchAndRetweet = (interval: number) => {
