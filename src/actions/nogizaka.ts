@@ -12,7 +12,7 @@ export const relatesToNogizaka = (tweet: ITweet): boolean => {
     for (const name of NOGIZAKA_NAMES) {
       if (text.includes(name)) {
         if (id === AccountId.ModelPress) {
-          if (text.includes('フォトランキング') || text.includes('このツイートをRT')) {
+          if (text.includes('フォトランキング') || text.includes('このツイートをRT') || text.includes('人気記事')) {
             return false;
           }
         }
