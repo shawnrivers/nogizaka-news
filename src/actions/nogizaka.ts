@@ -6,17 +6,17 @@ import { containsHour } from '../utils/string';
 import { ITweet, ITypeSchedule, ITypeSchedules } from '../utils/types';
 
 export const relatesToNogizaka = (tweet: ITweet): boolean => {
-  const { text, id } = tweet;
+  const { text, userId } = tweet;
 
   if (text !== undefined) {
     for (const name of NOGIZAKA_NAMES) {
       if (text.includes(name)) {
-        if (id === AccountId.ModelPress) {
+        if (userId === AccountId.ModelPress) {
           if (text.includes('フォトランキング') || text.includes('このツイートをRT') || text.includes('人気記事')) {
             return false;
           }
         }
-        if (id === AccountId.NikkanSports) {
+        if (userId === AccountId.NikkanSports) {
           if (text.includes('芸能社会ニュース')) {
             return false;
           }

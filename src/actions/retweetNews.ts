@@ -28,6 +28,7 @@ export const getTimeline = async (account: IWatchedAccount): Promise<ITweet[]> =
       const tweet: ITweet = {
         id: data.id_str,
         createdDate: new Date(data.created_at),
+        userId: data.user.id_str,
         userName: data.user.screen_name,
         text: data.text,
       };

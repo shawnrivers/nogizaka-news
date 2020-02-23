@@ -20,6 +20,7 @@ export type IWatchedAccount = {
 export type ITweet = {
   id: string;
   createdDate: Date;
+  userId: string;
   userName: string;
   text: string;
 };
