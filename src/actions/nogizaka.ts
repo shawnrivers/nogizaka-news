@@ -21,6 +21,11 @@ export const relatesToNogizaka = (tweet: ITweet): boolean => {
             return false;
           }
         }
+        if (userId === AccountId.MantanWeb) {
+          if (text.includes('今週の美女図鑑')) {
+            return false;
+          }
+        }
         return true;
       }
     }
