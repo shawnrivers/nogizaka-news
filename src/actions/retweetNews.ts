@@ -83,7 +83,7 @@ export const retweetNogizakaRelated = async (
   nogizakaAccounts: IWatchedAccount[],
   mediaAccounts: IWatchedAccount[],
   showroomAccount: IWatchedAccount,
-  lastTweets: any
+  lastTweets: any,
 ) => {
   console.log('[News] Retweet cycle starts.');
 
