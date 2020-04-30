@@ -22,4 +22,3 @@ jobs:
         run: yarn type-check
       - name: Lint
         run: yarn lint
-      - name: Deploy
