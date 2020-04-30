@@ -32,7 +32,7 @@
   "scripts": {
     "start": "ts-node src/app.ts",
     "watch": "tsc --watch",
-    "type-check": "tsc",
+    "type-check": "tsc --noEmit",
     "format": "prettier",
     "lint": "eslint --ignore-path .gitignore . --ext ts",
     "lint:fix": "eslint --ignore-path .gitignore . --ext ts --fix"
