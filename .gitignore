@@ -4,3 +4,4 @@
 /src/temp
 /src/utils/twitConfig.ts
 /src/debug
+.envrc

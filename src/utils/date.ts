@@ -79,7 +79,6 @@ export const getOneDigitDate = (date: string): string => {
   }
 };
 
-
 // Compare date in h:mm～h:mm format.
 export const compareDates = (dateA: string, dateB: string) => {
   // '〜': this shit seems to have an alternative code so split both of them.
@@ -104,4 +103,4 @@ export const compareDates = (dateA: string, dateB: string) => {
   } else {
     return -1;
   }
-}
+};

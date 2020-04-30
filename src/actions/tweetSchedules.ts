@@ -63,7 +63,7 @@ export const formatSchedules = (params: {
 };
 
 export const tweetFormattedSchedules = async (formattedSchedules: string[]): Promise<void> => {
-  let firstTweetID: string = '';
+  let firstTweetID = '';
 
   for (let i = 0; i < formattedSchedules.length; i++) {
     const formattedSchedule = formattedSchedules[i];

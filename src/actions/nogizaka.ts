@@ -45,13 +45,13 @@ export const containsShowroomSchedule = (text: string): boolean => {
 };
 
 const getDaySchedules = (html: any, day: string): ITypeSchedules[] => {
-  let schedules: ITypeSchedules[] = [];
+  const schedules: ITypeSchedules[] = [];
 
   const $ = cheerio.load(html);
   const dayElement = $(`#d${day}`);
 
   for (const NogizakaScheduleType of NOGIZAKA_SCHEDULE_TYPES) {
-    let typeSchedulesData = [];
+    const typeSchedulesData = [];
     const typeSchedulesElement = dayElement.find(NogizakaScheduleType.className).get();
 
     if (typeSchedulesElement.length !== 0) {
@@ -77,10 +77,10 @@ export const getNogizakaSchedules = async (date: IDate): Promise<ITypeSchedules[
   const url = `http://www.nogizaka46.com/schedule/?to=${date.year}${date.month}`;
 
   await req(url)
-    .then(html => {
+    .then((html) => {
       schedules = getDaySchedules(html, date.day);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log('Error:', err);
     });
 
@@ -104,13 +104,13 @@ export const getGraduatesSchedules = async (date: IDate): Promise<ITypeSchedules
   };
   const urlObjects = [urlNishino, urlIkoma, urlWakatsuki];
 
-  let normalizedSchedules: ITypeSchedules[] = [];
-  let rawSchedules: ITypeSchedule[] = [];
+  const normalizedSchedules: ITypeSchedules[] = [];
+  const rawSchedules: ITypeSchedule[] = [];
 
   for (const urlObj of urlObjects) {
     const { memberName } = urlObj;
 
-    let memberSchedules: ITypeSchedule[] = [];
+    const memberSchedules: ITypeSchedule[] = [];
 
     try {
       const html = await req(urlObj.url);
@@ -121,15 +121,9 @@ export const getGraduatesSchedules = async (date: IDate): Promise<ITypeSchedules
       const dayElement = dayElements.find('.list_card');
 
       dayElement.map((_, element) => {
-        const type = $(element)
-          .find('.category')
-          .text();
-        const date = $(element)
-          .find('.date')
-          .text();
-        const title = $(element)
-          .find('.title')
-          .text();
+        const type = $(element).find('.category').text();
+        const date = $(element).find('.date').text();
+        const title = $(element).find('.title').text();
 
         memberSchedules.push({
           type,
@@ -151,7 +145,7 @@ export const getGraduatesSchedules = async (date: IDate): Promise<ITypeSchedules
       data: [],
     });
 
-    let schedulesForSorting = [];
+    const schedulesForSorting = [];
 
     for (const rawSchedule of rawSchedules) {
       if (rawSchedule.type === scheduleType) {

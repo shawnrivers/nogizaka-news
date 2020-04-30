@@ -10,8 +10,8 @@ export enum AccountId {
   YahooNews = '88846085',
   Nogizaka46 = '317684165',
   NogizakaKoujichu = '929625878249684992',
-  Showroom = '2212674829'
-};
+  Showroom = '2212674829',
+}
 
 export const NEWS_MEDIA_ACCOUNTS: IWatchedAccount[] = [
   { id: AccountId.ModelPress, count: 30 }, // モデルプレス
