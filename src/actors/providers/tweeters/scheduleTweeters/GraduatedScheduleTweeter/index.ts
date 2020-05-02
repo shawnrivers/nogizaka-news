@@ -112,4 +112,10 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
 
     return LLCSchedules;
   }
+
+  public async getFormattedSchedules(date: ScheduleDate): Promise<string[]> {
+    const schedules = await this.getSchedules(date);
+    const formattedSchedules = this.formatSchedules({ schedules, date });
+    return formattedSchedules;
+  }
 }

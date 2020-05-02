@@ -51,4 +51,10 @@ export class NogizakaScheduleTweeter extends BaseScheduleTweeter {
 
     return getTweetableSchedulesWithType({ schedules, heading });
   }
+
+  public async getFormattedSchedules(date: ScheduleDate): Promise<string[]> {
+    const schedules = await this.getSchedules(date);
+    const formattedSchedules = this.formatSchedules({ schedules, date });
+    return formattedSchedules;
+  }
 }
