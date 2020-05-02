@@ -4,6 +4,7 @@ import { compareDates, getOneDigitDate } from '../../../../../utils/date';
 import { BaseScheduleTweeter } from '../BaseScheduleTweeter';
 import { getTweetableSchedulesWithType } from '../BaseScheduleTweeter/converters';
 import { ScheduleDate, ScheduleWithType, ScheduleWithTypeLLC } from '../BaseScheduleTweeter/types';
+import { NogizakaName } from '../../../../../constants/names';
 
 export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
   constructor(twitter: Twit) {
@@ -63,13 +64,13 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
   private getNishinoSchedules(date: ScheduleDate): Promise<ScheduleWithTypeLLC[]> {
     const url = `https://nishinonanase.com/s/m04/media/list?ima=2551&dy=${date.year}${date.month}`;
 
-    return this.getLLCMemberSchedule({ date, url, scraperId: 'nishino', memberName: '西野七瀬' });
+    return this.getLLCMemberSchedule({ date, url, scraperId: 'nishino', memberName: NogizakaName.NishinoNanase });
   }
 
   private getIkomaSchedules(date: ScheduleDate): Promise<ScheduleWithTypeLLC[]> {
     const url = `https://ikomarina.com/s/m01/media/list?ima=2925&dy=${date.year}${date.month}`;
 
-    return this.getLLCMemberSchedule({ date, url, scraperId: 'ikoma', memberName: '生駒里奈' });
+    return this.getLLCMemberSchedule({ date, url, scraperId: 'ikoma', memberName: NogizakaName.IkomaRina });
   }
 
   private async getLLCMemberSchedule({
