@@ -29,8 +29,6 @@ README: [English](https://github.com/shawnrivers/nogizaka-news/blob/master/READM
   - 現メンバーのスケジュールは[乃木坂46公式サイト](http://www.nogizaka46.com/)から
   - 卒業メンバーのスケジュールはそれぞれの公式サイトから：
     - [西野七瀬公式サイト](https://nishinonanase.com/)
-    - [若月佑美公式サイト](https://wakatsukiyumi.jp/)
     - [生駒里奈公式サイト](https://ikomarina.com/)
-  - _NOTE_：現段階では、西野七瀬、若月佑美と生駒里奈のスケジュールのみを提供している
 - [のぎおび SHOWROOM](https://www.showroom-live.com/campaign/nogizaka46_sr) のスケジュールをリツイート
   - リツイート先：SHOWROOM（[@SHOWROOM_jp](https://twitter.com/SHOWROOM_jp)）
