@@ -1,7 +1,7 @@
 import * as Twit from 'twit';
 import { arrayToObject } from '../../../utils/array';
 
-type WatchingAccount = {
+export type WatchingAccount = {
   id: string;
   count: number;
 };
@@ -18,7 +18,7 @@ type GetTweetResponse = Omit<Twit.PromiseResponse, 'data'> & {
   }[];
 };
 
-type Tweet = {
+export type Tweet = {
   id: string;
   createdDate: Date;
   userId: string;
@@ -95,6 +95,5 @@ export class TweetFetcher {
 
   public updateLastTweets({ account, tweetId }: { account: string; tweetId: string }): void {
     this.lastTweets[account].tweetId = tweetId;
-    console.log('updateLastTweets', this.lastTweets);
   }
 }
