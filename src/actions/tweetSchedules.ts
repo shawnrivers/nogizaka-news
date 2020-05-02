@@ -1,7 +1,7 @@
 import { getGraduatesSchedules, getNogizakaSchedules } from '../actions/nogizaka';
 import { getOneDigitDate, getToday, IDate } from '../utils/date';
 import { getStringLength } from '../utils/string';
-import { T } from '../utils/twit';
+import { Twitter } from '../utils/twit';
 import { ITypeSchedules } from '../utils/types';
 
 export const formatSchedules = (params: {
@@ -74,7 +74,7 @@ export const tweetFormattedSchedules = async (formattedSchedules: string[]): Pro
 
     if (i === 0) {
       try {
-        const response: any = await T.post('statuses/update', params);
+        const response: any = await Twitter.post('statuses/update', params);
         firstTweetID = response.data.id_str;
       } catch (err) {
         console.log('Error:', err);
@@ -87,7 +87,7 @@ export const tweetFormattedSchedules = async (formattedSchedules: string[]): Pro
       };
 
       try {
-        const response: any = await T.post('statuses/update', params);
+        const response: any = await Twitter.post('statuses/update', params);
         firstTweetID = response.data.id_str;
       } catch (err) {
         console.log('Error:', err);

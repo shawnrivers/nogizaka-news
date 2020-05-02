@@ -1,48 +1,8 @@
 import * as cheerio from 'cheerio';
 import * as req from 'request-promise';
-import { AccountId, GRADUATES_SCHEDULE_TYPE_LIST, NOGIZAKA_NAMES, NOGIZAKA_SCHEDULE_TYPES } from '../utils/constants';
+import { GRADUATES_SCHEDULE_TYPE_LIST, NOGIZAKA_SCHEDULE_TYPES } from '../utils/constants';
 import { compareDates, IDate } from '../utils/date';
-import { containsHour } from '../utils/string';
-import { ITweet, ITypeSchedule, ITypeSchedules } from '../utils/types';
-
-export const relatesToNogizaka = (tweet: ITweet): boolean => {
-  const { text, userId } = tweet;
-
-  if (text !== undefined) {
-    for (const name of NOGIZAKA_NAMES) {
-      if (text.includes(name)) {
-        if (userId === AccountId.ModelPress) {
-          if (text.includes('フォトランキング') || text.includes('このツイートをRT') || text.includes('人気記事')) {
-            return false;
-          }
-        }
-        if (userId === AccountId.NikkanSports) {
-          if (text.includes('芸能社会ニュース')) {
-            return false;
-          }
-        }
-        if (userId === AccountId.MantanWeb) {
-          if (text.includes('今週の美女図鑑')) {
-            return false;
-          }
-        }
-        return true;
-      }
-    }
-    return false;
-  } else {
-    return false;
-  }
-};
-
-export const containsShowroomSchedule = (text: string): boolean => {
-  if (text !== undefined) {
-    if (text.includes('のぎおび') && containsHour(text)) {
-      return true;
-    }
-  }
-  return false;
-};
+import { ITypeSchedule, ITypeSchedules } from '../utils/types';
 
 const getDaySchedules = (html: any, day: string): ITypeSchedules[] => {
   const schedules: ITypeSchedules[] = [];

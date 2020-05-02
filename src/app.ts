@@ -1,17 +1,32 @@
-import { retweetNogizakaRelated } from './actions/retweetNews';
 import { tweetTodaysSchedules } from './actions/tweetSchedules';
-import { NEWS_MEDIA_ACCOUNTS, NOGIZAKA_RELATED_ACCOUNTS, SHOWROOM_ACCOUNT } from './utils/constants';
+import { MediaRetweeter } from './actors/providers/retweeters/MediaRetweeter';
+import { NogizakaRetweeter } from './actors/providers/retweeters/NogizakaRetweeter';
+import { ShowroomRetweeter } from './actors/providers/retweeters/ShowroomRetweeter';
 import { getCurrentFullDate, getMillisecondsTilNextTime } from './utils/date';
-import { getInitialLastTweets } from './utils/lastTweets';
+import { Twitter } from './utils/twit';
 
-let lastTweets = getInitialLastTweets();
+const nogizakaRetweeter = new NogizakaRetweeter(Twitter);
+const mediaRetweeter = new MediaRetweeter(Twitter);
+const showroomRetweeter = new ShowroomRetweeter(Twitter);
 
-const watchAndRetweet = (interval: number, lastTweets: any) => {
-  retweetNogizakaRelated(NOGIZAKA_RELATED_ACCOUNTS, NEWS_MEDIA_ACCOUNTS, SHOWROOM_ACCOUNT, lastTweets);
-  setInterval(
-    () => retweetNogizakaRelated(NOGIZAKA_RELATED_ACCOUNTS, NEWS_MEDIA_ACCOUNTS, SHOWROOM_ACCOUNT, lastTweets),
-    interval,
-  );
+const retweet = async (): Promise<void> => {
+  console.log('[News] Retweet cycle starts.');
+
+  await nogizakaRetweeter.start();
+  await showroomRetweeter.start();
+  await mediaRetweeter.start();
+
+  console.log('[News] Retweet cycle finished.\n');
+
+  console.log(`[Schedules] Tomorrow's schedules will be tweeted after ${getMillisecondsTilNextTime(1) / 1000} sec\n`);
+};
+
+const watchAndRetweet = (interval: number): void => {
+  retweet();
+
+  setInterval(() => {
+    retweet();
+  }, interval);
 };
 
 const scheduleTweet = (hour: number) => {
@@ -35,7 +50,7 @@ const scheduleTweet = (hour: number) => {
 };
 
 const TWEET_SCHEDULE_HOUR = 1;
-const TWEET_INTERVAL = 1000 * 60 * 15;
+const TWEET_INTERVAL = 1000 * 60 * 0.5;
 
 scheduleTweet(TWEET_SCHEDULE_HOUR);
-watchAndRetweet(TWEET_INTERVAL, lastTweets);
+watchAndRetweet(TWEET_INTERVAL);

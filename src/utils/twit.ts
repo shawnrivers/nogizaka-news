@@ -1,6 +1,6 @@
 import * as Twit from 'twit';
 
-export const T = new Twit({
+export const Twitter = new Twit({
   consumer_key: process.env.CONSUMER_KEY || '',
   consumer_secret: process.env.CONSUMER_SECRET || '',
   access_token: process.env.ACCESS_TOKEN,
