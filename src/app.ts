@@ -1,13 +1,16 @@
-import { tweetTodaysSchedules } from './actions/tweetSchedules';
 import { MediaRetweeter } from './actors/providers/retweeters/MediaRetweeter';
 import { NogizakaRetweeter } from './actors/providers/retweeters/NogizakaRetweeter';
 import { ShowroomRetweeter } from './actors/providers/retweeters/ShowroomRetweeter';
-import { getCurrentFullDate, getMillisecondsTilNextTime } from './utils/date';
+import { GraduatedScheduleTweeter } from './actors/providers/tweeters/scheduleTweeters/GraduatedScheduleTweeter';
+import { NogizakaScheduleTweeter } from './actors/providers/tweeters/scheduleTweeters/NogizakaScheduleTweeter';
+import { getCurrentFullDate, getMillisecondsTilNextTime, getToday } from './utils/date';
 import { Twitter } from './utils/twit';
 
 const nogizakaRetweeter = new NogizakaRetweeter(Twitter);
 const mediaRetweeter = new MediaRetweeter(Twitter);
 const showroomRetweeter = new ShowroomRetweeter(Twitter);
+const nogizakaScheduleTweeter = new NogizakaScheduleTweeter(Twitter);
+const graduatesScheduleTweeter = new GraduatedScheduleTweeter(Twitter);
 
 const retweet = async (): Promise<void> => {
   console.log('[News] Retweet cycle starts.');
@@ -29,12 +32,19 @@ const watchAndRetweet = (interval: number): void => {
   }, interval);
 };
 
-const scheduleTweet = (hour: number) => {
+const tweetTodaysSchedules = async (): Promise<void> => {
+  const today = getToday();
+
+  await nogizakaScheduleTweeter.start(today);
+  await graduatesScheduleTweeter.start(today);
+};
+
+const scheduleTweet = (hour: number): void => {
   let nextTweetTimeout = getMillisecondsTilNextTime(hour);
 
   console.log(`[Schedules] Tomorrow's schedules will be tweeted after ${nextTweetTimeout / 1000} sec\n`);
 
-  const timeoutTweet = async () => {
+  const timeoutTweet = async (): Promise<void> => {
     console.log("[Schedules] Started tweeting today's schedules.");
 
     await tweetTodaysSchedules();

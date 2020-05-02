@@ -42,7 +42,7 @@ const getTimezoneOffsetFromTokyo = (date: Date): number => {
   return timezoneOffsetDiff;
 };
 
-const shiftToTokyoTimezone = (date: Date): Date => {
+const getTokyoDate = (date: Date): Date => {
   const timeZoneOffsetDiff = getTimezoneOffsetFromTokyo(date);
 
   const shiftedDate = new Date();
@@ -56,8 +56,8 @@ export const getMillisecondsTilNextTime = (hour: number): number => {
   if (Math.floor(hour) >= 0 && Math.floor(hour) <= 23) {
     const currentDate = new Date();
 
-    const currentDateTokyoTime = shiftToTokyoTimezone(currentDate);
-    const tomorrowDateTokyoTime = shiftToTokyoTimezone(currentDate);
+    const currentDateTokyoTime = getTokyoDate(currentDate);
+    const tomorrowDateTokyoTime = getTokyoDate(currentDate);
 
     if (currentDateTokyoTime.getHours() >= hour) {
       tomorrowDateTokyoTime.setDate(currentDateTokyoTime.getDate() + 1);
