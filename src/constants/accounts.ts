@@ -11,6 +11,12 @@ export enum AccountId {
   Nogizaka46 = '317684165',
   NogizakaKoujichu = '929625878249684992',
   Showroom = '2212674829',
+  KawagoHina = '1091388477088780288',
+  IkomaRina = '1237442080730787840',
+  WakatsukiYumi = '1253595964444520448',
+  NagashimaSeira = '730678731862212609',
+  HatanakaSeira = '4077236000',
+  ItouNene = '3190643234',
 }
 
 export const NEWS_MEDIA_ACCOUNTS: WatchingAccount[] = [
