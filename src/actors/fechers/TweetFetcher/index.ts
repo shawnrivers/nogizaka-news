@@ -1,10 +1,6 @@
 import * as Twit from 'twit';
 import { arrayToObject } from '../../../utils/array';
-
-export type WatchingAccount = {
-  id: string;
-  count: number;
-};
+import { WatchingAccount } from './types';
 
 type GetTweetResponse = Omit<Twit.PromiseResponse, 'data'> & {
   data: {

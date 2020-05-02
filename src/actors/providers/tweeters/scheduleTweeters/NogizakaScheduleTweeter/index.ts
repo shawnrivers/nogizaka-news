@@ -1,10 +1,9 @@
 import * as Twit from 'twit';
 import { NOGIZAKA_SCHEDULE_TYPES } from '../../../../../utils/constants';
-import { getOneDigitDate, getToday } from '../../../../../utils/date';
+import { getOneDigitDate } from '../../../../../utils/date';
 import { BaseScheduleTweeter } from '../BaseScheduleTweeter';
 import { getTweetableSchedulesWithType } from '../BaseScheduleTweeter/converters';
 import { ScheduleDate, ScheduleWithType } from '../BaseScheduleTweeter/types';
-import { Twitter } from '../../../../../utils/twit';
 
 export class NogizakaScheduleTweeter extends BaseScheduleTweeter {
   constructor(twitter: Twit) {
@@ -14,8 +13,7 @@ export class NogizakaScheduleTweeter extends BaseScheduleTweeter {
   public async start(date: ScheduleDate): Promise<void> {
     const schedules = await this.getSchedules(date);
     const formattedSchedules = this.formatSchedules({ schedules, date });
-    // this.tweetPoster.tweetThread(formattedSchedules);
-    console.log(formattedSchedules);
+    this.tweetPoster.tweetThread(formattedSchedules);
   }
 
   private async getSchedules(date: ScheduleDate): Promise<ScheduleWithType[]> {
@@ -54,7 +52,3 @@ export class NogizakaScheduleTweeter extends BaseScheduleTweeter {
     return getTweetableSchedulesWithType({ schedules, heading });
   }
 }
-
-const today = getToday();
-const nogizakaScheduleTweeter = new NogizakaScheduleTweeter(Twitter);
-nogizakaScheduleTweeter.start(today);

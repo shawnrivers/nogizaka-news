@@ -1,10 +1,9 @@
 import * as Twit from 'twit';
 import { LLC_SCHEDULE_TYPE_LIST } from '../../../../../utils/constants';
-import { compareDates, getOneDigitDate, getToday } from '../../../../../utils/date';
+import { compareDates, getOneDigitDate } from '../../../../../utils/date';
 import { BaseScheduleTweeter } from '../BaseScheduleTweeter';
 import { getTweetableSchedulesWithType } from '../BaseScheduleTweeter/converters';
 import { ScheduleDate, ScheduleWithType, ScheduleWithTypeLLC } from '../BaseScheduleTweeter/types';
-import { Twitter } from '../../../../../utils/twit';
 
 export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
   constructor(twitter: Twit) {
@@ -14,8 +13,7 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
   public async start(date: ScheduleDate): Promise<void> {
     const schedules = await this.getSchedules(date);
     const formattedSchedules = this.formatSchedules({ schedules, date });
-    // this.tweetPoster.tweetThread(formattedSchedules);
-    console.log(schedules, formattedSchedules);
+    this.tweetPoster.tweetThread(formattedSchedules);
   }
 
   private async getSchedules(date: ScheduleDate): Promise<ScheduleWithType[]> {
@@ -114,7 +112,3 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
     return LLCSchedules;
   }
 }
-
-const today = getToday();
-const graduatedScheduleTweeter = new GraduatedScheduleTweeter(Twitter);
-graduatedScheduleTweeter.start(today);

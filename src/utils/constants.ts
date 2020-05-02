@@ -1,4 +1,4 @@
-import { IWatchedAccount } from './types';
+import { WatchingAccount } from '../actors/fechers/TweetFetcher/types';
 
 export enum AccountId {
   ModelPress = '142921471',
@@ -13,7 +13,7 @@ export enum AccountId {
   Showroom = '2212674829',
 }
 
-export const NEWS_MEDIA_ACCOUNTS: IWatchedAccount[] = [
+export const NEWS_MEDIA_ACCOUNTS: WatchingAccount[] = [
   { id: AccountId.ModelPress, count: 30 }, // モデルプレス
   { id: AccountId.MantanWeb, count: 30 }, // MANTANWEB
   { id: AccountId.OriconNews, count: 30 }, // ORICON NEWS
@@ -23,12 +23,12 @@ export const NEWS_MEDIA_ACCOUNTS: IWatchedAccount[] = [
   { id: AccountId.YahooNews, count: 30 }, // Yahoo!ニュース
 ];
 
-export const NOGIZAKA_RELATED_ACCOUNTS: IWatchedAccount[] = [
+export const NOGIZAKA_RELATED_ACCOUNTS: WatchingAccount[] = [
   { id: AccountId.Nogizaka46, count: 10 }, // 乃木坂46
   { id: AccountId.NogizakaKoujichu, count: 1 }, // 乃木坂工事中
 ];
 
-export const SHOWROOM_ACCOUNT: IWatchedAccount = { id: AccountId.Showroom, count: 30 };
+export const SHOWROOM_ACCOUNT: WatchingAccount = { id: AccountId.Showroom, count: 30 };
 
 export const NOGIZAKA_NAMES = [
   '乃木坂46',

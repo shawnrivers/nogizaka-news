@@ -1,6 +1,7 @@
 import * as Twit from 'twit';
-import { TweetFetcher, WatchingAccount } from '../../../fechers/TweetFetcher';
+import { TweetFetcher } from '../../../fechers/TweetFetcher';
 import { TweetPoster } from '../../../posters/TweetPoster';
+import { WatchingAccount } from '../../../fechers/TweetFetcher/types';
 
 export class BaseRetweeter {
   tweetFetcher: TweetFetcher;
