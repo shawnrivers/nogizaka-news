@@ -7,7 +7,7 @@ on:
     branches: [master]
 
 jobs:
-  deploy:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

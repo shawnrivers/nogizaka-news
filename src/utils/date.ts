@@ -1,10 +1,6 @@
-export type IDate = {
-  year: string;
-  month: string;
-  day: string;
-};
+import { ScheduleDate } from '../actors/providers/tweeters/scheduleTweeters/BaseScheduleTweeter/types';
 
-export const getToday = (): IDate => {
+export const getToday = (): ScheduleDate => {
   const now = new Date();
   const tokyoDate = now.toLocaleString('en-US', {
     timeZone: 'Asia/Tokyo',
@@ -42,7 +38,7 @@ const getTimezoneOffsetFromTokyo = (date: Date): number => {
   return timezoneOffsetDiff;
 };
 
-const shiftToTokyoTimezone = (date: Date): Date => {
+const getTokyoDate = (date: Date): Date => {
   const timeZoneOffsetDiff = getTimezoneOffsetFromTokyo(date);
 
   const shiftedDate = new Date();
@@ -56,8 +52,8 @@ export const getMillisecondsTilNextTime = (hour: number): number => {
   if (Math.floor(hour) >= 0 && Math.floor(hour) <= 23) {
     const currentDate = new Date();
 
-    const currentDateTokyoTime = shiftToTokyoTimezone(currentDate);
-    const tomorrowDateTokyoTime = shiftToTokyoTimezone(currentDate);
+    const currentDateTokyoTime = getTokyoDate(currentDate);
+    const tomorrowDateTokyoTime = getTokyoDate(currentDate);
 
     if (currentDateTokyoTime.getHours() >= hour) {
       tomorrowDateTokyoTime.setDate(currentDateTokyoTime.getDate() + 1);
@@ -80,7 +76,7 @@ export const getOneDigitDate = (date: string): string => {
 };
 
 // Compare date in h:mm～h:mm format.
-export const compareDates = (dateA: string, dateB: string) => {
+export const compareDates = (dateA: string, dateB: string): 1 | 0 | -1 => {
   // '〜': this shit seems to have an alternative code so split both of them.
   const startTimeA = dateA.split('～')[0].split('〜')[0];
   const startTimeB = dateB.split('～')[0].split('〜')[0];
@@ -103,4 +99,20 @@ export const compareDates = (dateA: string, dateB: string) => {
   } else {
     return -1;
   }
+};
+
+export const convertHMS = (
+  totalSeconds: number,
+): {
+  hours: number;
+  minutes: number;
+  seconds: number;
+} => {
+  const hourRemainder = totalSeconds % 3600;
+
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor(hourRemainder / 60);
+  const seconds = hourRemainder % 60;
+
+  return { hours, minutes, seconds };
 };
