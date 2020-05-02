@@ -188,7 +188,7 @@ export const NOGIZAKA_SCHEDULE_TYPES: {
   },
 ];
 
-export const GRADUATES_SCHEDULE_TYPE_LIST = ['TV', 'RADIO', 'MAGAZINE', 'WEB', 'STAGE', 'EVENT', 'OTHER'];
+export const LLC_SCHEDULE_TYPE_LIST = ['TV', 'RADIO', 'MAGAZINE', 'WEB', 'STAGE', 'EVENT', 'OTHER'];
 
 export const HOURS = {
   jp: [

@@ -1,9 +1,9 @@
-import { Schedule } from '../NogizakaScheduleTweeter';
 import { getStringLength } from '../../../../../utils/string';
+import { ScheduleWithType } from './types';
 
 const TWEET_MAX_TEXT = 275;
 
-type GetTweetableSchedulesWithType = (params: { schedules: Schedule[]; heading: string }) => string[];
+type GetTweetableSchedulesWithType = (params: { schedules: ScheduleWithType[]; heading: string }) => string[];
 
 export const getTweetableSchedulesWithType: GetTweetableSchedulesWithType = ({ schedules, heading }) => {
   const formattedTweets: string[] = [];

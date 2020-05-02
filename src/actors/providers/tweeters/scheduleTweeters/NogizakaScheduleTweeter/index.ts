@@ -1,19 +1,10 @@
 import * as Twit from 'twit';
 import { NOGIZAKA_SCHEDULE_TYPES } from '../../../../../utils/constants';
-import { getOneDigitDate } from '../../../../../utils/date';
+import { getOneDigitDate, getToday } from '../../../../../utils/date';
 import { BaseScheduleTweeter } from '../BaseScheduleTweeter';
 import { getTweetableSchedulesWithType } from '../BaseScheduleTweeter/converters';
-
-export type ScheduleDate = {
-  year: string;
-  month: string;
-  day: string;
-};
-
-export type Schedule = {
-  type: string;
-  schedule: string[];
-};
+import { ScheduleDate, ScheduleWithType } from '../BaseScheduleTweeter/types';
+import { Twitter } from '../../../../../utils/twit';
 
 export class NogizakaScheduleTweeter extends BaseScheduleTweeter {
   constructor(twitter: Twit) {
@@ -23,43 +14,47 @@ export class NogizakaScheduleTweeter extends BaseScheduleTweeter {
   public async start(date: ScheduleDate): Promise<void> {
     const schedules = await this.getSchedules(date);
     const formattedSchedules = this.formatSchedules({ schedules, date });
-    this.tweetPoster.tweetThread(formattedSchedules);
+    // this.tweetPoster.tweetThread(formattedSchedules);
+    console.log(formattedSchedules);
   }
 
-  private async getSchedules(date: ScheduleDate): Promise<Schedule[]> {
+  private async getSchedules(date: ScheduleDate): Promise<ScheduleWithType[]> {
     const schedules = [];
-    const url = `http://www.nogizaka46.com/schedule/?to=${date.year}${date.month}`;
-    const $ = await this.getDOMSelector(url);
+    const url = `https://www.nogizaka46.com/schedule/?to=${date.year}${date.month}`;
+    const $ = await this.addDOMSelector({ url, scraperId: 'nogizaka' });
 
-    if (!$) {
-      return [];
-    }
+    if ($ !== null) {
+      const dayElement = $(`#d${date.day}`);
 
-    const dayElement = $(`#d${date.day}`);
+      for (const NogizakaScheduleType of NOGIZAKA_SCHEDULE_TYPES) {
+        const typeSchedulesData = [];
+        const typeSchedulesElement = dayElement.find(NogizakaScheduleType.className).get();
 
-    for (const NogizakaScheduleType of NOGIZAKA_SCHEDULE_TYPES) {
-      const typeSchedulesData = [];
-      const typeSchedulesElement = dayElement.find(NogizakaScheduleType.className).get();
-
-      if (typeSchedulesElement.length !== 0) {
-        for (const typeScheduleElement of typeSchedulesElement) {
-          const scheduleData = typeScheduleElement.children[0].data as string;
-          typeSchedulesData.push(scheduleData);
+        if (typeSchedulesElement.length !== 0) {
+          for (const typeScheduleElement of typeSchedulesElement) {
+            const scheduleData = typeScheduleElement.children[0].data as string;
+            typeSchedulesData.push(scheduleData);
+          }
         }
-      }
 
-      const typeSchedules = {
-        type: NogizakaScheduleType.displayName,
-        schedule: typeSchedulesData,
-      };
-      schedules.push(typeSchedules);
+        const typeSchedules = {
+          type: NogizakaScheduleType.displayName,
+          schedule: typeSchedulesData,
+        };
+        schedules.push(typeSchedules);
+      }
     }
 
     return schedules;
   }
 
-  private formatSchedules({ schedules, date }: { schedules: Schedule[]; date: ScheduleDate }): string[] {
+  private formatSchedules({ schedules, date }: { schedules: ScheduleWithType[]; date: ScheduleDate }): string[] {
     const heading = `${getOneDigitDate(date.month)}月${getOneDigitDate(date.day)}日のスケジュール`;
+
     return getTweetableSchedulesWithType({ schedules, heading });
   }
 }
+
+const today = getToday();
+const nogizakaScheduleTweeter = new NogizakaScheduleTweeter(Twitter);
+nogizakaScheduleTweeter.start(today);
