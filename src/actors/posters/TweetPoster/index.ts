@@ -14,10 +14,10 @@ export class TweetPoster {
   public async retweet(tweetId: string): Promise<Twit.PromiseResponse | unknown> {
     try {
       const response = await this.twitter.post('statuses/retweet/:id', { id: tweetId });
-      console.log('Retweet succeeded:', tweetId);
+      console.log('[Retweet] Succeeded:', tweetId);
       return response;
     } catch (error) {
-      console.log('Retweet failed:', error.message);
+      console.log('[Retweet] Failed:', error.message);
       return error;
     }
   }

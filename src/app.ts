@@ -7,6 +7,8 @@ import { getCurrentFullDate, getMillisecondsTilNextTime, getToday, convertHMS } 
 import { Twitter } from './utils/twit';
 import { cutDecimalPlace } from './utils/number';
 
+const RETWEET_CYCLE_MIN = 10;
+
 const nogizakaRetweeter = new NogizakaRetweeter(Twitter);
 const mediaRetweeter = new MediaRetweeter(Twitter);
 const showroomRetweeter = new ShowroomRetweeter(Twitter);
@@ -14,7 +16,7 @@ const nogizakaScheduleTweeter = new NogizakaScheduleTweeter(Twitter);
 const graduatesScheduleTweeter = new GraduatedScheduleTweeter(Twitter);
 
 const retweet = async (): Promise<void> => {
-  console.log('[News] Retweet cycle starts.');
+  console.log('[Retweet] Retweet started.');
 
   const start = new Date().getTime();
 
@@ -23,13 +25,14 @@ const retweet = async (): Promise<void> => {
   await mediaRetweeter.start();
 
   const retweetTookTime = new Date().getTime() - start;
-  console.log(`[News] Retweet cycle finished. Done in ${cutDecimalPlace(retweetTookTime / 1000, 2)}s.\n`);
+  console.log(`[Retweet] Retweet done ${cutDecimalPlace(retweetTookTime / 1000, 2)}s.`);
+  console.log(`[Retweet] The next retweet will be in ${RETWEET_CYCLE_MIN}m.`);
 
   const nextTweetTimer = convertHMS(getMillisecondsTilNextTime(1) / 1000);
   console.log(
-    `[Schedules] Tomorrow's schedules will be tweeted after ${nextTweetTimer.hours}h ${
+    `[Schedules] The next schedules tweeting will be in ${nextTweetTimer.hours}h ${
       nextTweetTimer.minutes
-    }m ${cutDecimalPlace(nextTweetTimer.seconds, 0)}s.\n`,
+    }m ${cutDecimalPlace(nextTweetTimer.seconds, 0)}s.`,
   );
 };
 
@@ -53,13 +56,13 @@ const scheduleTweet = (hour: number): void => {
   let nextTweetTimerHMS = convertHMS(nextTweetTimer / 1000);
 
   console.log(
-    `[Schedules] Tomorrow's schedules will be tweeted after ${nextTweetTimerHMS.hours}h ${
+    `[Schedules] The next schedules tweeting will be in ${nextTweetTimerHMS.hours}h ${
       nextTweetTimerHMS.minutes
-    }m ${cutDecimalPlace(nextTweetTimerHMS.seconds, 0)}s.\n`,
+    }m ${cutDecimalPlace(nextTweetTimerHMS.seconds, 0)}s.`,
   );
 
   const timeoutTweet = async (): Promise<void> => {
-    console.log("[Schedules] Started tweeting today's schedules.");
+    console.log("[Schedules] Today's schedules tweeting started.");
 
     await tweetTodaysSchedules();
 
@@ -69,9 +72,9 @@ const scheduleTweet = (hour: number): void => {
     nextTweetTimerHMS = convertHMS(nextTweetTimer / 1000);
 
     console.log(
-      `[Schedules] Tomorrow's schedules will be tweeted after ${nextTweetTimerHMS.hours}h ${
+      `[Schedules] The next schedules tweeting will be in ${nextTweetTimerHMS.hours}h ${
         nextTweetTimerHMS.minutes
-      }m ${cutDecimalPlace(nextTweetTimerHMS.seconds, 0)}s.\n`,
+      }m ${cutDecimalPlace(nextTweetTimerHMS.seconds, 0)}s.`,
     );
 
     setTimeout(timeoutTweet, nextTweetTimer);
@@ -81,7 +84,7 @@ const scheduleTweet = (hour: number): void => {
 };
 
 const TWEET_SCHEDULE_HOUR = 1;
-const TWEET_INTERVAL = 1000 * 60 * 10;
+const TWEET_INTERVAL = 1000 * 60 * RETWEET_CYCLE_MIN;
 
 scheduleTweet(TWEET_SCHEDULE_HOUR);
 watchAndRetweet(TWEET_INTERVAL);
