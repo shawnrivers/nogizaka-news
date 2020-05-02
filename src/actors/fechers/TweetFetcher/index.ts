@@ -26,10 +26,16 @@ type Tweet = {
   text: string;
 };
 
+type LastTweets = {
+  [accountId: string]: {
+    tweetId: string | null;
+  };
+};
+
 export class TweetFetcher {
   twitter: Twit;
   watchingAccounts: WatchingAccount[];
-  lastTweets: { [key: string]: { tweetId: string | null } };
+  lastTweets: LastTweets;
 
   constructor({ twitter, watchingAccounts }: { twitter: Twit; watchingAccounts: WatchingAccount[] }) {
     this.twitter = twitter;
@@ -41,6 +47,10 @@ export class TweetFetcher {
       })),
       'id',
     );
+  }
+
+  public getLastTweets(): LastTweets {
+    return this.lastTweets;
   }
 
   public async getTweets(): Promise<Tweet[]> {
@@ -76,14 +86,15 @@ export class TweetFetcher {
       }
 
       timeline.sort((tweetA, tweetB) => (tweetA.createdDate > tweetB.createdDate ? 1 : -1));
-
-      if (timeline.length > 0) {
-        this.lastTweets[account.id].tweetId = timeline.slice(-1)[0].id;
-      }
     } catch (error) {
       console.log('Get timeline error:', error);
     }
 
     return timeline;
+  }
+
+  public updateLastTweets({ account, tweetId }: { account: string; tweetId: string }): void {
+    this.lastTweets[account].tweetId = tweetId;
+    console.log('updateLastTweets', this.lastTweets);
   }
 }
