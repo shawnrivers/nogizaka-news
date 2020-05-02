@@ -1,10 +1,10 @@
 import * as Twit from 'twit';
-import { LLC_SCHEDULE_TYPE_LIST } from '../../../../../utils/constants';
+import { NogizakaName } from '../../../../../constants/names';
+import { LLC_SCHEDULE_TYPE_LIST } from '../../../../../constants/schedules';
 import { compareDates, getOneDigitDate } from '../../../../../utils/date';
 import { BaseScheduleTweeter } from '../BaseScheduleTweeter';
 import { getTweetableSchedulesWithType } from '../BaseScheduleTweeter/converters';
 import { ScheduleDate, ScheduleWithType, ScheduleWithTypeLLC } from '../BaseScheduleTweeter/types';
-import { NogizakaName } from '../../../../../constants/names';
 
 export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
   constructor(twitter: Twit) {

@@ -1,6 +1,6 @@
 import * as Twit from 'twit';
 import { BaseRetweeter } from '../BaseRetweeter';
-import { NOGIZAKA_RELATED_ACCOUNTS } from '../../../../utils/accounts';
+import { NOGIZAKA_RELATED_ACCOUNTS } from '../../../../constants/accounts';
 
 export class NogizakaRetweeter extends BaseRetweeter {
   constructor(twitter: Twit) {

@@ -1,4 +1,4 @@
-import { HOURS } from './constants';
+import { HOURS } from '../constants/schedules';
 
 export const getStringLength = (text: string): number => {
   let length = 0;

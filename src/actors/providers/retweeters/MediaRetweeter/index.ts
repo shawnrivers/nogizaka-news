@@ -1,8 +1,8 @@
 import * as Twit from 'twit';
 import { BaseRetweeter } from '../BaseRetweeter';
 import { Tweet } from '../../../fechers/TweetFetcher';
-import { NEWS_MEDIA_ACCOUNTS, AccountId } from '../../../../utils/accounts';
 import { NOGIZAKA_NAMES } from '../../../../constants/names';
+import { NEWS_MEDIA_ACCOUNTS, AccountId } from '../../../../constants/accounts';
 
 export class MediaRetweeter extends BaseRetweeter {
   constructor(twitter: Twit) {

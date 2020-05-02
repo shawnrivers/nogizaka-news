@@ -1,5 +1,5 @@
 import * as Twit from 'twit';
-import { NOGIZAKA_SCHEDULE_TYPES } from '../../../../../utils/constants';
+import { NOGIZAKA_SCHEDULE_TYPES } from '../../../../../constants/schedules';
 import { getOneDigitDate } from '../../../../../utils/date';
 import { BaseScheduleTweeter } from '../BaseScheduleTweeter';
 import { getTweetableSchedulesWithType } from '../BaseScheduleTweeter/converters';

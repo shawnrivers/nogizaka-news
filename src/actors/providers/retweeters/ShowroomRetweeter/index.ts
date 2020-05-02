@@ -1,7 +1,7 @@
 import * as Twit from 'twit';
 import { BaseRetweeter } from '../BaseRetweeter';
 import { containsHour } from '../../../../utils/string';
-import { SHOWROOM_ACCOUNT } from '../../../../utils/accounts';
+import { SHOWROOM_ACCOUNT } from '../../../../constants/accounts';
 
 export class ShowroomRetweeter extends BaseRetweeter {
   constructor(twitter: Twit) {
