@@ -81,7 +81,7 @@ const scheduleTweet = (hour: number): void => {
 };
 
 const TWEET_SCHEDULE_HOUR = 1;
-const TWEET_INTERVAL = 1000 * 60 * 0.5;
+const TWEET_INTERVAL = 1000 * 60 * 10;
 
 scheduleTweet(TWEET_SCHEDULE_HOUR);
 watchAndRetweet(TWEET_INTERVAL);
