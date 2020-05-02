@@ -9,7 +9,8 @@ export const getTweetableSchedulesWithType: GetTweetableSchedulesWithType = ({ s
   const formattedTweets: string[] = [];
 
   let threadCount = 1;
-  let schedulesText = heading + '\n';
+  const headingWithNewLine = heading + '\n';
+  let schedulesText = headingWithNewLine;
 
   for (const typeSchedule of schedules) {
     if (typeSchedule.schedule.length > 0) {
@@ -40,10 +41,10 @@ export const getTweetableSchedulesWithType: GetTweetableSchedulesWithType = ({ s
     }
   }
 
-  if (schedulesText !== heading) {
+  if (schedulesText !== headingWithNewLine) {
     schedulesText = schedulesText.slice(0, -1);
   } else {
-    schedulesText = heading + '\nなし';
+    schedulesText = headingWithNewLine + '\nなし';
   }
 
   formattedTweets.push(schedulesText);
