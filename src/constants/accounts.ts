@@ -35,3 +35,7 @@ export const NOGIZAKA_RELATED_ACCOUNTS: WatchingAccount[] = [
 ];
 
 export const SHOWROOM_ACCOUNT: WatchingAccount = { id: AccountId.Showroom, count: 30 };
+
+export const IKOMA_ACCOUNT: WatchingAccount = { id: AccountId.IkomaRina, count: 5 };
+export const WAKATSUKI_ACCOUNT: WatchingAccount = { id: AccountId.WakatsukiYumi, count: 5 };
+export const KAWAGO_ACCOUNT: WatchingAccount = { id: AccountId.KawagoHina, count: 5 };

@@ -116,3 +116,8 @@ export const convertHMS = (
 
   return { hours, minutes, seconds };
 };
+
+export const isSameDay = (dateA: Date, dateB: Date): boolean =>
+  dateA.getFullYear() === dateB.getFullYear() &&
+  dateA.getMonth() === dateB.getMonth() &&
+  dateA.getDate() === dateB.getDate();
