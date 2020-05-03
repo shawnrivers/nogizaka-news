@@ -1,32 +1,6 @@
 import * as Twit from 'twit';
 import { arrayToObject } from '../../../utils/array';
-import { WatchingAccount } from './types';
-
-type GetTweetResponse = Omit<Twit.PromiseResponse, 'data'> & {
-  data: {
-    id_str: string;
-    created_at: string;
-    user: {
-      id_str: string;
-      screen_name: string;
-    };
-    text: string;
-  }[];
-};
-
-export type Tweet = {
-  id: string;
-  createdDate: Date;
-  userId: string;
-  userName: string;
-  text: string;
-};
-
-type LastTweets = {
-  [accountId: string]: {
-    tweetId: string | null;
-  };
-};
+import { WatchingAccount, LastTweets, Tweet, GetTweetResponse } from './types';
 
 export class TweetFetcher {
   twitter: Twit;
