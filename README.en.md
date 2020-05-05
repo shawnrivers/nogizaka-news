@@ -25,6 +25,7 @@ README: [日本語](https://github.com/shawnrivers/nogizaka-news/blob/master/REA
     - 日刊スポーツ ([@nikkansports](https://twitter.com/nikkansports))
     - 音楽ナタリー ([@natalie_mu](https://twitter.com/natalie_mu))
     - MANTANWEB ([@mantanweb](https://twitter.com/mantanweb))
+    - Real Sound ([@mantanweb](https://twitter.com/realsoundjp))
 - Tweet the schedules of members every day at 1:00 a.m. Tokyo time
   - Schedules data of current members are from [Nogizaka46 official site](http://www.nogizaka46.com/).
   - Schedules data of graduated members are from their official websites:

@@ -25,6 +25,7 @@ README: [English](https://github.com/shawnrivers/nogizaka-news/blob/master/READM
     - 日刊スポーツ（[@nikkansports](https://twitter.com/nikkansports)）
     - 音楽ナタリー（[@natalie_mu](https://twitter.com/natalie_mu)）
     - MANTANWEB（[@mantanweb](https://twitter.com/mantanweb)）
+    - Real Sound（[@realsoundjp](https://twitter.com/realsoundjp)）
 - 毎日東京時間午前 1 時にメンバーのスケジュールをツイート：
   - 現メンバーのスケジュールは[乃木坂46公式サイト](http://www.nogizaka46.com/)から
   - 卒業メンバーのスケジュールはそれぞれの公式サイトから：

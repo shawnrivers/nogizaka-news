@@ -8,6 +8,7 @@ export enum AccountId {
   LINENews = '1516060316',
   NikkanSports = '46058599',
   YahooNews = '88846085',
+  RealSound = '1501970341',
   Nogizaka46 = '317684165',
   NogizakaKoujichu = '929625878249684992',
   Showroom = '2212674829',
@@ -27,6 +28,7 @@ export const NEWS_MEDIA_ACCOUNTS: WatchingAccount[] = [
   { id: AccountId.LINENews, count: 30 }, // LINE NEWS
   { id: AccountId.NikkanSports, count: 30 }, // 日刊スポーツ
   { id: AccountId.YahooNews, count: 30 }, // Yahoo!ニュース
+  { id: AccountId.RealSound, count: 30 }, // Real Sound
 ];
 
 export const NOGIZAKA_RELATED_ACCOUNTS: WatchingAccount[] = [
