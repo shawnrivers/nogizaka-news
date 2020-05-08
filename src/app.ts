@@ -10,7 +10,7 @@ import { convertHMS, getCurrentFullDate, getMillisecondsTilNextTime, getToday } 
 import { cutDecimalPlace } from './utils/number';
 import { Twitter } from './utils/twit';
 
-const RETWEET_CYCLE_MIN = 10;
+const RETWEET_CYCLE_MIN = 15;
 
 const nogizakaRetweeter = new NogizakaRetweeter(Twitter);
 const mediaRetweeter = new MediaRetweeter(Twitter);
