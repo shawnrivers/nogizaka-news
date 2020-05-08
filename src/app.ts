@@ -11,6 +11,8 @@ import { cutDecimalPlace } from './utils/number';
 import { Twitter } from './utils/twit';
 
 const RETWEET_CYCLE_MIN = 15;
+const DAILY_SCHEDULES_CYCLE_HOUR = 1;
+const RETWEET_CYCLE_MS = 1000 * 60 * RETWEET_CYCLE_MIN;
 
 const nogizakaRetweeter = new NogizakaRetweeter(Twitter);
 const mediaRetweeter = new MediaRetweeter(Twitter);
@@ -47,7 +49,7 @@ const retweet = async (): Promise<void> => {
   );
 };
 
-const watchAndRetweet = (interval: number): void => {
+const runRetweetingCycle = (interval: number): void => {
   retweet();
 
   setInterval(() => {
@@ -55,14 +57,14 @@ const watchAndRetweet = (interval: number): void => {
   }, interval);
 };
 
-const tweetTodaysSchedules = async (): Promise<void> => {
+const tweetDailySchedules = async (): Promise<void> => {
   const today = getToday();
 
   await nogizakaScheduleTweeter.start(today);
   await graduatesScheduleTweeter.start(today);
 };
 
-const scheduleTweet = (hour: number): void => {
+const runDailySchedulesTweetingCycle = (hour: number): void => {
   let nextTweetTimer = getMillisecondsTilNextTime(hour);
   let nextTweetTimerHMS = convertHMS(nextTweetTimer / 1000);
 
@@ -75,7 +77,7 @@ const scheduleTweet = (hour: number): void => {
   const timeoutTweet = async (): Promise<void> => {
     console.log("[Schedules] Today's schedules tweeting started.");
 
-    await tweetTodaysSchedules();
+    await tweetDailySchedules();
 
     console.log("[Schedules] Today's schedules tweeting finished at Tokyo time:", getCurrentFullDate());
 
@@ -94,8 +96,5 @@ const scheduleTweet = (hour: number): void => {
   setTimeout(() => timeoutTweet(), nextTweetTimer);
 };
 
-const TWEET_SCHEDULE_HOUR = 1;
-const TWEET_INTERVAL = 1000 * 60 * RETWEET_CYCLE_MIN;
-
-scheduleTweet(TWEET_SCHEDULE_HOUR);
-watchAndRetweet(TWEET_INTERVAL);
+runDailySchedulesTweetingCycle(DAILY_SCHEDULES_CYCLE_HOUR);
+runRetweetingCycle(RETWEET_CYCLE_MS);
