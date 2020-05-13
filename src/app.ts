@@ -52,9 +52,7 @@ const retweet = async (): Promise<void> => {
 const runRetweetingCycle = (interval: number): void => {
   retweet();
 
-  setInterval(() => {
-    retweet();
-  }, interval);
+  setInterval(retweet, interval);
 };
 
 const tweetDailySchedules = async (): Promise<void> => {
@@ -93,7 +91,7 @@ const runDailySchedulesTweetingCycle = (hour: number): void => {
     setTimeout(timeoutTweet, nextTweetTimer);
   };
 
-  setTimeout(() => timeoutTweet(), nextTweetTimer);
+  setTimeout(timeoutTweet, nextTweetTimer);
 };
 
 runDailySchedulesTweetingCycle(DAILY_SCHEDULES_CYCLE_HOUR);
