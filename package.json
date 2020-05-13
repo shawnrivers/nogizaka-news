@@ -4,20 +4,20 @@
   "description": "@n46_news is a Twitter bot focusing on retweeting news about Nogizaka46. We also recently added a function to tweet today's schedules of Nogizaka46 members every day.",
   "main": "dist/app.js",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.3",
-    "request": "^2.88.2",
-    "request-promise": "^4.2.5",
-    "ts-node": "^8.9.1",
-    "twit": "^2.2.11"
-  },
-  "devDependencies": {
     "@types/cheerio": "^0.22.17",
     "@types/request": "^2.48.4",
     "@types/request-promise": "^4.1.46",
     "@types/twit": "^2.2.23",
+    "cheerio": "^1.0.0-rc.3",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5",
+    "ts-node": "^8.9.1",
+    "twit": "^2.2.11",
+    "typescript": "^3.8.3"
+  },
+  "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.24.0",
-    "typescript": "^3.8.3",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.3",
