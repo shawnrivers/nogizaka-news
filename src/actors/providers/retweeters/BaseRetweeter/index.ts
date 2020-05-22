@@ -4,8 +4,8 @@ import { TweetPoster } from '../../../posters/TweetPoster';
 import { WatchingAccount } from '../../../fechers/TweetFetcher/types';
 
 export class BaseRetweeter {
-  tweetFetcher: TweetFetcher;
-  tweetPoster: TweetPoster;
+  protected tweetFetcher: TweetFetcher;
+  protected tweetPoster: TweetPoster;
 
   constructor({ twitter, watchingAccounts }: { twitter: Twit; watchingAccounts: WatchingAccount[] }) {
     this.tweetFetcher = new TweetFetcher({ twitter, watchingAccounts });

@@ -3,9 +3,9 @@ import { arrayToObject } from '../../../utils/array';
 import { WatchingAccount, LastTweets, Tweet, GetTweetResponse } from './types';
 
 export class TweetFetcher {
-  twitter: Twit;
-  watchingAccounts: WatchingAccount[];
-  lastTweets: LastTweets;
+  private twitter: Twit;
+  private watchingAccounts: WatchingAccount[];
+  private lastTweets: LastTweets;
 
   constructor({ twitter, watchingAccounts }: { twitter: Twit; watchingAccounts: WatchingAccount[] }) {
     this.twitter = twitter;

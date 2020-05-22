@@ -5,7 +5,7 @@ type PostTweetResponse = Omit<Twit.PromiseResponse, 'data'> & {
 };
 
 export class TweetPoster {
-  twitter: Twit;
+  private twitter: Twit;
 
   constructor(twitter: Twit) {
     this.twitter = twitter;
