@@ -1,11 +1,11 @@
 import * as Twit from 'twit';
 import { arrayToObject } from '../../../utils/array';
-import { WatchingAccount, LastTweets, Tweet, GetTweetResponse } from './types';
+import { WatchingAccount, LastTweets, Tweet, GetTweetResponse, AccountTweets } from './types';
 
 export class TweetFetcher {
-  twitter: Twit;
-  watchingAccounts: WatchingAccount[];
-  lastTweets: LastTweets;
+  private twitter: Twit;
+  private watchingAccounts: WatchingAccount[];
+  private lastTweets: LastTweets;
 
   constructor({ twitter, watchingAccounts }: { twitter: Twit; watchingAccounts: WatchingAccount[] }) {
     this.twitter = twitter;
@@ -32,6 +32,20 @@ export class TweetFetcher {
     }
 
     return tweets;
+  }
+
+  public async getTweetsByAccount(): Promise<AccountTweets[]> {
+    const tweetsByAccountArray = [];
+
+    for (const watchingAccount of this.watchingAccounts) {
+      const accountTweets = await this.getTimeline(watchingAccount);
+      tweetsByAccountArray.push({
+        accountId: watchingAccount.id,
+        tweets: accountTweets,
+      });
+    }
+
+    return tweetsByAccountArray;
   }
 
   private async getTimeline(account: WatchingAccount): Promise<Tweet[]> {
@@ -63,7 +77,7 @@ export class TweetFetcher {
     return timeline;
   }
 
-  public updateLastTweets({ account, tweetId }: { account: string; tweetId: string }): void {
-    this.lastTweets[account].tweetId = tweetId;
+  public updateLastTweets({ accountId, tweetId }: { accountId: string; tweetId: string }): void {
+    this.lastTweets[accountId].tweetId = tweetId;
   }
 }

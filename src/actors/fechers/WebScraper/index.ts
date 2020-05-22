@@ -2,7 +2,7 @@ import * as cheerio from 'cheerio';
 import * as req from 'request-promise';
 
 export class WebScraper {
-  $: CheerioStatic | null;
+  private $: CheerioStatic | null;
 
   constructor() {
     this.$ = null;
