@@ -16,7 +16,7 @@ export class MediaRetweeter extends BaseRetweeter {
       if (this.relatesToNogizaka(tweet)) {
         await this.tweetPoster.retweet(tweet.id);
       }
-      this.tweetFetcher.updateLastTweets({ account: tweet.userId, tweetId: tweet.id });
+      this.tweetFetcher.updateLastTweets({ accountId: tweet.userId, tweetId: tweet.id });
     }
   }
 

@@ -2,40 +2,63 @@ import { BaseRetweeter } from '../BaseRetweeter';
 import * as Twit from 'twit';
 import { WatchingAccount, Tweet } from '../../../fechers/TweetFetcher/types';
 import { isSameDay } from '../../../../utils/date';
-import { TweetRelativeCallback } from './types';
+import { TweetRelativeCallback, TextRelativeRetweeterOptions } from './types';
 import { getWatchingAccountWithCallback } from './retweetRules';
 
 export class TextRelativeRetweeter extends BaseRetweeter {
-  constructor({ twitter, accounts }: { twitter: Twit; accounts: WatchingAccount[] }) {
+  private options: TextRelativeRetweeterOptions;
+
+  constructor({
+    twitter,
+    accounts,
+    options,
+  }: {
+    twitter: Twit;
+    accounts: WatchingAccount[];
+    options?: TextRelativeRetweeterOptions;
+  }) {
     super({ twitter, watchingAccounts: accounts });
+    this.options = {
+      onlySameDay: options?.onlySameDay,
+    };
   }
 
   public async start(): Promise<void> {
     const accountsTweets = await this.tweetFetcher.getTweetsByAccount();
-    const today = new Date();
+    const today = this.options.onlySameDay ? new Date() : undefined;
 
     for (const accountTweets of accountsTweets) {
       const accountWithCallback = getWatchingAccountWithCallback(accountTweets.accountId);
 
       for (const tweet of accountTweets.tweets) {
-        if (this.isTweetRelative({ tweet, today, tweetRelativeCallback: accountWithCallback.tweetRelativeCallback })) {
+        const isTweetRelative = this.isTweetRelative({
+          tweet,
+          today,
+          tweetRelativeCallback: accountWithCallback.tweetRelativeCallback,
+        });
+        if (isTweetRelative) {
           await this.tweetPoster.retweet(tweet.id);
         }
-        this.tweetFetcher.updateLastTweets({ account: tweet.userId, tweetId: tweet.id });
+        this.tweetFetcher.updateLastTweets({ accountId: tweet.userId, tweetId: tweet.id });
       }
     }
   }
 
-  public async getRelativeTweets({ sameDay }: { sameDay: boolean }): Promise<Tweet[]> {
+  public async getRelativeTweets(): Promise<Tweet[]> {
     const accountsTweets = await this.tweetFetcher.getTweetsByAccount();
-    const today = sameDay ? new Date() : undefined;
+    const today = this.options?.onlySameDay ? new Date() : undefined;
     const informationTweets = [];
 
     for (const accountTweets of accountsTweets) {
       const accountWithCallback = getWatchingAccountWithCallback(accountTweets.accountId);
 
       for (const tweet of accountTweets.tweets) {
-        if (this.isTweetRelative({ tweet, today, tweetRelativeCallback: accountWithCallback.tweetRelativeCallback })) {
+        const isTweetRelative = this.isTweetRelative({
+          tweet,
+          today,
+          tweetRelativeCallback: accountWithCallback.tweetRelativeCallback,
+        });
+        if (isTweetRelative) {
           informationTweets.push(tweet);
         }
       }

@@ -77,7 +77,7 @@ export class TweetFetcher {
     return timeline;
   }
 
-  public updateLastTweets({ account, tweetId }: { account: string; tweetId: string }): void {
-    this.lastTweets[account].tweetId = tweetId;
+  public updateLastTweets({ accountId, tweetId }: { accountId: string; tweetId: string }): void {
+    this.lastTweets[accountId].tweetId = tweetId;
   }
 }

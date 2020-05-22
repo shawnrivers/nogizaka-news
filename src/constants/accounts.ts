@@ -32,7 +32,7 @@ export const NEWS_MEDIA_ACCOUNTS: WatchingAccount[] = [
   { id: AccountId.RealSound, count: 30, type: 'news' }, // Real Sound
 ];
 
-export const NOGIZAKA_RELATED_ACCOUNTS: WatchingAccount[] = [
+export const NOGIZAKA_ACCOUNTS: WatchingAccount[] = [
   { id: AccountId.Nogizaka46, count: 10, type: 'nogizaka' }, // 乃木坂46
   { id: AccountId.NogizakaKoujichu, count: 1, type: 'nogizaka' }, // 乃木坂工事中
 ];
@@ -44,13 +44,6 @@ export const WAKATSUKI_ACCOUNT: WatchingAccount = { id: AccountId.WakatsukiYumi,
 export const KAWAGO_ACCOUNT: WatchingAccount = { id: AccountId.KawagoHina, count: 5, type: 'member' };
 
 export const RETWEET_ACCOUNTS_OBJECT = arrayToObject(
-  [
-    ...NOGIZAKA_RELATED_ACCOUNTS,
-    ...NEWS_MEDIA_ACCOUNTS,
-    SHOWROOM_ACCOUNT,
-    IKOMA_ACCOUNT,
-    WAKATSUKI_ACCOUNT,
-    KAWAGO_ACCOUNT,
-  ],
+  [...NOGIZAKA_ACCOUNTS, ...NEWS_MEDIA_ACCOUNTS, SHOWROOM_ACCOUNT, IKOMA_ACCOUNT, WAKATSUKI_ACCOUNT, KAWAGO_ACCOUNT],
   'id',
 );
