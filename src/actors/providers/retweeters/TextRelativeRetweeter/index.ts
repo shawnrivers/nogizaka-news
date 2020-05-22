@@ -24,13 +24,13 @@ export class TextRelativeRetweeter extends BaseRetweeter {
   }
 
   public async start(): Promise<void> {
-    const accountsTweets = await this.tweetFetcher.getTweetsByAccount();
+    const tweetsByAccountArray = await this.tweetFetcher.getTweetsByAccount();
     const today = this.options.onlySameDay ? new Date() : undefined;
 
-    for (const accountTweets of accountsTweets) {
-      const accountWithCallback = getWatchingAccountWithCallback(accountTweets.accountId);
+    for (const tweetsByAccount of tweetsByAccountArray) {
+      const accountWithCallback = getWatchingAccountWithCallback(tweetsByAccount.accountId);
 
-      for (const tweet of accountTweets.tweets) {
+      for (const tweet of tweetsByAccount.tweets) {
         const isTweetRelative = this.isTweetRelative({
           tweet,
           today,
@@ -45,26 +45,26 @@ export class TextRelativeRetweeter extends BaseRetweeter {
   }
 
   public async getRelativeTweets(): Promise<Tweet[]> {
-    const accountsTweets = await this.tweetFetcher.getTweetsByAccount();
+    const tweetsByAccountArray = await this.tweetFetcher.getTweetsByAccount();
     const today = this.options?.onlySameDay ? new Date() : undefined;
-    const informationTweets = [];
+    const relativeTweets = [];
 
-    for (const accountTweets of accountsTweets) {
-      const accountWithCallback = getWatchingAccountWithCallback(accountTweets.accountId);
+    for (const tweetsByAccount of tweetsByAccountArray) {
+      const accountWithCallback = getWatchingAccountWithCallback(tweetsByAccount.accountId);
 
-      for (const tweet of accountTweets.tweets) {
+      for (const tweet of tweetsByAccount.tweets) {
         const isTweetRelative = this.isTweetRelative({
           tweet,
           today,
           tweetRelativeCallback: accountWithCallback.tweetRelativeCallback,
         });
         if (isTweetRelative) {
-          informationTweets.push(tweet);
+          relativeTweets.push(tweet);
         }
       }
     }
 
-    return informationTweets;
+    return relativeTweets;
   }
 
   private isTweetRelative({
@@ -79,7 +79,6 @@ export class TextRelativeRetweeter extends BaseRetweeter {
     const { text } = tweet;
 
     const sameDayFactor = today !== undefined ? isSameDay(today, tweet.createdDate) : true;
-
     const relativeTweetFactor = text !== undefined ? tweetRelativeCallback(text) : false;
 
     return sameDayFactor && relativeTweetFactor;
