@@ -1,10 +1,14 @@
-import { MediaRetweeter } from './actors/providers/retweeters/MediaRetweeter';
-import { NogizakaRetweeter } from './actors/providers/retweeters/NogizakaRetweeter';
-import { ShowroomRetweeter } from './actors/providers/retweeters/ShowroomRetweeter';
 import { TextRelativeRetweeter } from './actors/providers/retweeters/TextRelativeRetweeter';
 import { GraduatedScheduleTweeter } from './actors/providers/tweeters/scheduleTweeters/GraduatedScheduleTweeter';
 import { NogizakaScheduleTweeter } from './actors/providers/tweeters/scheduleTweeters/NogizakaScheduleTweeter';
-import { IKOMA_ACCOUNT, KAWAGO_ACCOUNT, WAKATSUKI_ACCOUNT } from './constants/accounts';
+import {
+  IKOMA_ACCOUNT,
+  KAWAGO_ACCOUNT,
+  NEWS_MEDIA_ACCOUNTS,
+  NOGIZAKA_ACCOUNTS,
+  SHOWROOM_ACCOUNT,
+  WAKATSUKI_ACCOUNT,
+} from './constants/accounts';
 import { convertHMS, getCurrentFullDate, getMillisecondsTilNextTime, getToday } from './utils/date';
 import { cutDecimalPlace } from './utils/number';
 import { Twitter } from './utils/twit';
@@ -13,9 +17,18 @@ const RETWEET_CYCLE_MIN = 15;
 const DAILY_SCHEDULES_CYCLE_HOUR = 1;
 const RETWEET_CYCLE_MS = 1000 * 60 * RETWEET_CYCLE_MIN;
 
-const nogizakaRetweeter = new NogizakaRetweeter(Twitter);
-const mediaRetweeter = new MediaRetweeter(Twitter);
-const showroomRetweeter = new ShowroomRetweeter(Twitter);
+const nogizakaRetweeter = new TextRelativeRetweeter({
+  twitter: Twitter,
+  accounts: NOGIZAKA_ACCOUNTS,
+});
+const mediaRetweeter = new TextRelativeRetweeter({
+  twitter: Twitter,
+  accounts: NEWS_MEDIA_ACCOUNTS,
+});
+const showroomRetweeter = new TextRelativeRetweeter({
+  twitter: Twitter,
+  accounts: [SHOWROOM_ACCOUNT],
+});
 const ikomaRetweeter = new TextRelativeRetweeter({
   twitter: Twitter,
   accounts: [IKOMA_ACCOUNT],
