@@ -35,17 +35,17 @@ export class TweetFetcher {
   }
 
   public async getTweetsByAccount(): Promise<AccountTweets[]> {
-    const tweets = [];
+    const tweetsByAccountArray = [];
 
     for (const watchingAccount of this.watchingAccounts) {
       const accountTweets = await this.getTimeline(watchingAccount);
-      tweets.push({
+      tweetsByAccountArray.push({
         accountId: watchingAccount.id,
         tweets: accountTweets,
       });
     }
 
-    return tweets;
+    return tweetsByAccountArray;
   }
 
   private async getTimeline(account: WatchingAccount): Promise<Tweet[]> {
