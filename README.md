@@ -1,6 +1,6 @@
 # [Nogizaka46 News](https://twitter.com/n46_news)
 
-**Nogizaka46 News** ([@n46_news](https://twitter.com/n46_news)) は、[乃木坂 46](https://ja.wikipedia.org/wiki/%E4%B9%83%E6%9C%A8%E5%9D%8246)関連のニュースとスケジュールをツイートする [Node.js](https://nodejs.org/en/) のツイーターボットである。
+**Nogizaka46 News** ([@n46_news](https://twitter.com/n46_news)) は、[乃木坂46](https://ja.wikipedia.org/wiki/%E4%B9%83%E6%9C%A8%E5%9D%8246)関連のニュースとスケジュールをツイートする [Node.js](https://nodejs.org/en/) のツイーターボットである。
 
 ## 技術
 
