@@ -34,3 +34,8 @@ export type LastTweets = {
     tweetId: string | null;
   };
 };
+
+export type AccountTweets = {
+  accountId: AccountId;
+  tweets: Tweet[];
+};

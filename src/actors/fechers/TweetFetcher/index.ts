@@ -1,6 +1,6 @@
 import * as Twit from 'twit';
 import { arrayToObject } from '../../../utils/array';
-import { WatchingAccount, LastTweets, Tweet, GetTweetResponse } from './types';
+import { WatchingAccount, LastTweets, Tweet, GetTweetResponse, AccountTweets } from './types';
 
 export class TweetFetcher {
   private twitter: Twit;
@@ -29,6 +29,20 @@ export class TweetFetcher {
     for (const watchingAccount of this.watchingAccounts) {
       const accountTweets = await this.getTimeline(watchingAccount);
       tweets.push(...accountTweets);
+    }
+
+    return tweets;
+  }
+
+  public async getTweetsByAccount(): Promise<AccountTweets[]> {
+    const tweets = [];
+
+    for (const watchingAccount of this.watchingAccounts) {
+      const accountTweets = await this.getTimeline(watchingAccount);
+      tweets.push({
+        accountId: watchingAccount.id,
+        tweets: accountTweets,
+      });
     }
 
     return tweets;
