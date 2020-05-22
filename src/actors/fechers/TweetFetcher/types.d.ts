@@ -1,8 +1,12 @@
 import * as Twit from 'twit';
+import { AccountId } from '../../../constants/accounts';
+
+export type AccountType = 'nogizaka' | 'news' | 'showroom' | 'member';
 
 export type WatchingAccount = {
-  id: string;
+  id: AccountId;
   count: number;
+  type: AccountType;
 };
 
 export type GetTweetResponse = Omit<Twit.PromiseResponse, 'data'> & {
