@@ -8,15 +8,7 @@ const ikomaRule: TweetRelativeCallback = (text) => text.includes('出演情報')
 const kawagoRule: TweetRelativeCallback = (text) => text.includes('お知らせ');
 const wakatsukiRule: TweetRelativeCallback = (text) => text.includes('告知');
 const showroomScheduleRule: TweetRelativeCallback = (text) => text.includes('のぎおび') && containsHour(text);
-const newsMediaRule: TweetRelativeCallback = (text) => {
-  for (const name of NOGIZAKA_NAMES) {
-    if (text.includes(name)) {
-      return true;
-    }
-  }
-
-  return false;
-};
+const newsMediaRule: TweetRelativeCallback = (text) => NOGIZAKA_NAMES.some((name) => text.includes(name));
 const modelPressRule: TweetRelativeCallback = (text) =>
   !text.includes('フォトランキング') &&
   !text.includes('このツイートをRT') &&
