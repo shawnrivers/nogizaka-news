@@ -1,12 +1,10 @@
 import { MediaRetweeter } from './actors/providers/retweeters/MediaRetweeter';
-import { MemberRetweeter } from './actors/providers/retweeters/MemberRetweeter';
-import { memberRetweetRule } from './actors/providers/retweeters/MemberRetweeter/relativeRules';
 import { NogizakaRetweeter } from './actors/providers/retweeters/NogizakaRetweeter';
 import { ShowroomRetweeter } from './actors/providers/retweeters/ShowroomRetweeter';
+import { TextRelativeRetweeter } from './actors/providers/retweeters/TextRelativeRetweeter';
 import { GraduatedScheduleTweeter } from './actors/providers/tweeters/scheduleTweeters/GraduatedScheduleTweeter';
 import { NogizakaScheduleTweeter } from './actors/providers/tweeters/scheduleTweeters/NogizakaScheduleTweeter';
 import { IKOMA_ACCOUNT, KAWAGO_ACCOUNT, WAKATSUKI_ACCOUNT } from './constants/accounts';
-import { NogizakaName } from './constants/names';
 import { convertHMS, getCurrentFullDate, getMillisecondsTilNextTime, getToday } from './utils/date';
 import { cutDecimalPlace } from './utils/number';
 import { Twitter } from './utils/twit';
@@ -18,20 +16,17 @@ const RETWEET_CYCLE_MS = 1000 * 60 * RETWEET_CYCLE_MIN;
 const nogizakaRetweeter = new NogizakaRetweeter(Twitter);
 const mediaRetweeter = new MediaRetweeter(Twitter);
 const showroomRetweeter = new ShowroomRetweeter(Twitter);
-const ikomaRetweeter = new MemberRetweeter({
+const ikomaRetweeter = new TextRelativeRetweeter({
   twitter: Twitter,
-  account: IKOMA_ACCOUNT,
-  tweetRelativeCallback: memberRetweetRule(NogizakaName.IkomaRina),
+  accounts: [IKOMA_ACCOUNT],
 });
-const wakatsukiRetweeter = new MemberRetweeter({
+const wakatsukiRetweeter = new TextRelativeRetweeter({
   twitter: Twitter,
-  account: WAKATSUKI_ACCOUNT,
-  tweetRelativeCallback: memberRetweetRule(NogizakaName.WakatsukiYumi),
+  accounts: [WAKATSUKI_ACCOUNT],
 });
-const kawagoRetweeter = new MemberRetweeter({
+const kawagoRetweeter = new TextRelativeRetweeter({
   twitter: Twitter,
-  account: KAWAGO_ACCOUNT,
-  tweetRelativeCallback: memberRetweetRule(NogizakaName.KawagoHina),
+  accounts: [KAWAGO_ACCOUNT],
 });
 
 const nogizakaScheduleTweeter = new NogizakaScheduleTweeter(Twitter);

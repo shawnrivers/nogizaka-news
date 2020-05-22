@@ -43,7 +43,7 @@ export const IKOMA_ACCOUNT: WatchingAccount = { id: AccountId.IkomaRina, count: 
 export const WAKATSUKI_ACCOUNT: WatchingAccount = { id: AccountId.WakatsukiYumi, count: 5, type: 'member' };
 export const KAWAGO_ACCOUNT: WatchingAccount = { id: AccountId.KawagoHina, count: 5, type: 'member' };
 
-export const retweetAccountsObject = arrayToObject(
+export const RETWEET_ACCOUNTS_OBJECT = arrayToObject(
   [
     ...NOGIZAKA_RELATED_ACCOUNTS,
     ...NEWS_MEDIA_ACCOUNTS,
