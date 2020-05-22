@@ -3,7 +3,8 @@ import { TweetRelativeCallback, WatchingAccountWithCallback } from './types';
 import { containsHour } from '../../../../utils/string';
 import { NOGIZAKA_NAMES } from '../../../../constants/names';
 
-const defaultRule: TweetRelativeCallback = () => true;
+const defaultRule: TweetRelativeCallback = () => false;
+const nogizakaRule: TweetRelativeCallback = () => true;
 const ikomaRule: TweetRelativeCallback = (text) => text.includes('出演情報');
 const kawagoRule: TweetRelativeCallback = (text) => text.includes('お知らせ');
 const wakatsukiRule: TweetRelativeCallback = (text) => text.includes('告知');
@@ -22,6 +23,30 @@ const mantanWebRule: TweetRelativeCallback = (text) => !text.includes('今週の
 
 export const getWatchingAccountWithCallback = (accountId: AccountId): WatchingAccountWithCallback => {
   const account = RETWEET_ACCOUNTS_OBJECT[accountId];
+
+  if (account.type === 'nogizaka') {
+    return { ...account, tweetRelativeCallback: nogizakaRule };
+  }
+
+  if (account.type === 'news') {
+    if (accountId === AccountId.ModelPress) {
+      return { ...account, tweetRelativeCallback: modelPressRule };
+    }
+
+    if (accountId === AccountId.NikkanSports) {
+      return { ...account, tweetRelativeCallback: nikkanSportsRule };
+    }
+
+    if (accountId === AccountId.MantanWeb) {
+      return { ...account, tweetRelativeCallback: mantanWebRule };
+    }
+
+    return { ...account, tweetRelativeCallback: newsMediaRule };
+  }
+
+  if (accountId === AccountId.Showroom) {
+    return { ...account, tweetRelativeCallback: showroomScheduleRule };
+  }
 
   if (accountId === AccountId.IkomaRina) {
     return { ...account, tweetRelativeCallback: ikomaRule };
@@ -45,26 +70,6 @@ export const getWatchingAccountWithCallback = (accountId: AccountId): WatchingAc
 
   if (accountId === AccountId.HatanakaSeira) {
     return { ...account, tweetRelativeCallback: HatanakaRule };
-  }
-
-  if (accountId === AccountId.Showroom) {
-    return { ...account, tweetRelativeCallback: showroomScheduleRule };
-  }
-
-  if (account.type === 'news') {
-    if (accountId === AccountId.ModelPress) {
-      return { ...account, tweetRelativeCallback: modelPressRule };
-    }
-
-    if (accountId === AccountId.NikkanSports) {
-      return { ...account, tweetRelativeCallback: nikkanSportsRule };
-    }
-
-    if (accountId === AccountId.MantanWeb) {
-      return { ...account, tweetRelativeCallback: mantanWebRule };
-    }
-
-    return { ...account, tweetRelativeCallback: newsMediaRule };
   }
 
   return { ...account, tweetRelativeCallback: defaultRule };
