@@ -39,14 +39,16 @@ export const NOGIZAKA_ACCOUNTS: WatchingAccount[] = [
 
 export const SHOWROOM_ACCOUNT: WatchingAccount = { id: AccountId.Showroom, count: 30, type: 'showroom' };
 
-export const IKOMA_ACCOUNT: WatchingAccount = { id: AccountId.IkomaRina, count: 5, type: 'member' };
-export const WAKATSUKI_ACCOUNT: WatchingAccount = { id: AccountId.WakatsukiYumi, count: 5, type: 'member' };
-export const KAWAGO_ACCOUNT: WatchingAccount = { id: AccountId.KawagoHina, count: 5, type: 'member' };
-export const NAGASHIMA_ACCOUNT: WatchingAccount = { id: AccountId.NagashimaSeira, count: 5, type: 'member' };
-export const NENE_ACCOUNT: WatchingAccount = { id: AccountId.ItouNene, count: 5, type: 'member' };
-export const HATANAKA_ACCOUNT: WatchingAccount = { id: AccountId.HatanakaSeira, count: 5, type: 'member' };
+export const GRADUATES_ACCOUNTS: WatchingAccount[] = [
+  { id: AccountId.IkomaRina, count: 5, type: 'member' },
+  { id: AccountId.WakatsukiYumi, count: 5, type: 'member' },
+  { id: AccountId.KawagoHina, count: 5, type: 'member' },
+  { id: AccountId.NagashimaSeira, count: 5, type: 'member' },
+  { id: AccountId.ItouNene, count: 5, type: 'member' },
+  { id: AccountId.HatanakaSeira, count: 5, type: 'member' },
+];
 
 export const RETWEET_ACCOUNTS_OBJECT = arrayToObject(
-  [...NOGIZAKA_ACCOUNTS, ...NEWS_MEDIA_ACCOUNTS, SHOWROOM_ACCOUNT, IKOMA_ACCOUNT, WAKATSUKI_ACCOUNT, KAWAGO_ACCOUNT],
+  [...NOGIZAKA_ACCOUNTS, ...NEWS_MEDIA_ACCOUNTS, ...GRADUATES_ACCOUNTS, SHOWROOM_ACCOUNT],
   'id',
 );

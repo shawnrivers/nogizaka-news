@@ -1,17 +1,12 @@
 import { TextRelativeRetweeter } from './actors/providers/retweeters/TextRelativeRetweeter';
-import { GraduatedScheduleTweeter } from './actors/providers/tweeters/scheduleTweeters/GraduatedScheduleTweeter';
-import { NogizakaScheduleTweeter } from './actors/providers/tweeters/scheduleTweeters/NogizakaScheduleTweeter';
 import {
-  IKOMA_ACCOUNT,
-  KAWAGO_ACCOUNT,
+  GRADUATES_ACCOUNTS,
   NEWS_MEDIA_ACCOUNTS,
   NOGIZAKA_ACCOUNTS,
   SHOWROOM_ACCOUNT,
-  WAKATSUKI_ACCOUNT,
-  NAGASHIMA_ACCOUNT,
-  NENE_ACCOUNT,
-  HATANAKA_ACCOUNT,
 } from './actors/providers/retweeters/TextRelativeRetweeter/accounts';
+import { GraduatedScheduleTweeter } from './actors/providers/tweeters/scheduleTweeters/GraduatedScheduleTweeter';
+import { NogizakaScheduleTweeter } from './actors/providers/tweeters/scheduleTweeters/NogizakaScheduleTweeter';
 import { convertHMS, getCurrentFullDate, getMillisecondsTilNextTime, getToday } from './utils/date';
 import { cutDecimalPlace } from './utils/number';
 import { Twitter } from './utils/twit';
@@ -34,7 +29,7 @@ const showroomRetweeter = new TextRelativeRetweeter({
 });
 const graduatesRetweeter = new TextRelativeRetweeter({
   twitter: Twitter,
-  accounts: [IKOMA_ACCOUNT, WAKATSUKI_ACCOUNT, KAWAGO_ACCOUNT, NAGASHIMA_ACCOUNT, NENE_ACCOUNT, HATANAKA_ACCOUNT],
+  accounts: GRADUATES_ACCOUNTS,
 });
 
 const nogizakaScheduleTweeter = new NogizakaScheduleTweeter(Twitter);
