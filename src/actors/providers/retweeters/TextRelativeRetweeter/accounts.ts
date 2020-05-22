@@ -21,23 +21,22 @@ export enum AccountId {
   ItouNene = '3190643234',
 }
 
-export const NEWS_MEDIA_ACCOUNTS: WatchingAccount[] = [
-  { id: AccountId.ModelPress, count: 30, type: 'news' }, // モデルプレス
-  { id: AccountId.MantanWeb, count: 30, type: 'news' }, // MANTANWEB
-  { id: AccountId.OriconNews, count: 30, type: 'news' }, // ORICON NEWS
-  { id: AccountId.OngakuNatalie, count: 30, type: 'news' }, // 音楽ナタリー
-  { id: AccountId.LINENews, count: 30, type: 'news' }, // LINE NEWS
-  { id: AccountId.NikkanSports, count: 30, type: 'news' }, // 日刊スポーツ
-  { id: AccountId.YahooNews, count: 30, type: 'news' }, // Yahoo!ニュース
-  { id: AccountId.RealSound, count: 30, type: 'news' }, // Real Sound
+export const MEDIA_ACCOUNTS: WatchingAccount[] = [
+  { id: AccountId.Showroom, count: 30, type: 'media' }, // SHOWROOM
+  { id: AccountId.ModelPress, count: 30, type: 'media' }, // モデルプレス
+  { id: AccountId.MantanWeb, count: 30, type: 'media' }, // MANTANWEB
+  { id: AccountId.OriconNews, count: 30, type: 'media' }, // ORICON NEWS
+  { id: AccountId.OngakuNatalie, count: 30, type: 'media' }, // 音楽ナタリー
+  { id: AccountId.LINENews, count: 30, type: 'media' }, // LINE NEWS
+  { id: AccountId.NikkanSports, count: 30, type: 'media' }, // 日刊スポーツ
+  { id: AccountId.YahooNews, count: 30, type: 'media' }, // Yahoo!ニュース
+  { id: AccountId.RealSound, count: 30, type: 'media' }, // Real Sound
 ];
 
 export const NOGIZAKA_ACCOUNTS: WatchingAccount[] = [
   { id: AccountId.Nogizaka46, count: 10, type: 'nogizaka' }, // 乃木坂46
   { id: AccountId.NogizakaKoujichu, count: 1, type: 'nogizaka' }, // 乃木坂工事中
 ];
-
-export const SHOWROOM_ACCOUNT: WatchingAccount = { id: AccountId.Showroom, count: 30, type: 'showroom' };
 
 export const GRADUATES_ACCOUNTS: WatchingAccount[] = [
   { id: AccountId.IkomaRina, count: 5, type: 'member' },
@@ -49,6 +48,6 @@ export const GRADUATES_ACCOUNTS: WatchingAccount[] = [
 ];
 
 export const RETWEET_ACCOUNTS_OBJECT = arrayToObject(
-  [...NOGIZAKA_ACCOUNTS, ...NEWS_MEDIA_ACCOUNTS, ...GRADUATES_ACCOUNTS, SHOWROOM_ACCOUNT],
+  [...NOGIZAKA_ACCOUNTS, ...MEDIA_ACCOUNTS, ...GRADUATES_ACCOUNTS],
   'id',
 );

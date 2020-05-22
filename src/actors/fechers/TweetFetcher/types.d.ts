@@ -1,7 +1,7 @@
 import * as Twit from 'twit';
 import { AccountId } from '../../providers/retweeters/TextRelativeRetweeter/accounts';
 
-export type AccountType = 'nogizaka' | 'news' | 'showroom' | 'member';
+export type AccountType = 'nogizaka' | 'media' | 'member';
 
 export type WatchingAccount = {
   id: AccountId;

@@ -16,6 +16,7 @@
     - 乃木坂46（[@nogizaka46](https://twitter.com/nogizaka46)）
     - 乃木坂工事中（[@nogikmax](https://twitter.com/nogikmax)）
   - メディアアカウントから乃木坂46関連のツイートをリツイート：
+    - SHOWROOM（[@SHOWROOM_jp](https://twitter.com/SHOWROOM_jp)）
     - Yahoo!ニュース（[@YahooNewsTopics](https://twitter.com/YahooNewsTopics)）
     - LINE NEWS（[@news_line_me](https://twitter.com/news_line_me)）
     - ORICON NEWS（[@oricon](https://twitter.com/oricon)）
@@ -34,6 +35,4 @@
     - 永島聖羅（[@seira_0519n](https://twitter.com/seira_0519n)）
     - 伊藤寧々（[@nene_ito1212](https://twitter.com/nene_ito1212)）
     - 畠中清羅（[@seira_hatanaka](https://twitter.com/seira_hatanaka)）
-- [のぎおび SHOWROOM](https://www.showroom-live.com/campaign/nogizaka46_sr) のスケジュールをリツイート
-  - SHOWROOM の公式ツイートアカウントから：
-    - SHOWROOM（[@SHOWROOM_jp](https://twitter.com/SHOWROOM_jp)）
+

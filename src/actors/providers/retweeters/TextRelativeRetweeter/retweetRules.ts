@@ -12,14 +12,14 @@ const neneRule: TweetRelativeCallback = (text) => text.includes('お知らせ');
 const HatanakaRule: TweetRelativeCallback = (text) => text.includes('本日の動画') || text.includes('YouTubeで生配信');
 const showroomRule: TweetRelativeCallback = (text) =>
   (text.includes('のぎおび') && containsHour(text)) || containsNogizakaNames(text);
-const newsMediaRule: TweetRelativeCallback = containsNogizakaNames;
+const newsRule: TweetRelativeCallback = containsNogizakaNames;
 const modelPressRule: TweetRelativeCallback = (text) =>
   !text.includes('フォトランキング') &&
   !text.includes('このツイートをRT') &&
   !text.includes('人気記事') &&
-  newsMediaRule(text);
-const nikkanSportsRule: TweetRelativeCallback = (text) => !text.includes('芸能社会ニュース') && newsMediaRule(text);
-const mantanWebRule: TweetRelativeCallback = (text) => !text.includes('今週の美女図鑑') && newsMediaRule(text);
+  newsRule(text);
+const nikkanSportsRule: TweetRelativeCallback = (text) => !text.includes('芸能社会ニュース') && newsRule(text);
+const mantanWebRule: TweetRelativeCallback = (text) => !text.includes('今週の美女図鑑') && newsRule(text);
 
 export const getWatchingAccountWithCallback = (accountId: AccountId): WatchingAccountWithCallback => {
   const account = RETWEET_ACCOUNTS_OBJECT[accountId];
@@ -28,7 +28,11 @@ export const getWatchingAccountWithCallback = (accountId: AccountId): WatchingAc
     return { ...account, tweetRelativeCallback: nogizakaRule };
   }
 
-  if (account.type === 'news') {
+  if (account.type === 'media') {
+    if (accountId === AccountId.Showroom) {
+      return { ...account, tweetRelativeCallback: showroomRule };
+    }
+
     if (accountId === AccountId.ModelPress) {
       return { ...account, tweetRelativeCallback: modelPressRule };
     }
@@ -41,11 +45,7 @@ export const getWatchingAccountWithCallback = (accountId: AccountId): WatchingAc
       return { ...account, tweetRelativeCallback: mantanWebRule };
     }
 
-    return { ...account, tweetRelativeCallback: newsMediaRule };
-  }
-
-  if (accountId === AccountId.Showroom) {
-    return { ...account, tweetRelativeCallback: showroomRule };
+    return { ...account, tweetRelativeCallback: newsRule };
   }
 
   if (accountId === AccountId.IkomaRina) {
