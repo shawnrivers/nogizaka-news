@@ -1,5 +1,5 @@
-import { WatchingAccount } from '../actors/fechers/TweetFetcher/types';
-import { arrayToObject } from '../utils/array';
+import { WatchingAccount } from '../../../fechers/TweetFetcher/types';
+import { arrayToObject } from '../../../../utils/array';
 
 export enum AccountId {
   ModelPress = '142921471',
@@ -42,6 +42,9 @@ export const SHOWROOM_ACCOUNT: WatchingAccount = { id: AccountId.Showroom, count
 export const IKOMA_ACCOUNT: WatchingAccount = { id: AccountId.IkomaRina, count: 5, type: 'member' };
 export const WAKATSUKI_ACCOUNT: WatchingAccount = { id: AccountId.WakatsukiYumi, count: 5, type: 'member' };
 export const KAWAGO_ACCOUNT: WatchingAccount = { id: AccountId.KawagoHina, count: 5, type: 'member' };
+export const NAGASHIMA_ACCOUNT: WatchingAccount = { id: AccountId.NagashimaSeira, count: 5, type: 'member' };
+export const NENE_ACCOUNT: WatchingAccount = { id: AccountId.ItouNene, count: 5, type: 'member' };
+export const HATANAKA_ACCOUNT: WatchingAccount = { id: AccountId.HatanakaSeira, count: 5, type: 'member' };
 
 export const RETWEET_ACCOUNTS_OBJECT = arrayToObject(
   [...NOGIZAKA_ACCOUNTS, ...NEWS_MEDIA_ACCOUNTS, SHOWROOM_ACCOUNT, IKOMA_ACCOUNT, WAKATSUKI_ACCOUNT, KAWAGO_ACCOUNT],

@@ -1,5 +1,5 @@
 import * as Twit from 'twit';
-import { AccountId } from '../../../constants/accounts';
+import { AccountId } from '../../providers/retweeters/TextRelativeRetweeter/accounts';
 
 export type AccountType = 'nogizaka' | 'news' | 'showroom' | 'member';
 

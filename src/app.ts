@@ -8,7 +8,10 @@ import {
   NOGIZAKA_ACCOUNTS,
   SHOWROOM_ACCOUNT,
   WAKATSUKI_ACCOUNT,
-} from './constants/accounts';
+  NAGASHIMA_ACCOUNT,
+  NENE_ACCOUNT,
+  HATANAKA_ACCOUNT,
+} from './actors/providers/retweeters/TextRelativeRetweeter/accounts';
 import { convertHMS, getCurrentFullDate, getMillisecondsTilNextTime, getToday } from './utils/date';
 import { cutDecimalPlace } from './utils/number';
 import { Twitter } from './utils/twit';
@@ -29,17 +32,9 @@ const showroomRetweeter = new TextRelativeRetweeter({
   twitter: Twitter,
   accounts: [SHOWROOM_ACCOUNT],
 });
-const ikomaRetweeter = new TextRelativeRetweeter({
+const graduatesRetweeter = new TextRelativeRetweeter({
   twitter: Twitter,
-  accounts: [IKOMA_ACCOUNT],
-});
-const wakatsukiRetweeter = new TextRelativeRetweeter({
-  twitter: Twitter,
-  accounts: [WAKATSUKI_ACCOUNT],
-});
-const kawagoRetweeter = new TextRelativeRetweeter({
-  twitter: Twitter,
-  accounts: [KAWAGO_ACCOUNT],
+  accounts: [IKOMA_ACCOUNT, WAKATSUKI_ACCOUNT, KAWAGO_ACCOUNT, NAGASHIMA_ACCOUNT, NENE_ACCOUNT, HATANAKA_ACCOUNT],
 });
 
 const nogizakaScheduleTweeter = new NogizakaScheduleTweeter(Twitter);
@@ -54,9 +49,7 @@ const retweet = async (): Promise<void> => {
     nogizakaRetweeter.start(),
     showroomRetweeter.start(),
     mediaRetweeter.start(),
-    ikomaRetweeter.start(),
-    wakatsukiRetweeter.start(),
-    kawagoRetweeter.start(),
+    graduatesRetweeter.start(),
   ]);
 
   const retweetTookTime = new Date().getTime() - start;
