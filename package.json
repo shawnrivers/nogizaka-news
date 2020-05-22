@@ -26,7 +26,7 @@
   },
   "scripts": {
     "start": "ts-node src/app.ts",
-    "watch": "tsc --watch",
+    "watch": "tsc --watch --noEmit",
     "type-check": "tsc --noEmit",
     "format": "prettier 'src/**/*.ts' --write",
     "lint": "eslint --ignore-path .gitignore . --ext ts",
