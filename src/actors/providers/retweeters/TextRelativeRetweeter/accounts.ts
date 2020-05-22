@@ -38,7 +38,7 @@ export const NOGIZAKA_ACCOUNTS: WatchingAccount[] = [
   { id: AccountId.NogizakaKoujichu, count: 1, type: 'nogizaka' }, // 乃木坂工事中
 ];
 
-export const GRADUATES_ACCOUNTS: WatchingAccount[] = [
+export const MEMBER_ACCOUNTS: WatchingAccount[] = [
   { id: AccountId.IkomaRina, count: 5, type: 'member' },
   { id: AccountId.WakatsukiYumi, count: 5, type: 'member' },
   { id: AccountId.KawagoHina, count: 5, type: 'member' },
@@ -48,6 +48,6 @@ export const GRADUATES_ACCOUNTS: WatchingAccount[] = [
 ];
 
 export const RETWEET_ACCOUNTS_OBJECT = arrayToObject(
-  [...NOGIZAKA_ACCOUNTS, ...MEDIA_ACCOUNTS, ...GRADUATES_ACCOUNTS],
+  [...NOGIZAKA_ACCOUNTS, ...MEDIA_ACCOUNTS, ...MEMBER_ACCOUNTS],
   'id',
 );

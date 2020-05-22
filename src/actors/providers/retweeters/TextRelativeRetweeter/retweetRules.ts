@@ -48,28 +48,30 @@ export const getWatchingAccountWithCallback = (accountId: AccountId): WatchingAc
     return { ...account, tweetRelativeCallback: newsRule };
   }
 
-  if (accountId === AccountId.IkomaRina) {
-    return { ...account, tweetRelativeCallback: ikomaRule };
-  }
+  if (account.type === 'member') {
+    if (accountId === AccountId.IkomaRina) {
+      return { ...account, tweetRelativeCallback: ikomaRule };
+    }
 
-  if (accountId === AccountId.WakatsukiYumi) {
-    return { ...account, tweetRelativeCallback: wakatsukiRule };
-  }
+    if (accountId === AccountId.WakatsukiYumi) {
+      return { ...account, tweetRelativeCallback: wakatsukiRule };
+    }
 
-  if (accountId === AccountId.KawagoHina) {
-    return { ...account, tweetRelativeCallback: kawagoRule };
-  }
+    if (accountId === AccountId.KawagoHina) {
+      return { ...account, tweetRelativeCallback: kawagoRule };
+    }
 
-  if (accountId === AccountId.NagashimaSeira) {
-    return { ...account, tweetRelativeCallback: nagashimaRule };
-  }
+    if (accountId === AccountId.NagashimaSeira) {
+      return { ...account, tweetRelativeCallback: nagashimaRule };
+    }
 
-  if (accountId === AccountId.ItouNene) {
-    return { ...account, tweetRelativeCallback: neneRule };
-  }
+    if (accountId === AccountId.ItouNene) {
+      return { ...account, tweetRelativeCallback: neneRule };
+    }
 
-  if (accountId === AccountId.HatanakaSeira) {
-    return { ...account, tweetRelativeCallback: HatanakaRule };
+    if (accountId === AccountId.HatanakaSeira) {
+      return { ...account, tweetRelativeCallback: HatanakaRule };
+    }
   }
 
   return { ...account, tweetRelativeCallback: defaultRule };

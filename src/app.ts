@@ -1,6 +1,6 @@
 import { TextRelativeRetweeter } from './actors/providers/retweeters/TextRelativeRetweeter';
 import {
-  GRADUATES_ACCOUNTS,
+  MEMBER_ACCOUNTS,
   MEDIA_ACCOUNTS,
   NOGIZAKA_ACCOUNTS,
 } from './actors/providers/retweeters/TextRelativeRetweeter/accounts';
@@ -22,9 +22,9 @@ const mediaRetweeter = new TextRelativeRetweeter({
   twitter: Twitter,
   accounts: MEDIA_ACCOUNTS,
 });
-const graduatesRetweeter = new TextRelativeRetweeter({
+const membersRetweeter = new TextRelativeRetweeter({
   twitter: Twitter,
-  accounts: GRADUATES_ACCOUNTS,
+  accounts: MEMBER_ACCOUNTS,
 });
 
 const nogizakaScheduleTweeter = new NogizakaScheduleTweeter(Twitter);
@@ -35,7 +35,7 @@ const retweet = async (): Promise<void> => {
 
   const start = new Date().getTime();
 
-  await Promise.all([nogizakaRetweeter.start(), mediaRetweeter.start(), graduatesRetweeter.start()]);
+  await Promise.all([nogizakaRetweeter.start(), mediaRetweeter.start(), membersRetweeter.start()]);
 
   const retweetTookTime = new Date().getTime() - start;
   console.log(`[Retweet] Retweet done ${cutDecimalPlace(retweetTookTime / 1000, 2)}s.`);
