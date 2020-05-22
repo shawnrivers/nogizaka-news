@@ -1,7 +1,6 @@
+import { containsHour, containsNogizakaNames } from '../../../../utils/string';
 import { AccountId, RETWEET_ACCOUNTS_OBJECT } from './accounts';
 import { TweetRelativeCallback, WatchingAccountWithCallback } from './types';
-import { containsHour } from '../../../../utils/string';
-import { NOGIZAKA_NAMES } from '../../../../constants/names';
 
 const defaultRule: TweetRelativeCallback = () => false;
 const nogizakaRule: TweetRelativeCallback = () => true;
@@ -11,8 +10,9 @@ const wakatsukiRule: TweetRelativeCallback = (text) => text.includes('告知');
 const nagashimaRule: TweetRelativeCallback = (text) => text.includes('ブログ更新しました');
 const neneRule: TweetRelativeCallback = (text) => text.includes('お知らせ');
 const HatanakaRule: TweetRelativeCallback = (text) => text.includes('本日の動画') || text.includes('YouTubeで生配信');
-const showroomScheduleRule: TweetRelativeCallback = (text) => text.includes('のぎおび') && containsHour(text);
-const newsMediaRule: TweetRelativeCallback = (text) => NOGIZAKA_NAMES.some((name) => text.includes(name));
+const showroomRule: TweetRelativeCallback = (text) =>
+  (text.includes('のぎおび') && containsHour(text)) || containsNogizakaNames(text);
+const newsMediaRule: TweetRelativeCallback = containsNogizakaNames;
 const modelPressRule: TweetRelativeCallback = (text) =>
   !text.includes('フォトランキング') &&
   !text.includes('このツイートをRT') &&
@@ -45,7 +45,7 @@ export const getWatchingAccountWithCallback = (accountId: AccountId): WatchingAc
   }
 
   if (accountId === AccountId.Showroom) {
-    return { ...account, tweetRelativeCallback: showroomScheduleRule };
+    return { ...account, tweetRelativeCallback: showroomRule };
   }
 
   if (accountId === AccountId.IkomaRina) {
