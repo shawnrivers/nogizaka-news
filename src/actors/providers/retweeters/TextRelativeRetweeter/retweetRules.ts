@@ -9,7 +9,8 @@ const kawagoRule: TweetRelativeCallback = (text) => text.includes('お知らせ'
 const wakatsukiRule: TweetRelativeCallback = (text) => text.includes('告知');
 const nagashimaRule: TweetRelativeCallback = (text) => text.includes('ブログ更新しました');
 const neneRule: TweetRelativeCallback = (text) => text.includes('お知らせ');
-const HatanakaRule: TweetRelativeCallback = (text) => text.includes('本日の動画') || text.includes('YouTubeで生配信');
+const HatanakaRule: TweetRelativeCallback = (text) =>
+  text.includes('本日の動画') || text.includes('YouTubeで生配信') || text.includes('#せいたんちゃんねる');
 const showroomRule: TweetRelativeCallback = (text) =>
   (text.includes('のぎおび') && containsHour(text)) || containsNogizakaNames(text);
 const newsRule: TweetRelativeCallback = containsNogizakaNames;
