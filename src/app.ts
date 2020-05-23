@@ -10,7 +10,7 @@ import { convertHMS, getCurrentFullDate, getMillisecondsTilNextTime, getToday } 
 import { cutDecimalPlace } from './utils/number';
 import { Twitter } from './utils/twit';
 
-const RETWEET_CYCLE_MIN = 15;
+const RETWEET_CYCLE_MIN = 5;
 const DAILY_SCHEDULES_CYCLE_HOUR = 1;
 const RETWEET_CYCLE_MS = 1000 * 60 * RETWEET_CYCLE_MIN;
 

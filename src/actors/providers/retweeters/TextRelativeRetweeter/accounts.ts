@@ -22,20 +22,20 @@ export enum AccountId {
 }
 
 export const MEDIA_ACCOUNTS: WatchingAccount[] = [
-  { id: AccountId.Showroom, count: 30, type: 'media' }, // SHOWROOM
-  { id: AccountId.ModelPress, count: 30, type: 'media' }, // モデルプレス
-  { id: AccountId.MantanWeb, count: 30, type: 'media' }, // MANTANWEB
-  { id: AccountId.OriconNews, count: 30, type: 'media' }, // ORICON NEWS
-  { id: AccountId.OngakuNatalie, count: 30, type: 'media' }, // 音楽ナタリー
-  { id: AccountId.LINENews, count: 30, type: 'media' }, // LINE NEWS
-  { id: AccountId.NikkanSports, count: 30, type: 'media' }, // 日刊スポーツ
-  { id: AccountId.YahooNews, count: 30, type: 'media' }, // Yahoo!ニュース
-  { id: AccountId.RealSound, count: 30, type: 'media' }, // Real Sound
+  { id: AccountId.Showroom, count: 10, type: 'media' }, // SHOWROOM
+  { id: AccountId.ModelPress, count: 10, type: 'media' }, // モデルプレス
+  { id: AccountId.MantanWeb, count: 10, type: 'media' }, // MANTANWEB
+  { id: AccountId.OriconNews, count: 10, type: 'media' }, // ORICON NEWS
+  { id: AccountId.OngakuNatalie, count: 10, type: 'media' }, // 音楽ナタリー
+  { id: AccountId.LINENews, count: 10, type: 'media' }, // LINE NEWS
+  { id: AccountId.NikkanSports, count: 10, type: 'media' }, // 日刊スポーツ
+  { id: AccountId.YahooNews, count: 10, type: 'media' }, // Yahoo!ニュース
+  { id: AccountId.RealSound, count: 10, type: 'media' }, // Real Sound
 ];
 
 export const NOGIZAKA_ACCOUNTS: WatchingAccount[] = [
-  { id: AccountId.Nogizaka46, count: 10, type: 'nogizaka' }, // 乃木坂46
-  { id: AccountId.NogizakaKoujichu, count: 1, type: 'nogizaka' }, // 乃木坂工事中
+  { id: AccountId.Nogizaka46, count: 5, type: 'nogizaka' }, // 乃木坂46
+  { id: AccountId.NogizakaKoujichu, count: 5, type: 'nogizaka' }, // 乃木坂工事中
 ];
 
 export const MEMBER_ACCOUNTS: WatchingAccount[] = [
