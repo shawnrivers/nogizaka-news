@@ -28,18 +28,22 @@ export class TextRelativeRetweeter extends BaseRetweeter {
     const today = this.options.onlySameDay ? new Date() : undefined;
 
     for (const tweetsByAccount of tweetsByAccountArray) {
-      const accountWithCallback = getWatchingAccountWithCallback(tweetsByAccount.accountId);
+      try {
+        const accountWithCallback = getWatchingAccountWithCallback(tweetsByAccount.accountId);
 
-      for (const tweet of tweetsByAccount.tweets) {
-        const isTweetRelative = this.isTweetRelative({
-          tweet,
-          today,
-          tweetRelativeCallback: accountWithCallback.tweetRelativeCallback,
-        });
-        if (isTweetRelative) {
-          await this.tweetPoster.retweet(tweet.id);
+        for (const tweet of tweetsByAccount.tweets) {
+          const isTweetRelative = this.isTweetRelative({
+            tweet,
+            today,
+            tweetRelativeCallback: accountWithCallback.tweetRelativeCallback,
+          });
+          if (isTweetRelative) {
+            await this.tweetPoster.retweet(tweet.id);
+          }
+          this.tweetFetcher.updateLastTweets({ accountId: tweet.userId, tweetId: tweet.id });
         }
-        this.tweetFetcher.updateLastTweets({ accountId: tweet.userId, tweetId: tweet.id });
+      } catch (e) {
+        console.error(e);
       }
     }
   }
@@ -50,17 +54,21 @@ export class TextRelativeRetweeter extends BaseRetweeter {
     const relativeTweets = [];
 
     for (const tweetsByAccount of tweetsByAccountArray) {
-      const accountWithCallback = getWatchingAccountWithCallback(tweetsByAccount.accountId);
+      try {
+        const accountWithCallback = getWatchingAccountWithCallback(tweetsByAccount.accountId);
 
-      for (const tweet of tweetsByAccount.tweets) {
-        const isTweetRelative = this.isTweetRelative({
-          tweet,
-          today,
-          tweetRelativeCallback: accountWithCallback.tweetRelativeCallback,
-        });
-        if (isTweetRelative) {
-          relativeTweets.push(tweet);
+        for (const tweet of tweetsByAccount.tweets) {
+          const isTweetRelative = this.isTweetRelative({
+            tweet,
+            today,
+            tweetRelativeCallback: accountWithCallback.tweetRelativeCallback,
+          });
+          if (isTweetRelative) {
+            relativeTweets.push(tweet);
+          }
         }
+      } catch (e) {
+        console.error(e);
       }
     }
 

@@ -24,6 +24,10 @@ const mantanWebRule: TweetRelativeCallback = (text) => !text.includes('今週の
 export const getWatchingAccountWithCallback = (accountId: AccountId): WatchingAccountWithCallback => {
   const account = RETWEET_ACCOUNTS_OBJECT[accountId];
 
+  if (account === undefined) {
+    throw new Error(`The accountId ${accountId} dose not exist accounts list.`);
+  }
+
   if (account.type === 'nogizaka') {
     return { ...account, tweetRelativeCallback: nogizakaRule };
   }
