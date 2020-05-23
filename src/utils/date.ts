@@ -13,9 +13,8 @@ export const getToday = (): ScheduleDate => {
   return { year, month, day };
 };
 
-export const getCurrentFullDate = (): string => {
-  const now = new Date();
-  const currentFullDate = now.toLocaleString('en-US', {
+export const getFullDate = (date: Date): string => {
+  return date.toLocaleString('en-US', {
     timeZone: 'Asia/Tokyo',
     year: 'numeric',
     month: '2-digit',
@@ -25,8 +24,12 @@ export const getCurrentFullDate = (): string => {
     minute: '2-digit',
     second: '2-digit',
   });
+};
 
-  return currentFullDate;
+export const getCurrentFullDate = (): string => {
+  const now = new Date();
+
+  return getFullDate(now);
 };
 
 const getTimezoneOffsetFromTokyo = (date: Date): number => {
