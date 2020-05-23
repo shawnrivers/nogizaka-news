@@ -106,8 +106,8 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
           });
         });
       }
-    } catch (err) {
-      console.log('Error:', err);
+    } catch (error) {
+      console.log('Error:', error);
     }
 
     return LLCSchedules;

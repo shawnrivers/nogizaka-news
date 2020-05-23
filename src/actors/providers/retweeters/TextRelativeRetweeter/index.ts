@@ -42,8 +42,8 @@ export class TextRelativeRetweeter extends BaseRetweeter {
           }
           this.tweetFetcher.updateLastTweets({ accountId: tweet.userId, tweetId: tweet.id });
         }
-      } catch (e) {
-        console.error(e);
+      } catch (error) {
+        console.error(error);
       }
     }
   }
@@ -67,8 +67,8 @@ export class TextRelativeRetweeter extends BaseRetweeter {
             relativeTweets.push(tweet);
           }
         }
-      } catch (e) {
-        console.error(e);
+      } catch (error) {
+        console.error(error);
       }
     }
 
