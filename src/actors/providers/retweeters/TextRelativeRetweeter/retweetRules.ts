@@ -22,8 +22,17 @@ const modelPressRule: TweetRelativeCallback = (text) =>
 const nikkanSportsRule: TweetRelativeCallback = (text) => !text.includes('芸能社会ニュース') && newsRule(text);
 const mantanWebRule: TweetRelativeCallback = (text) => !text.includes('今週の美女図鑑') && newsRule(text);
 
-export const getWatchingAccountWithCallback = (accountId: AccountId): WatchingAccountWithCallback => {
+export const getWatchingAccountWithCallback = (
+  accountId: AccountId,
+  options?: {
+    ignoreRules?: boolean;
+  },
+): WatchingAccountWithCallback => {
   const account = RETWEET_ACCOUNTS_OBJECT[accountId];
+
+  if (options?.ignoreRules) {
+    return { ...account, tweetRelativeCallback: nogizakaRule };
+  }
 
   if (account === undefined) {
     throw new Error(`The accountId ${accountId} dose not exist accounts list.`);

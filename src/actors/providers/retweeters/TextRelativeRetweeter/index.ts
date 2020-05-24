@@ -6,7 +6,7 @@ import { TweetRelativeCallback, TextRelativeRetweeterOptions } from './types';
 import { getWatchingAccountWithCallback } from './retweetRules';
 
 export class TextRelativeRetweeter extends BaseRetweeter {
-  private options: TextRelativeRetweeterOptions;
+  private options: TextRelativeRetweeterOptions | undefined;
 
   constructor({
     twitter,
@@ -18,18 +18,18 @@ export class TextRelativeRetweeter extends BaseRetweeter {
     options?: TextRelativeRetweeterOptions;
   }) {
     super({ twitter, watchingAccounts: accounts });
-    this.options = {
-      onlySameDay: options?.onlySameDay,
-    };
+    this.options = options;
   }
 
   public async start(): Promise<void> {
     const tweetsByAccountArray = await this.tweetFetcher.getTweetsByAccount();
-    const today = this.options.onlySameDay ? new Date() : undefined;
+    const today = this.options?.onlySameDay ? new Date() : undefined;
 
     for (const tweetsByAccount of tweetsByAccountArray) {
       try {
-        const accountWithCallback = getWatchingAccountWithCallback(tweetsByAccount.accountId);
+        const accountWithCallback = getWatchingAccountWithCallback(tweetsByAccount.accountId, {
+          ignoreRules: this.options?.ignoreRules,
+        });
 
         for (const tweet of tweetsByAccount.tweets) {
           const isTweetRelative = this.isTweetRelative({
@@ -55,7 +55,9 @@ export class TextRelativeRetweeter extends BaseRetweeter {
 
     for (const tweetsByAccount of tweetsByAccountArray) {
       try {
-        const accountWithCallback = getWatchingAccountWithCallback(tweetsByAccount.accountId);
+        const accountWithCallback = getWatchingAccountWithCallback(tweetsByAccount.accountId, {
+          ignoreRules: this.options?.ignoreRules,
+        });
 
         for (const tweet of tweetsByAccount.tweets) {
           const isTweetRelative = this.isTweetRelative({
