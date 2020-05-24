@@ -5,9 +5,12 @@ import { TweetRelativeCallback, WatchingAccountWithCallback } from './types';
 const defaultRule: TweetRelativeCallback = () => false;
 const nogizakaRule: TweetRelativeCallback = () => true;
 const ikomaRule: TweetRelativeCallback = (text) => text.includes('出演情報');
-const kawagoRule: TweetRelativeCallback = (text) => text.includes('お知らせ');
+const kawagoRule: TweetRelativeCallback = (text) =>
+  text.includes('お知らせ') ||
+  (text.includes('動画') && (text.includes('公開') || text.includes('新作') || text.includes('更新'))) ||
+  text.includes('ブログ更新');
 const wakatsukiRule: TweetRelativeCallback = (text) => text.includes('告知');
-const nagashimaRule: TweetRelativeCallback = (text) => text.includes('ブログ更新しました');
+const nagashimaRule: TweetRelativeCallback = (text) => text.includes('ブログ更新');
 const neneRule: TweetRelativeCallback = (text) => text.includes('お知らせ');
 const HatanakaRule: TweetRelativeCallback = (text) =>
   text.includes('本日の動画') || text.includes('YouTubeで生配信') || text.includes('#せいたんちゃんねる');
