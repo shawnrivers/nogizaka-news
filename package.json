@@ -30,7 +30,7 @@
   "scripts": {
     "build": "webpack --mode=production",
     "dev": "webpack --mode=development --watch",
-    "start": "webpack --mode=production && node ./dist/bundle.js",
+    "start": "node ./dist/bundle.js",
     "type-check": "tsc --noEmit",
     "format": "prettier './src/**/*.ts' --write",
     "lint": "eslint --ignore-path .gitignore . --ext ts",
