@@ -16,6 +16,7 @@
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-typescript": "^7.10.1",
     "@types/cheerio": "^0.22.17",
+    "@types/jest": "^25.2.3",
     "@types/request": "^2.48.4",
     "@types/request-promise": "^4.1.46",
     "@types/twit": "^2.2.23",
@@ -28,6 +29,7 @@
     "jest": "^26.0.1",
     "lint-staged": "^10.2.1",
     "prettier": "^2.0.5",
+    "ts-jest": "^26.1.0",
     "ts-node": "^8.9.1",
     "typescript": "^3.8.3",
     "webpack": "^4.43.0",
@@ -40,7 +42,8 @@
     "type-check": "tsc --noEmit",
     "format": "prettier './src/**/*.ts' --write",
     "lint": "eslint --ignore-path .gitignore . --ext ts",
-    "lint:fix": "eslint --ignore-path .gitignore . --ext ts --fix"
+    "lint:fix": "eslint --ignore-path .gitignore . --ext ts --fix",
+    "test": "jest"
   },
   "lint-staged": {
     "*.ts": [
