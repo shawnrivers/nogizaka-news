@@ -10,20 +10,28 @@
     "twit": "^2.2.11"
   },
   "devDependencies": {
+    "@babel/cli": "^7.10.1",
+    "@babel/core": "^7.10.2",
+    "@babel/plugin-proposal-class-properties": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/preset-typescript": "^7.10.1",
     "@types/cheerio": "^0.22.17",
+    "@types/jest": "^25.2.3",
     "@types/request": "^2.48.4",
     "@types/request-promise": "^4.1.46",
     "@types/twit": "^2.2.23",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.24.0",
-    "typescript": "^3.8.3",
-    "ts-node": "^8.9.1",
+    "babel-loader": "^8.1.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.11.0",
     "husky": "^4.2.5",
+    "jest": "^26.0.1",
     "lint-staged": "^10.2.1",
     "prettier": "^2.0.5",
-    "ts-loader": "^7.0.5",
+    "ts-jest": "^26.1.0",
+    "ts-node": "^8.9.1",
+    "typescript": "^3.8.3",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   },
@@ -34,7 +42,9 @@
     "type-check": "tsc --noEmit",
     "format": "prettier './src/**/*.ts' --write",
     "lint": "eslint --ignore-path .gitignore . --ext ts",
-    "lint:fix": "eslint --ignore-path .gitignore . --ext ts --fix"
+    "lint:fix": "eslint --ignore-path .gitignore . --ext ts --fix",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "lint-staged": {
     "*.ts": [

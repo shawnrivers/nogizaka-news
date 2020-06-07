@@ -14,5 +14,5 @@
     "node": true,
     "es6": true
   },
-  "ignorePatterns": "webpack.config.js"
+  "ignorePatterns": ["webpack.config.js", "**/__tests__/**/*.ts", "**/*.test.ts"]
 }
