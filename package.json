@@ -43,7 +43,8 @@
     "format": "prettier './src/**/*.ts' --write",
     "lint": "eslint --ignore-path .gitignore . --ext ts",
     "lint:fix": "eslint --ignore-path .gitignore . --ext ts --fix",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "lint-staged": {
     "*.ts": [
