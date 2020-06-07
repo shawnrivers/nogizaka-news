@@ -5,3 +5,4 @@
 /src/utils/twitConfig.ts
 /src/debug
 .envrc
+yarn-error.log
