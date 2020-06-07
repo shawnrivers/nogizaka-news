@@ -32,6 +32,8 @@
     - [生駒里奈公式サイト](https://ikomarina.com/)
 - 卒業メンバーの活動やブログなどをリツイート：
   - 卒業メンバーのツイートアカウントから：
+    - 生駒里奈（[@ikomarina_staff](https://twitter.com/ikomarina_staff)）
+    - 若月佑美（[@WAKA_Y_official](https://twitter.com/WAKA_Y_official)）
     - 永島聖羅（[@seira_0519n](https://twitter.com/seira_0519n)）
     - 伊藤寧々（[@nene_ito1212](https://twitter.com/nene_ito1212)）
     - 畠中清羅（[@seira_hatanaka](https://twitter.com/seira_hatanaka)）
