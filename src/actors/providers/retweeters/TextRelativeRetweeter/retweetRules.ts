@@ -21,6 +21,7 @@ const modelPressRule: TweetRelativeCallback = (text) =>
   !text.includes('フォトランキング') &&
   !text.includes('このツイートをRT') &&
   !text.includes('人気記事') &&
+  !text.includes('読者アンケート') &&
   newsRule(text);
 const nikkanSportsRule: TweetRelativeCallback = (text) => !text.includes('芸能社会ニュース') && newsRule(text);
 const mantanWebRule: TweetRelativeCallback = (text) => !text.includes('今週の美女図鑑') && newsRule(text);
