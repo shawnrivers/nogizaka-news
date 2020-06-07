@@ -39,5 +39,5 @@ jobs:
         with:
           add: 'dist'
           message: 'Update bundled files'
-          branch: bundle
+          ref: bundle
           force: true
