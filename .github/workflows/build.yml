@@ -38,6 +38,6 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Update bundled files
-          branch: bundled
-          file_pattern: src/dist/**/*
+          branch: bundle
+          file_pattern: dist/bundle.js
           push_options: '--force'
