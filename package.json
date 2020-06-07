@@ -4,6 +4,7 @@
   "description": "@n46_news is a Twitter bot focusing on retweeting news about Nogizaka46. We also recently added a function to tweet today's schedules of Nogizaka46 members every day.",
   "private": "true",
   "dependencies": {
+    "@babel/runtime": "^7.10.2",
     "cheerio": "^1.0.0-rc.3",
     "request": "^2.88.2",
     "request-promise": "^4.2.5",
@@ -13,6 +14,7 @@
     "@babel/cli": "^7.10.1",
     "@babel/core": "^7.10.2",
     "@babel/plugin-proposal-class-properties": "^7.10.1",
+    "@babel/plugin-transform-runtime": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-typescript": "^7.10.1",
     "@types/cheerio": "^0.22.17",
