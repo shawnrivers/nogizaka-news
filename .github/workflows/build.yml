@@ -40,4 +40,4 @@ jobs:
           add: 'dist'
           message: 'Update bundled files'
           ref: bundle
-          force: true
+          remove: '"." ":(exclude)dist/"'
