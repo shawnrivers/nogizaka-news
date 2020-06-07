@@ -39,5 +39,5 @@ jobs:
         with:
           commit_message: Update bundled files
           branch: bundled
-          file_pattern: src/dist/**/*
+          file_pattern: dist/**/*
           push_options: '--force'
