@@ -1,23 +1,32 @@
-import { IkomaRetweeter } from './actors/providers/retweeters/IkomaRetweeter';
-import { KawagoRetweeter } from './actors/providers/retweeters/KawagoRetweeter';
-import { MediaRetweeter } from './actors/providers/retweeters/MediaRetweeter';
-import { NogizakaRetweeter } from './actors/providers/retweeters/NogizakaRetweeter';
-import { ShowroomRetweeter } from './actors/providers/retweeters/ShowroomRetweeter';
-import { WakatsukiRetweeter } from './actors/providers/retweeters/WakatsukiRetweeter';
+import { TextRelativeRetweeter } from './actors/providers/retweeters/TextRelativeRetweeter';
+import {
+  MEMBER_ACCOUNTS,
+  MEDIA_ACCOUNTS,
+  NOGIZAKA_ACCOUNTS,
+} from './actors/providers/retweeters/TextRelativeRetweeter/accounts';
 import { GraduatedScheduleTweeter } from './actors/providers/tweeters/scheduleTweeters/GraduatedScheduleTweeter';
 import { NogizakaScheduleTweeter } from './actors/providers/tweeters/scheduleTweeters/NogizakaScheduleTweeter';
 import { convertHMS, getCurrentFullDate, getMillisecondsTilNextTime, getToday } from './utils/date';
 import { cutDecimalPlace } from './utils/number';
 import { Twitter } from './utils/twit';
 
-const RETWEET_CYCLE_MIN = 10;
+const RETWEET_CYCLE_MIN = 5;
+const DAILY_SCHEDULES_CYCLE_HOUR = 1;
+const RETWEET_CYCLE_MS = 1000 * 60 * RETWEET_CYCLE_MIN;
 
-const nogizakaRetweeter = new NogizakaRetweeter(Twitter);
-const mediaRetweeter = new MediaRetweeter(Twitter);
-const showroomRetweeter = new ShowroomRetweeter(Twitter);
-const ikomaRetweeter = new IkomaRetweeter(Twitter);
-const wakatsukiRetweeter = new WakatsukiRetweeter(Twitter);
-const kawagoRetweeter = new KawagoRetweeter(Twitter);
+const nogizakaRetweeter = new TextRelativeRetweeter({
+  twitter: Twitter,
+  accounts: NOGIZAKA_ACCOUNTS,
+});
+const mediaRetweeter = new TextRelativeRetweeter({
+  twitter: Twitter,
+  accounts: MEDIA_ACCOUNTS,
+});
+const membersRetweeter = new TextRelativeRetweeter({
+  twitter: Twitter,
+  accounts: MEMBER_ACCOUNTS,
+});
+
 const nogizakaScheduleTweeter = new NogizakaScheduleTweeter(Twitter);
 const graduatesScheduleTweeter = new GraduatedScheduleTweeter(Twitter);
 
@@ -26,14 +35,7 @@ const retweet = async (): Promise<void> => {
 
   const start = new Date().getTime();
 
-  await Promise.all([
-    nogizakaRetweeter.start(),
-    showroomRetweeter.start(),
-    mediaRetweeter.start(),
-    ikomaRetweeter.start(),
-    wakatsukiRetweeter.start(),
-    kawagoRetweeter.start(),
-  ]);
+  await Promise.all([nogizakaRetweeter.start(), mediaRetweeter.start(), membersRetweeter.start()]);
 
   const retweetTookTime = new Date().getTime() - start;
   console.log(`[Retweet] Retweet done ${cutDecimalPlace(retweetTookTime / 1000, 2)}s.`);
@@ -47,22 +49,20 @@ const retweet = async (): Promise<void> => {
   );
 };
 
-const watchAndRetweet = (interval: number): void => {
+const runRetweetingCycle = (interval: number): void => {
   retweet();
 
-  setInterval(() => {
-    retweet();
-  }, interval);
+  setInterval(retweet, interval);
 };
 
-const tweetTodaysSchedules = async (): Promise<void> => {
+const tweetDailySchedules = async (): Promise<void> => {
   const today = getToday();
 
   await nogizakaScheduleTweeter.start(today);
   await graduatesScheduleTweeter.start(today);
 };
 
-const scheduleTweet = (hour: number): void => {
+const runDailySchedulesTweetingCycle = (hour: number): void => {
   let nextTweetTimer = getMillisecondsTilNextTime(hour);
   let nextTweetTimerHMS = convertHMS(nextTweetTimer / 1000);
 
@@ -75,7 +75,7 @@ const scheduleTweet = (hour: number): void => {
   const timeoutTweet = async (): Promise<void> => {
     console.log("[Schedules] Today's schedules tweeting started.");
 
-    await tweetTodaysSchedules();
+    await tweetDailySchedules();
 
     console.log("[Schedules] Today's schedules tweeting finished at Tokyo time:", getCurrentFullDate());
 
@@ -91,11 +91,8 @@ const scheduleTweet = (hour: number): void => {
     setTimeout(timeoutTweet, nextTweetTimer);
   };
 
-  setTimeout(() => timeoutTweet(), nextTweetTimer);
+  setTimeout(timeoutTweet, nextTweetTimer);
 };
 
-const TWEET_SCHEDULE_HOUR = 1;
-const TWEET_INTERVAL = 1000 * 60 * RETWEET_CYCLE_MIN;
-
-scheduleTweet(TWEET_SCHEDULE_HOUR);
-watchAndRetweet(TWEET_INTERVAL);
+runDailySchedulesTweetingCycle(DAILY_SCHEDULES_CYCLE_HOUR);
+runRetweetingCycle(RETWEET_CYCLE_MS);

@@ -1,8 +1,6 @@
-name: CI
+name: PR CI
 
 on:
-  push:
-    branches: [master]
   pull_request:
     branches: [master]
 
@@ -18,7 +16,11 @@ jobs:
           node-version: '12.x'
       - name: Install dependencies
         run: yarn
+      - name: Format
+        run: yarn format
       - name: Type check
         run: yarn type-check
       - name: Lint
         run: yarn lint
+      - name: Test
+        run: yarn test

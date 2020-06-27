@@ -1,4 +1,5 @@
 import { HOURS } from '../constants/schedules';
+import { NOGIZAKA_NAMES } from '../constants/names';
 
 export const getStringLength = (text: string): number => {
   let length = 0;
@@ -36,3 +37,5 @@ export const containsHour = (text: string): boolean => {
   }
   return false;
 };
+
+export const containsNogizakaNames = (text: string): boolean => NOGIZAKA_NAMES.some((name) => text.includes(name));

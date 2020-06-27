@@ -1,7 +1,5 @@
 # [Nogizaka46 News](https://twitter.com/n46_news)
 
-README: [English](https://github.com/shawnrivers/nogizaka-news/blob/master/README.en.md), [日本語](https://github.com/shawnrivers/nogizaka-news/blob/master/README.md)
-
 **Nogizaka46 News** ([@n46_news](https://twitter.com/n46_news)) は、[乃木坂46](https://ja.wikipedia.org/wiki/%E4%B9%83%E6%9C%A8%E5%9D%8246)関連のニュースとスケジュールをツイートする [Node.js](https://nodejs.org/en/) のツイーターボットである。
 
 ## 技術
@@ -18,6 +16,7 @@ README: [English](https://github.com/shawnrivers/nogizaka-news/blob/master/READM
     - 乃木坂46（[@nogizaka46](https://twitter.com/nogizaka46)）
     - 乃木坂工事中（[@nogikmax](https://twitter.com/nogikmax)）
   - メディアアカウントから乃木坂46関連のツイートをリツイート：
+    - SHOWROOM（[@SHOWROOM_jp](https://twitter.com/SHOWROOM_jp)）
     - Yahoo!ニュース（[@YahooNewsTopics](https://twitter.com/YahooNewsTopics)）
     - LINE NEWS（[@news_line_me](https://twitter.com/news_line_me)）
     - ORICON NEWS（[@oricon](https://twitter.com/oricon)）
@@ -26,10 +25,16 @@ README: [English](https://github.com/shawnrivers/nogizaka-news/blob/master/READM
     - 音楽ナタリー（[@natalie_mu](https://twitter.com/natalie_mu)）
     - MANTANWEB（[@mantanweb](https://twitter.com/mantanweb)）
     - Real Sound（[@realsoundjp](https://twitter.com/realsoundjp)）
-- 毎日東京時間午前 1 時にメンバーのスケジュールをツイート：
+- 毎日東京時間午前1時にメンバーのスケジュールをツイート：
   - 現メンバーのスケジュールは[乃木坂46公式サイト](http://www.nogizaka46.com/)から
   - 卒業メンバーのスケジュールはそれぞれの公式サイトから：
     - [西野七瀬公式サイト](https://nishinonanase.com/)
     - [生駒里奈公式サイト](https://ikomarina.com/)
-- [のぎおび SHOWROOM](https://www.showroom-live.com/campaign/nogizaka46_sr) のスケジュールをリツイート
-  - リツイート先：SHOWROOM（[@SHOWROOM_jp](https://twitter.com/SHOWROOM_jp)）
+- 卒業メンバーの活動やブログなどをリツイート：
+  - 卒業メンバーのツイートアカウントから：
+    - 生駒里奈（[@ikomarina_staff](https://twitter.com/ikomarina_staff)）
+    - 若月佑美（[@WAKA_Y_official](https://twitter.com/WAKA_Y_official)）
+    - 永島聖羅（[@seira_0519n](https://twitter.com/seira_0519n)）
+    - 伊藤寧々（[@nene_ito1212](https://twitter.com/nene_ito1212)）
+    - 畠中清羅（[@seira_hatanaka](https://twitter.com/seira_hatanaka)）
+

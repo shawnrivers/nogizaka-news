@@ -1,8 +1,12 @@
 import * as Twit from 'twit';
+import { AccountId } from '../../providers/retweeters/TextRelativeRetweeter/accounts';
+
+export type AccountType = 'nogizaka' | 'media' | 'member';
 
 export type WatchingAccount = {
-  id: string;
+  id: AccountId;
   count: number;
+  type: AccountType;
 };
 
 export type GetTweetResponse = Omit<Twit.PromiseResponse, 'data'> & {
@@ -29,4 +33,9 @@ export type LastTweets = {
   [accountId: string]: {
     tweetId: string | null;
   };
+};
+
+export type AccountTweets = {
+  accountId: AccountId;
+  tweets: Tweet[];
 };

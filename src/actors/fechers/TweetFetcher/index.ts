@@ -1,11 +1,13 @@
 import * as Twit from 'twit';
 import { arrayToObject } from '../../../utils/array';
-import { WatchingAccount, LastTweets, Tweet, GetTweetResponse } from './types';
+import { WatchingAccount, LastTweets, Tweet, GetTweetResponse, AccountTweets } from './types';
+import { getFullDate } from '../../../utils/date';
+import { cutDecimalPlace } from '../../../utils/number';
 
 export class TweetFetcher {
-  twitter: Twit;
-  watchingAccounts: WatchingAccount[];
-  lastTweets: LastTweets;
+  private twitter: Twit;
+  private watchingAccounts: WatchingAccount[];
+  private lastTweets: LastTweets;
 
   constructor({ twitter, watchingAccounts }: { twitter: Twit; watchingAccounts: WatchingAccount[] }) {
     this.twitter = twitter;
@@ -32,6 +34,20 @@ export class TweetFetcher {
     }
 
     return tweets;
+  }
+
+  public async getTweetsByAccount(): Promise<AccountTweets[]> {
+    const tweetsByAccountArray = [];
+
+    for (const watchingAccount of this.watchingAccounts) {
+      const accountTweets = await this.getTimeline(watchingAccount);
+      tweetsByAccountArray.push({
+        accountId: watchingAccount.id,
+        tweets: accountTweets,
+      });
+    }
+
+    return tweetsByAccountArray;
   }
 
   private async getTimeline(account: WatchingAccount): Promise<Tweet[]> {
@@ -63,7 +79,27 @@ export class TweetFetcher {
     return timeline;
   }
 
-  public updateLastTweets({ account, tweetId }: { account: string; tweetId: string }): void {
-    this.lastTweets[account].tweetId = tweetId;
+  public updateLastTweets({ accountId, tweetId }: { accountId: string; tweetId: string }): void {
+    this.lastTweets[accountId].tweetId = tweetId;
+  }
+
+  public async printTweetFrequency(): Promise<void> {
+    const tweetsByAccountArray = await this.getTweetsByAccount();
+
+    for (const tweetsByAccount of tweetsByAccountArray) {
+      const { tweets } = tweetsByAccount;
+      const userName = tweets[0].userName;
+      const numberOfTweets = tweets.length;
+      const oldestTweetCreatedDate = tweets[0].createdDate;
+      const latestTweetCreatedDate = tweets[numberOfTweets - 1].createdDate;
+      const durationInMs = latestTweetCreatedDate.getTime() - oldestTweetCreatedDate.getTime();
+      const frequency = cutDecimalPlace(numberOfTweets / (durationInMs / 1000 / 60 / 60), 2);
+
+      console.log(
+        `@${userName} made ${frequency} tweets in 60 min on average (from ${getFullDate(
+          oldestTweetCreatedDate,
+        )} to ${getFullDate(latestTweetCreatedDate)})`,
+      );
+    }
   }
 }
