@@ -1,6 +1,6 @@
 import * as Twit from 'twit';
 import { arrayToObject } from '../../../utils/array';
-import { WatchingAccount, LastTweets, Tweet, GetTweetResponse, AccountTweets } from './types';
+import { WatchingAccount, LastTweets, Tweet, GetTweetResponse, AccountTweets, GetTweetResponseData } from './types';
 import { getFullDate } from '../../../utils/date';
 import { cutDecimalPlace } from '../../../utils/number';
 
@@ -77,6 +77,26 @@ export class TweetFetcher {
     }
 
     return timeline;
+  }
+
+  public async getFullTweets(options?: { includeRts?: boolean }): Promise<GetTweetResponseData[]> {
+    const tweets = [];
+
+    try {
+      for (const watchingAccount of this.watchingAccounts) {
+        const response = (await this.twitter.get('statuses/user_timeline', {
+          user_id: watchingAccount.id,
+          include_rts: options?.includeRts ?? false,
+          count: watchingAccount.count,
+        })) as GetTweetResponse;
+
+        tweets.push(...response.data);
+      }
+    } catch (error) {
+      console.error('Get timeline error:', error);
+    }
+
+    return tweets;
   }
 
   public updateLastTweets({ accountId, tweetId }: { accountId: string; tweetId: string }): void {
