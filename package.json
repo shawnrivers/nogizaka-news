@@ -18,7 +18,7 @@
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-typescript": "^7.10.1",
     "@types/cheerio": "^0.22.17",
-    "@types/jest": "^25.2.3",
+    "@types/jest": "^26.0.6",
     "@types/request": "^2.48.4",
     "@types/request-promise": "^4.1.46",
     "@types/twit": "^2.2.23",
