@@ -35,7 +35,7 @@ export const MEDIA_ACCOUNTS: WatchingAccount[] = [
 
 export const NOGIZAKA_ACCOUNTS: WatchingAccount[] = [
   { id: AccountId.Nogizaka46, count: 5, type: 'nogizaka' }, // 乃木坂46
-  { id: AccountId.NogizakaKoujichu, count: 5, type: 'nogizaka' }, // 乃木坂工事中
+  { id: AccountId.NogizakaKoujichu, count: 2, type: 'nogizaka' }, // 乃木坂工事中
 ];
 
 export const MEMBER_ACCOUNTS: WatchingAccount[] = [
