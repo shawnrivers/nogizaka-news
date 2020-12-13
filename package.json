@@ -19,7 +19,7 @@
     "@babel/preset-typescript": "^7.10.1",
     "@types/cheerio": "^0.22.17",
     "@types/jest": "^26.0.19",
-    "@types/request": "^2.48.4",
+    "@types/request": "^2.48.5",
     "@types/request-promise": "^4.1.46",
     "@types/twit": "^2.2.23",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
