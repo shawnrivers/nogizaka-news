@@ -17,7 +17,7 @@
     "@babel/plugin-transform-runtime": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-typescript": "^7.10.1",
-    "@types/cheerio": "^0.22.17",
+    "@types/cheerio": "^0.22.23",
     "@types/jest": "^26.0.19",
     "@types/request": "^2.48.5",
     "@types/request-promise": "^4.1.46",
