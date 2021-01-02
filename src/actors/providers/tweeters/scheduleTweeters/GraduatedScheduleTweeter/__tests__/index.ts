@@ -9,6 +9,7 @@ describe('GraduatedScheduleTweeter', () => {
   let shiraishiSchedules: ScheduleWithTypeLLC[] = [];
   let ikomaSchedules: ScheduleWithTypeLLC[] = [];
   let wakatsukiSchedules: ScheduleWithTypeLLC[] = [];
+  let fukagawaSchedules: ScheduleWithTypeLLC[] = [];
   let allSchedules: ScheduleWithType[] = [];
 
   beforeAll(() => {
@@ -24,6 +25,9 @@ describe('GraduatedScheduleTweeter', () => {
       }),
       graduatedScheduleTweeter.getWakatsukiSchedules({ year: '2021', month: '01', day: '11' }).then((schedules) => {
         wakatsukiSchedules = schedules;
+      }),
+      graduatedScheduleTweeter.getFukagawaSchedules({ year: '2021', month: '01', day: '29' }).then((schedules) => {
+        fukagawaSchedules = schedules;
       }),
       graduatedScheduleTweeter.getSchedules({ year: '2020', month: '11', day: '21' }).then((schedules) => {
         allSchedules = schedules;
@@ -114,6 +118,31 @@ describe('GraduatedScheduleTweeter', () => {
           date: '',
           title: 'MBSラジオ 「アッパレ　やってまーす！」',
           memberName: '若月佑美',
+        },
+      },
+    ]);
+  });
+
+  /**
+   * Because I can only get the current month's schedule,
+   * this test is not scalable. Skip it.
+   */
+  xit("should get Fukagawa's schedules", async () => {
+    expect(fukagawaSchedules).toEqual([
+      {
+        type: 'MOVIE',
+        schedule: {
+          date: '',
+          title: '映画「おもいで写眞」公開',
+          memberName: '深川麻衣',
+        },
+      },
+      {
+        type: 'DRAMA',
+        schedule: {
+          date: '',
+          title: 'ドラマ「福岡恋愛白書10」Twitterで配信',
+          memberName: '深川麻衣',
         },
       },
     ]);

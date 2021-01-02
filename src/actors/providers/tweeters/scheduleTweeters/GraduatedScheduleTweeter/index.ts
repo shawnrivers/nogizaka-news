@@ -224,4 +224,35 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
 
     return wakatsukiSchedules;
   }
+
+  public async getFukagawaSchedules(date: ScheduleDate): Promise<ScheduleWithTypeLLC[]> {
+    const { year, month, day } = date;
+    const url = 'https://fukagawamai.com/contents/schedule';
+    const fukagawaSchedules: ScheduleWithTypeLLC[] = [];
+
+    try {
+      const $ = await this.addDOMSelector({ url, scraperId: 'wakatsukiyumi' });
+
+      if ($ !== null) {
+        const dayElements = $(`.contents-list > li`);
+
+        dayElements.map((_, element) => {
+          const type = $(element).find('.meta > .tag').text().trim();
+          const date = $(element).find('.meta > .time > time').text().trim();
+          const title = $(element).find('.contents-list-title').text().trim();
+
+          if (date === `${year}.${month}.${day}`) {
+            fukagawaSchedules.push({
+              type,
+              schedule: { date: '', title, memberName: NogizakaName.FukagawaMai },
+            });
+          }
+        });
+      }
+    } catch (error) {
+      console.log('Error:', error);
+    }
+
+    return fukagawaSchedules;
+  }
 }
