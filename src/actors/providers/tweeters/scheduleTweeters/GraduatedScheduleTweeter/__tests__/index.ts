@@ -1,5 +1,4 @@
 import { GraduatedScheduleTweeter } from '..';
-import { Twitter } from '../../../../../../utils/twit';
 import { ScheduleWithTypeLLC, ScheduleWithType } from '../../BaseScheduleTweeter/types';
 
 /**
@@ -14,11 +13,12 @@ xdescribe('GraduatedScheduleTweeter', () => {
   let ikomaSchedules: ScheduleWithTypeLLC[] = [];
   let wakatsukiSchedules: ScheduleWithTypeLLC[] = [];
   let fukagawaSchedules: ScheduleWithTypeLLC[] = [];
-  
+
   let allSchedules: ScheduleWithType[] = [];
 
-  beforeAll(() => {
-    graduatedScheduleTweeter = new GraduatedScheduleTweeter(Twitter);
+  beforeAll(async () => {
+    const Twitter = await import('../../../../../../utils/twit');
+    graduatedScheduleTweeter = new GraduatedScheduleTweeter(Twitter as any);
 
     return Promise.all([
       graduatedScheduleTweeter.getNishinoSchedules({ year: '2020', month: '12', day: '22' }).then((schedules) => {
