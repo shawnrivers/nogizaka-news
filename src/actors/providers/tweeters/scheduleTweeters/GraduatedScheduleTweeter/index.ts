@@ -5,6 +5,7 @@ import { compareDates, getOneDigitDate } from '../../../../../utils/date';
 import { BaseScheduleTweeter } from '../BaseScheduleTweeter';
 import { getTweetableSchedulesWithType } from '../BaseScheduleTweeter/converters';
 import { ScheduleDate, ScheduleWithType, ScheduleWithTypeLLC } from '../BaseScheduleTweeter/types';
+import { arrayToObject } from '../../../../../utils/array';
 
 export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
   constructor(twitter: Twit) {
@@ -17,39 +18,66 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
     this.tweetPoster.tweetThread(formattedSchedules);
   }
 
-  private async getSchedules(date: ScheduleDate): Promise<ScheduleWithType[]> {
+  public async getSchedules(date: ScheduleDate): Promise<ScheduleWithType[]> {
     const nishinoSchedules = await this.getNishinoSchedules(date);
     const ikomaSchedules = await this.getIkomaSchedules(date);
     const rawSchedules = [...nishinoSchedules, ...ikomaSchedules];
 
-    const normalizedSchedules: ScheduleWithType[] = [];
-
-    for (let i = 0; i < LLC_SCHEDULE_TYPE_LIST.length; i++) {
-      const scheduleType = LLC_SCHEDULE_TYPE_LIST[i];
-
-      normalizedSchedules.push({
+    const denormalizedSchedules: Record<
+      string,
+      {
+        type: string;
+        schedule: {
+          title: string;
+          date: string;
+          memberName: string;
+        }[];
+      }
+    > = arrayToObject(
+      LLC_SCHEDULE_TYPE_LIST.map((scheduleType) => ({
         type: scheduleType,
         schedule: [],
+      })),
+      'type',
+    );
+
+    const normalizedSchedules: ScheduleWithType[] = [];
+
+    // Categorize schedules by type
+    rawSchedules.forEach((rawSchedule) => {
+      const typeIndex = LLC_SCHEDULE_TYPE_LIST.indexOf(rawSchedule.type);
+
+      if (typeIndex !== -1) {
+        denormalizedSchedules[LLC_SCHEDULE_TYPE_LIST[typeIndex]].schedule.push(rawSchedule.schedule);
+      } else {
+        denormalizedSchedules['OTHER'].schedule.push(rawSchedule.schedule);
+      }
+    });
+
+    // Sort each type of schedules by date
+    for (const scheduleType in denormalizedSchedules) {
+      denormalizedSchedules[scheduleType].schedule.sort((scheduleA, scheduleB) =>
+        compareDates(scheduleA.date, scheduleB.date),
+      );
+    }
+
+    // Finalize schedules text
+    for (const scheduleType in denormalizedSchedules) {
+      const normalizedSchedule: ScheduleWithType = {
+        type: scheduleType,
+        schedule: [],
+      };
+
+      denormalizedSchedules[scheduleType].schedule.forEach((denormalizedSchedule) => {
+        const scheduleText =
+          denormalizedSchedule.date !== ''
+            ? `${denormalizedSchedule.date} ${denormalizedSchedule.title} ${denormalizedSchedule.memberName}`
+            : `${denormalizedSchedule.title} ${denormalizedSchedule.memberName}`;
+
+        normalizedSchedule.schedule.push(scheduleText);
       });
 
-      const schedulesForSorting = [];
-
-      for (const rawSchedule of rawSchedules) {
-        if (rawSchedule.type === scheduleType) {
-          schedulesForSorting.push(rawSchedule.schedule);
-        }
-      }
-
-      schedulesForSorting.sort((scheduleA, scheduleB) => compareDates(scheduleA.date, scheduleB.date));
-
-      for (const scheduleForSorting of schedulesForSorting) {
-        const scheduleText =
-          scheduleForSorting.date !== ''
-            ? `${scheduleForSorting.date} ${scheduleForSorting.title} ${scheduleForSorting.memberName}`
-            : `${scheduleForSorting.title} ${scheduleForSorting.memberName}`;
-
-        normalizedSchedules[i].schedule.push(scheduleText);
-      }
+      normalizedSchedules.push(normalizedSchedule);
     }
 
     return normalizedSchedules;
@@ -61,16 +89,57 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
     return getTweetableSchedulesWithType({ schedules, heading });
   }
 
-  private getNishinoSchedules(date: ScheduleDate): Promise<ScheduleWithTypeLLC[]> {
+  public getNishinoSchedules(date: ScheduleDate): Promise<ScheduleWithTypeLLC[]> {
     const url = `https://nishinonanase.com/s/m04/media/list?ima=2551&dy=${date.year}${date.month}`;
 
     return this.getLLCMemberSchedule({ date, url, scraperId: 'nishino', memberName: NogizakaName.NishinoNanase });
   }
 
-  private getIkomaSchedules(date: ScheduleDate): Promise<ScheduleWithTypeLLC[]> {
-    const url = `https://ikomarina.com/s/m01/media/list?ima=2925&dy=${date.year}${date.month}`;
+  public async getIkomaSchedules(date: ScheduleDate): Promise<ScheduleWithTypeLLC[]> {
+    const { year, month, day } = date;
 
-    return this.getLLCMemberSchedule({ date, url, scraperId: 'ikoma', memberName: NogizakaName.IkomaRina });
+    const url = `https://ikomarina.com/schedule/list/${year}/${month}/?cat=L_ALL,live02,live03,live04,live05,live06,live07,live08,live09,live10`;
+
+    const ikomaSchedules: ScheduleWithTypeLLC[] = [];
+
+    try {
+      const $ = await this.addDOMSelector({ url, scraperId: 'ikomarina' });
+
+      if ($ !== null) {
+        const dayElements = $('ul.list--schedule > li');
+
+        dayElements.map((_, element) => {
+          const date = $(element)
+            .find('p.date--event')
+            .text()
+            .trim()
+            .replace(/\[[a-zA-Z]+\]/g, '');
+
+          if (date === `${month}.${day}`) {
+            const schedulesElements = $(element).find('div.block--txt');
+
+            schedulesElements.map((_, element) => {
+              const title = $(element).find('.tit').text().trim();
+              const memberName = '生駒里奈';
+
+              let type = $(element).find('.category').text().trim();
+              if (type.toUpperCase() === 'TV Show'.toUpperCase()) {
+                type = 'TV';
+              }
+
+              ikomaSchedules.push({
+                type,
+                schedule: { date: '', title, memberName },
+              });
+            });
+          }
+        });
+      }
+    } catch (error) {
+      console.log('Error:', error);
+    }
+
+    return ikomaSchedules;
   }
 
   private async getLLCMemberSchedule({
