@@ -26,8 +26,9 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
 
   public async getSchedules(date: ScheduleDate): Promise<ScheduleWithType[]> {
     const nishinoSchedules = await this.getNishinoSchedules(date);
+    const shiraishiSchedules = await this.getShiraishiSchedules(date);
     const ikomaSchedules = await this.getIkomaSchedules(date);
-    const rawSchedules = [...nishinoSchedules, ...ikomaSchedules];
+    const rawSchedules = [...nishinoSchedules, ...shiraishiSchedules, ...ikomaSchedules];
 
     const denormalizedSchedules: Record<
       string,
@@ -99,10 +100,9 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
 
       if ($ !== null) {
         const dateDay = year + month + day;
-        const dayElements = $(`[data-day=${dateDay}]`);
-        const dayElement = dayElements.find('.list_card');
+        const dayElements = $(`[data-day=${dateDay}] .list_card`);
 
-        dayElement.map((_, element) => {
+        dayElements.map((_, element) => {
           const type = $(element).find('.category').text();
           const date = $(element).find('.date').text();
           const title = $(element).find('.title').text();
@@ -118,6 +118,35 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
     }
 
     return nishinoSchedules;
+  }
+
+  public async getShiraishiSchedules(date: ScheduleDate): Promise<ScheduleWithTypeLLC[]> {
+    const { year, month, day } = date;
+    const url = `https://maishiraishi-official.com/s/ms/media/list?dy=${year}${month}`;
+    const shiraishiSchedules: ScheduleWithTypeLLC[] = [];
+
+    try {
+      const $ = await this.addDOMSelector({ url, scraperId: 'shiraishimai' });
+
+      if ($ !== null) {
+        const dayElements = $(`.list_card > a[href*="year=${year}&mont=${month}&day=${day}"]`);
+
+        dayElements.map((_, element) => {
+          const type = $(element).find('.category').text().trim();
+          const date = $(element).find('.date').text().trim();
+          const title = $(element).find('.title').text().trim();
+
+          shiraishiSchedules.push({
+            type,
+            schedule: { date, title, memberName: NogizakaName.ShiraishiMai },
+          });
+        });
+      }
+    } catch (error) {
+      console.log('Error:', error);
+    }
+
+    return shiraishiSchedules;
   }
 
   public async getIkomaSchedules(date: ScheduleDate): Promise<ScheduleWithTypeLLC[]> {
