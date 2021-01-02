@@ -5,14 +5,18 @@ import { ScheduleWithTypeLLC, ScheduleWithType } from '../../BaseScheduleTweeter
 describe('GraduatedScheduleTweeter', () => {
   const graduatedScheduleTweeter = new GraduatedScheduleTweeter(Twitter);
 
-  let nanaseSchedules: ScheduleWithTypeLLC[] = [];
+  let nishinoSchedules: ScheduleWithTypeLLC[] = [];
+  let shiraishiSchedules: ScheduleWithTypeLLC[] = [];
   let ikomaSchedules: ScheduleWithTypeLLC[] = [];
   let allSchedules: ScheduleWithType[] = [];
 
   beforeAll(() => {
     return Promise.all([
       graduatedScheduleTweeter.getNishinoSchedules({ year: '2020', month: '12', day: '22' }).then((schedules) => {
-        nanaseSchedules = schedules;
+        nishinoSchedules = schedules;
+      }),
+      graduatedScheduleTweeter.getShiraishiSchedules({ year: '2021', month: '01', day: '01' }).then((schedules) => {
+        shiraishiSchedules = schedules;
       }),
       graduatedScheduleTweeter.getIkomaSchedules({ year: '2020', month: '12', day: '13' }).then((schedules) => {
         ikomaSchedules = schedules;
@@ -23,8 +27,8 @@ describe('GraduatedScheduleTweeter', () => {
     ]);
   });
 
-  it("should get the Nanase's schedules", () => {
-    expect(nanaseSchedules).toEqual([
+  it("should get the Nishino's schedules", () => {
+    expect(nishinoSchedules).toEqual([
       {
         type: 'TV',
         schedule: {
@@ -39,6 +43,27 @@ describe('GraduatedScheduleTweeter', () => {
           date: '',
           title: '「FLASH」',
           memberName: '西野七瀬',
+        },
+      },
+    ]);
+  });
+
+  it("should get the Shiraishi's schedules", () => {
+    expect(shiraishiSchedules).toEqual([
+      {
+        type: 'TV',
+        schedule: {
+          date: '23:30～24:30',
+          title: '全力！脱力タイムズ 新春SP',
+          memberName: '白石麻衣',
+        },
+      },
+      {
+        type: 'TV',
+        schedule: {
+          date: '18:00〜21:00',
+          title: 'ジョブチューン お正月スペシャル',
+          memberName: '白石麻衣',
         },
       },
     ]);
@@ -105,4 +130,6 @@ describe('GraduatedScheduleTweeter', () => {
       },
     ]);
   });
+
+  it('should sort schedules by date in an asc order', () => {});
 });
