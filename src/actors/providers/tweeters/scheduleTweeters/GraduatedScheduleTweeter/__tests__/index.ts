@@ -7,16 +7,19 @@ import { ScheduleWithTypeLLC, ScheduleWithType } from '../../BaseScheduleTweeter
  * Run it on local environment.
  */
 xdescribe('GraduatedScheduleTweeter', () => {
-  const graduatedScheduleTweeter = new GraduatedScheduleTweeter(Twitter);
+  let graduatedScheduleTweeter: GraduatedScheduleTweeter;
 
   let nishinoSchedules: ScheduleWithTypeLLC[] = [];
   let shiraishiSchedules: ScheduleWithTypeLLC[] = [];
   let ikomaSchedules: ScheduleWithTypeLLC[] = [];
   let wakatsukiSchedules: ScheduleWithTypeLLC[] = [];
   let fukagawaSchedules: ScheduleWithTypeLLC[] = [];
+  
   let allSchedules: ScheduleWithType[] = [];
 
   beforeAll(() => {
+    graduatedScheduleTweeter = new GraduatedScheduleTweeter(Twitter);
+
     return Promise.all([
       graduatedScheduleTweeter.getNishinoSchedules({ year: '2020', month: '12', day: '22' }).then((schedules) => {
         nishinoSchedules = schedules;
