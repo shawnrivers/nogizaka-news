@@ -25,11 +25,15 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
   }
 
   public async getSchedules(date: ScheduleDate): Promise<ScheduleWithType[]> {
-    const nishinoSchedules = await this.getNishinoSchedules(date);
-    const shiraishiSchedules = await this.getShiraishiSchedules(date);
-    const ikomaSchedules = await this.getIkomaSchedules(date);
-    const wakatsukiSchedules = await this.getWakatsukiSchedules(date);
-    const rawSchedules = [...nishinoSchedules, ...shiraishiSchedules, ...ikomaSchedules, ...wakatsukiSchedules];
+    const rawSchedules = (
+      await Promise.all([
+        this.getNishinoSchedules(date),
+        this.getShiraishiSchedules(date),
+        this.getIkomaSchedules(date),
+        this.getWakatsukiSchedules(date),
+        this.getFukagawaSchedules(date),
+      ])
+    ).flat();
 
     const denormalizedSchedules: Record<
       string,
