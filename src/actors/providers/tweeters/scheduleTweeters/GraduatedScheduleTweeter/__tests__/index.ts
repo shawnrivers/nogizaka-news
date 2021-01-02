@@ -2,7 +2,11 @@ import { GraduatedScheduleTweeter } from '..';
 import { Twitter } from '../../../../../../utils/twit';
 import { ScheduleWithTypeLLC, ScheduleWithType } from '../../BaseScheduleTweeter/types';
 
-describe('GraduatedScheduleTweeter', () => {
+/**
+ * CI doesn't have the tokens to make Twitter requests, so skip it.
+ * Run it on local environment.
+ */
+xdescribe('GraduatedScheduleTweeter', () => {
   const graduatedScheduleTweeter = new GraduatedScheduleTweeter(Twitter);
 
   let nishinoSchedules: ScheduleWithTypeLLC[] = [];
