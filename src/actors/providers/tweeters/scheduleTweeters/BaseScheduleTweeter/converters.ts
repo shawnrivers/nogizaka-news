@@ -33,7 +33,7 @@ export const getTweetableSchedulesWithType: GetTweetableSchedulesWithType = ({ s
             formattedTweets.push(schedulesText.slice(0, -1));
           }
 
-          const subsequentThreadHeading = `${heading.slice(0, -1)}（${threadCount}）\n${typeScheduleHeading}`;
+          const subsequentThreadHeading = `${heading}（${threadCount}）\n${typeScheduleHeading}`;
 
           schedulesText = subsequentThreadHeading + `${i + 1}. ${schedule}\n`;
         }
