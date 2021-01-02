@@ -8,3 +8,5 @@ export const Twitter = new Twit({
   timeout_ms: 60 * 1000,
   strictSSL: true,
 });
+
+export default Twitter;
