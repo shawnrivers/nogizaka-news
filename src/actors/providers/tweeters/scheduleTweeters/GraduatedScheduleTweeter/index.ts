@@ -28,7 +28,8 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
     const nishinoSchedules = await this.getNishinoSchedules(date);
     const shiraishiSchedules = await this.getShiraishiSchedules(date);
     const ikomaSchedules = await this.getIkomaSchedules(date);
-    const rawSchedules = [...nishinoSchedules, ...shiraishiSchedules, ...ikomaSchedules];
+    const wakatsukiSchedules = await this.getWakatsukiSchedules(date);
+    const rawSchedules = [...nishinoSchedules, ...shiraishiSchedules, ...ikomaSchedules, ...wakatsukiSchedules];
 
     const denormalizedSchedules: Record<
       string,
@@ -191,5 +192,36 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
     }
 
     return ikomaSchedules;
+  }
+
+  public async getWakatsukiSchedules(date: ScheduleDate): Promise<ScheduleWithTypeLLC[]> {
+    const { year, month, day } = date;
+    const url = 'https://yumiwakatsuki.com/';
+    const wakatsukiSchedules: ScheduleWithTypeLLC[] = [];
+
+    try {
+      const $ = await this.addDOMSelector({ url, scraperId: 'wakatsukiyumi' });
+
+      if ($ !== null) {
+        const dayElements = $(`.schedule__item`);
+
+        dayElements.map((_, element) => {
+          const type = $(element).find('.schedule__item__date-cat > .cat').text().trim();
+          const date = $(element).find('.schedule__item__date-cat > .date').text().trim();
+          const title = $(element).find('.schedule__item__paragraph > p').first().text().trim();
+
+          if (date === `${year}/${month}/${day}`) {
+            wakatsukiSchedules.push({
+              type,
+              schedule: { date: '', title, memberName: NogizakaName.WakatsukiYumi },
+            });
+          }
+        });
+      }
+    } catch (error) {
+      console.log('Error:', error);
+    }
+
+    return wakatsukiSchedules;
   }
 }

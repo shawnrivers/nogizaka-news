@@ -8,6 +8,7 @@ describe('GraduatedScheduleTweeter', () => {
   let nishinoSchedules: ScheduleWithTypeLLC[] = [];
   let shiraishiSchedules: ScheduleWithTypeLLC[] = [];
   let ikomaSchedules: ScheduleWithTypeLLC[] = [];
+  let wakatsukiSchedules: ScheduleWithTypeLLC[] = [];
   let allSchedules: ScheduleWithType[] = [];
 
   beforeAll(() => {
@@ -20,6 +21,9 @@ describe('GraduatedScheduleTweeter', () => {
       }),
       graduatedScheduleTweeter.getIkomaSchedules({ year: '2020', month: '12', day: '13' }).then((schedules) => {
         ikomaSchedules = schedules;
+      }),
+      graduatedScheduleTweeter.getWakatsukiSchedules({ year: '2021', month: '01', day: '11' }).then((schedules) => {
+        wakatsukiSchedules = schedules;
       }),
       graduatedScheduleTweeter.getSchedules({ year: '2020', month: '11', day: '21' }).then((schedules) => {
         allSchedules = schedules;
@@ -93,6 +97,23 @@ describe('GraduatedScheduleTweeter', () => {
           date: '',
           title: 'ニコニコ生放送「トゥーランドット～廃墟に眠る少年の夢～」',
           memberName: '生駒里奈',
+        },
+      },
+    ]);
+  });
+
+  /**
+   * Because I can only get the current month's schedule,
+   * this test is not scalable. Skip it.
+   */
+  xit("should get Wakatsuki's schedules", async () => {
+    expect(wakatsukiSchedules).toEqual([
+      {
+        type: 'RADIO',
+        schedule: {
+          date: '',
+          title: 'MBSラジオ 「アッパレ　やってまーす！」',
+          memberName: '若月佑美',
         },
       },
     ]);
