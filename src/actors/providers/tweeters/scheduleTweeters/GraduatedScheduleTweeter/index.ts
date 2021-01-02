@@ -18,6 +18,12 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
     this.tweetPoster.tweetThread(formattedSchedules);
   }
 
+  private formatSchedules({ schedules, date }: { schedules: ScheduleWithType[]; date: ScheduleDate }): string[] {
+    const heading = `卒業生の${getOneDigitDate(date.month)}月${getOneDigitDate(date.day)}日のスケジュール`;
+
+    return getTweetableSchedulesWithType({ schedules, heading });
+  }
+
   public async getSchedules(date: ScheduleDate): Promise<ScheduleWithType[]> {
     const nishinoSchedules = await this.getNishinoSchedules(date);
     const ikomaSchedules = await this.getIkomaSchedules(date);
@@ -83,23 +89,40 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
     return normalizedSchedules;
   }
 
-  private formatSchedules({ schedules, date }: { schedules: ScheduleWithType[]; date: ScheduleDate }): string[] {
-    const heading = `卒業生の${getOneDigitDate(date.month)}月${getOneDigitDate(date.day)}日のスケジュール`;
+  public async getNishinoSchedules(date: ScheduleDate): Promise<ScheduleWithTypeLLC[]> {
+    const { year, month, day } = date;
+    const url = `https://nishinonanase.com/s/m04/media/list?ima=2551&dy=${year}${month}`;
+    const nishinoSchedules: ScheduleWithTypeLLC[] = [];
 
-    return getTweetableSchedulesWithType({ schedules, heading });
-  }
+    try {
+      const $ = await this.addDOMSelector({ url, scraperId: 'nishinonanase' });
 
-  public getNishinoSchedules(date: ScheduleDate): Promise<ScheduleWithTypeLLC[]> {
-    const url = `https://nishinonanase.com/s/m04/media/list?ima=2551&dy=${date.year}${date.month}`;
+      if ($ !== null) {
+        const dateDay = year + month + day;
+        const dayElements = $(`[data-day=${dateDay}]`);
+        const dayElement = dayElements.find('.list_card');
 
-    return this.getLLCMemberSchedule({ date, url, scraperId: 'nishino', memberName: NogizakaName.NishinoNanase });
+        dayElement.map((_, element) => {
+          const type = $(element).find('.category').text();
+          const date = $(element).find('.date').text();
+          const title = $(element).find('.title').text();
+
+          nishinoSchedules.push({
+            type,
+            schedule: { date, title, memberName: NogizakaName.NishinoNanase },
+          });
+        });
+      }
+    } catch (error) {
+      console.log('Error:', error);
+    }
+
+    return nishinoSchedules;
   }
 
   public async getIkomaSchedules(date: ScheduleDate): Promise<ScheduleWithTypeLLC[]> {
     const { year, month, day } = date;
-
     const url = `https://ikomarina.com/schedule/list/${year}/${month}/?cat=L_ALL,live02,live03,live04,live05,live06,live07,live08,live09,live10`;
-
     const ikomaSchedules: ScheduleWithTypeLLC[] = [];
 
     try {
@@ -120,7 +143,6 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
 
             schedulesElements.map((_, element) => {
               const title = $(element).find('.tit').text().trim();
-              const memberName = '生駒里奈';
 
               let type = $(element).find('.category').text().trim();
               if (type.toUpperCase() === 'TV Show'.toUpperCase()) {
@@ -129,7 +151,7 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
 
               ikomaSchedules.push({
                 type,
-                schedule: { date: '', title, memberName },
+                schedule: { date: '', title, memberName: NogizakaName.IkomaRina },
               });
             });
           }
@@ -140,51 +162,5 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
     }
 
     return ikomaSchedules;
-  }
-
-  private async getLLCMemberSchedule({
-    date,
-    url,
-    scraperId,
-    memberName,
-  }: {
-    date: ScheduleDate;
-    url: string;
-    scraperId: string;
-    memberName: string;
-  }): Promise<ScheduleWithTypeLLC[]> {
-    const LLCSchedules: ScheduleWithTypeLLC[] = [];
-    const { year, month, day } = date;
-
-    try {
-      const $ = await this.addDOMSelector({ url, scraperId });
-
-      if ($ !== null) {
-        const dateDay = year + month + day;
-        const dayElements = $(`[data-day=${dateDay}]`);
-        const dayElement = dayElements.find('.list_card');
-
-        dayElement.map((_, element) => {
-          const type = $(element).find('.category').text();
-          const date = $(element).find('.date').text();
-          const title = $(element).find('.title').text();
-
-          LLCSchedules.push({
-            type,
-            schedule: { date, title, memberName },
-          });
-        });
-      }
-    } catch (error) {
-      console.log('Error:', error);
-    }
-
-    return LLCSchedules;
-  }
-
-  public async getFormattedSchedules(date: ScheduleDate): Promise<string[]> {
-    const schedules = await this.getSchedules(date);
-    const formattedSchedules = this.formatSchedules({ schedules, date });
-    return formattedSchedules;
   }
 }
