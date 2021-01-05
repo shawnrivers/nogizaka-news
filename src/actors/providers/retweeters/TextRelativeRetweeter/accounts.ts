@@ -20,6 +20,7 @@ export enum AccountId {
   HatanakaSeira = '4077236000',
   ItouNene = '3190643234',
   ShiraishiMai = '1322080600006684672',
+  NishinoNanase = '1345751760682381312',
 }
 
 export const MEDIA_ACCOUNTS: WatchingAccount[] = [
@@ -47,6 +48,7 @@ export const MEMBER_ACCOUNTS: WatchingAccount[] = [
   { id: AccountId.ItouNene, count: 5, type: 'member' },
   { id: AccountId.HatanakaSeira, count: 5, type: 'member' },
   { id: AccountId.ShiraishiMai, count: 5, type: 'member' },
+  { id: AccountId.NishinoNanase, count: 5, type: 'member' },
 ];
 
 export const RETWEET_ACCOUNTS_OBJECT = arrayToObject(
