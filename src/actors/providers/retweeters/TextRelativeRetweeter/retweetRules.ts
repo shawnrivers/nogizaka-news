@@ -19,6 +19,7 @@ const neneRule: TweetRelativeCallback = (text) => text.includes('お知らせ');
 const hatanakaRule: TweetRelativeCallback = (text) =>
   text.includes('本日の動画') || text.includes('YouTubeで生配信') || text.includes('#せいたんちゃんねる');
 const shiraishiRule: TweetRelativeCallback = () => true;
+const nishinoRule: TweetRelativeCallback = () => true;
 
 // Media rules
 const showroomRule: TweetRelativeCallback = (text) =>
@@ -101,6 +102,10 @@ export const getWatchingAccountWithCallback = (
 
     if (accountId === AccountId.ShiraishiMai) {
       return { ...account, tweetRelativeCallback: shiraishiRule };
+    }
+
+    if (accountId === AccountId.NishinoNanase) {
+      return { ...account, tweetRelativeCallback: nishinoRule };
     }
   }
 
