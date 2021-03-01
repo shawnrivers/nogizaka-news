@@ -23,7 +23,10 @@ const nishinoRule: TweetRelativeCallback = () => true;
 
 // Media rules
 const showroomRule: TweetRelativeCallback = (text) =>
-  (text.includes('のぎおび') && containsHour(text)) || containsNogizakaNames(text);
+  (text.includes('のぎおび') && containsHour(text)) ||
+  (text.includes('猫舌') && containsNogizakaNames(text) && containsHour(text)) ||
+  text.includes('showroom-live.com/46_') ||
+  text.includes('nogizaka46');
 const newsRule: TweetRelativeCallback = containsNogizakaNames;
 const modelPressRule: TweetRelativeCallback = (text) =>
   !text.includes('フォトランキング') &&
