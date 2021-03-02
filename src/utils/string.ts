@@ -38,4 +38,4 @@ export const containsHour = (text: string): boolean => {
   return false;
 };
 
-export const containsNogizakaNames = (text: string): boolean => NOGIZAKA_NAMES.some(text.includes);
+export const containsNogizakaNames = (text: string): boolean => NOGIZAKA_NAMES.some((name) => text.includes(name));
