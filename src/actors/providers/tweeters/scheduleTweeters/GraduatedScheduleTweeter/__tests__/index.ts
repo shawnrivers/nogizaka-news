@@ -10,6 +10,7 @@ xdescribe('GraduatedScheduleTweeter', () => {
 
   let nishinoSchedules: ScheduleWithTypeLLC[] = [];
   let shiraishiSchedules: ScheduleWithTypeLLC[] = [];
+  let marikaSchedules: ScheduleWithTypeLLC[] = [];
   let ikomaSchedules: ScheduleWithTypeLLC[] = [];
   let wakatsukiSchedules: ScheduleWithTypeLLC[] = [];
   let fukagawaSchedules: ScheduleWithTypeLLC[] = [];
@@ -26,6 +27,9 @@ xdescribe('GraduatedScheduleTweeter', () => {
       }),
       graduatedScheduleTweeter.getShiraishiSchedules({ year: '2021', month: '01', day: '01' }).then((schedules) => {
         shiraishiSchedules = schedules;
+      }),
+      graduatedScheduleTweeter.getMarikaSchedules({ year: '2021', month: '05', day: '19' }).then((schedules) => {
+        marikaSchedules = schedules;
       }),
       graduatedScheduleTweeter.getIkomaSchedules({ year: '2020', month: '12', day: '13' }).then((schedules) => {
         ikomaSchedules = schedules;
@@ -79,6 +83,19 @@ xdescribe('GraduatedScheduleTweeter', () => {
           date: '18:00〜21:00',
           title: 'ジョブチューン お正月スペシャル',
           memberName: '白石麻衣',
+        },
+      },
+    ]);
+  });
+
+  it("should get the Marika's schedules", () => {
+    expect(marikaSchedules).toEqual([
+      {
+        type: 'STAGE',
+        schedule: {
+          date: '',
+          title: 'M&Oplaysプロデュース「DOORS」@世田谷パブリックシアター',
+          memberName: '伊藤万理華',
         },
       },
     ]);
