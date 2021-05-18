@@ -29,6 +29,7 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
       await Promise.all([
         this.getNishinoSchedules(date),
         this.getShiraishiSchedules(date),
+        this.getMarikaSchedules(date),
         this.getIkomaSchedules(date),
         this.getWakatsukiSchedules(date),
         this.getFukagawaSchedules(date),
@@ -152,6 +153,35 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
     }
 
     return shiraishiSchedules;
+  }
+
+  public async getMarikaSchedules(date: ScheduleDate): Promise<ScheduleWithTypeLLC[]> {
+    const { year, month, day } = date;
+    const url = `https://itomarika.com/s/m03/media/list?dy=${year}${month}`;
+    const marikaSchedules: ScheduleWithTypeLLC[] = [];
+
+    try {
+      const $ = await this.addDOMSelector({ url, scraperId: 'itoumarika' });
+
+      if ($ !== null) {
+        const dayElements = $(`.list_card > a[href*="year=${year}&mont=${month}&day=${day}"]`);
+
+        dayElements.map((_, element) => {
+          const type = $(element).find('.category').text().trim();
+          const date = $(element).find('.date').text().trim();
+          const title = $(element).find('.title').text().trim();
+
+          marikaSchedules.push({
+            type,
+            schedule: { date, title, memberName: NogizakaName.ItouMarika },
+          });
+        });
+      }
+    } catch (error) {
+      console.log('Error:', error);
+    }
+
+    return marikaSchedules;
   }
 
   public async getIkomaSchedules(date: ScheduleDate): Promise<ScheduleWithTypeLLC[]> {
