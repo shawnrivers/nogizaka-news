@@ -51,8 +51,7 @@
   "lint-staged": {
     "*.ts": [
       "prettier --write",
-      "eslint --fix",
-      "tsc --noEmit"
+      "eslint --fix"
     ]
   },
   "husky": {
