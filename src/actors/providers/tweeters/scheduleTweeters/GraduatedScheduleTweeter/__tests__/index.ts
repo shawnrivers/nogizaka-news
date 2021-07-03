@@ -14,6 +14,7 @@ xdescribe('GraduatedScheduleTweeter', () => {
   let ikomaSchedules: ScheduleWithTypeLLC[] = [];
   let wakatsukiSchedules: ScheduleWithTypeLLC[] = [];
   let fukagawaSchedules: ScheduleWithTypeLLC[] = [];
+  let mionaSchedules: ScheduleWithTypeLLC[] = [];
 
   let allSchedules: ScheduleWithType[] = [];
 
@@ -39,6 +40,9 @@ xdescribe('GraduatedScheduleTweeter', () => {
       }),
       graduatedScheduleTweeter.getFukagawaSchedules({ year: '2021', month: '01', day: '29' }).then((schedules) => {
         fukagawaSchedules = schedules;
+      }),
+      graduatedScheduleTweeter.getMionaSchedules({ year: '2021', month: '06', day: '09' }).then((schedules) => {
+        mionaSchedules = schedules;
       }),
       graduatedScheduleTweeter.getSchedules({ year: '2020', month: '11', day: '21' }).then((schedules) => {
         allSchedules = schedules;
@@ -167,6 +171,27 @@ xdescribe('GraduatedScheduleTweeter', () => {
           date: '',
           title: 'ドラマ「福岡恋愛白書10」Twitterで配信',
           memberName: '深川麻衣',
+        },
+      },
+    ]);
+  });
+
+  it("should get Miona's schedules", async () => {
+    expect(mionaSchedules).toEqual([
+      {
+        type: 'TV',
+        schedule: {
+          date: '',
+          title: 'テレビ朝日「あいつ今何してる？」にゲスト出演！',
+          memberName: '堀未央奈',
+        },
+      },
+      {
+        type: 'TV',
+        schedule: {
+          date: '',
+          title: 'テレビ朝日「声優パーク建設計画 VR部」に生出演！',
+          memberName: '堀未央奈',
         },
       },
     ]);

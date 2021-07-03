@@ -33,6 +33,7 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
         this.getIkomaSchedules(date),
         this.getWakatsukiSchedules(date),
         this.getFukagawaSchedules(date),
+        this.getMionaSchedules(date),
       ])
     ).flat();
 
@@ -288,5 +289,36 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
     }
 
     return fukagawaSchedules;
+  }
+
+  public async getMionaSchedules(date: ScheduleDate): Promise<ScheduleWithTypeLLC[]> {
+    const { year, month, day } = date;
+    const url = `https://hori-miona.com/schedule/list/${year}/${month}/`;
+    const mionaSchedules: ScheduleWithTypeLLC[] = [];
+
+    try {
+      const $ = await this.addDOMSelector({ url, scraperId: 'horimiona' });
+
+      if ($ !== null) {
+        const dayElements = $(`.list--schedule > li`);
+
+        dayElements.map((_, element) => {
+          const type = $(element).find('.list__txt .category').text().trim();
+          const date = $(element).find('.list__date .d').text().trim();
+          const title = $(element).find('.list__txt  .tit').text().trim();
+
+          if (date === day) {
+            mionaSchedules.push({
+              type,
+              schedule: { date: '', title, memberName: NogizakaName.HoriMiona },
+            });
+          }
+        });
+      }
+    } catch (error) {
+      console.log('Error:', error);
+    }
+
+    return mionaSchedules;
   }
 }
