@@ -265,7 +265,7 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
     const fukagawaSchedules: ScheduleWithTypeLLC[] = [];
 
     try {
-      const $ = await this.addDOMSelector({ url, scraperId: 'wakatsukiyumi' });
+      const $ = await this.addDOMSelector({ url, scraperId: 'fukagawamai' });
 
       if ($ !== null) {
         const dayElements = $(`.contents-list > li`);
