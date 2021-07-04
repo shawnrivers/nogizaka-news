@@ -4,7 +4,7 @@ import { LLC_SCHEDULE_TYPE_LIST } from '../../../../../constants/schedules';
 import { compareDates, getOneDigitDate } from '../../../../../utils/date';
 import { BaseScheduleTweeter } from '../BaseScheduleTweeter';
 import { getTweetableSchedulesWithType } from '../BaseScheduleTweeter/converters';
-import { ScheduleDate, ScheduleWithType, ScheduleWithTypeLLC } from '../BaseScheduleTweeter/types';
+import { ScheduleDate, ScheduleWithType, MemberScheduleWithType, MemberSchedule } from '../BaseScheduleTweeter/types';
 import { arrayToObject } from '../../../../../utils/array';
 
 export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
@@ -41,11 +41,7 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
       string,
       {
         type: string;
-        schedule: {
-          title: string;
-          date: string;
-          memberName: string;
-        }[];
+        schedule: MemberSchedule[];
       }
     > = arrayToObject(
       LLC_SCHEDULE_TYPE_LIST.map((scheduleType) => ({
@@ -97,10 +93,10 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
     return normalizedSchedules;
   }
 
-  public async getNishinoSchedules(date: ScheduleDate): Promise<ScheduleWithTypeLLC[]> {
+  public async getNishinoSchedules(date: ScheduleDate): Promise<MemberScheduleWithType[]> {
     const { year, month, day } = date;
     const url = `https://nishinonanase.com/s/m04/media/list?ima=2551&dy=${year}${month}`;
-    const nishinoSchedules: ScheduleWithTypeLLC[] = [];
+    const nishinoSchedules: MemberScheduleWithType[] = [];
 
     try {
       const $ = await this.addDOMSelector({ url, scraperId: 'nishinonanase' });
@@ -127,10 +123,10 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
     return nishinoSchedules;
   }
 
-  public async getShiraishiSchedules(date: ScheduleDate): Promise<ScheduleWithTypeLLC[]> {
+  public async getShiraishiSchedules(date: ScheduleDate): Promise<MemberScheduleWithType[]> {
     const { year, month, day } = date;
     const url = `https://maishiraishi-official.com/s/ms/media/list?dy=${year}${month}`;
-    const shiraishiSchedules: ScheduleWithTypeLLC[] = [];
+    const shiraishiSchedules: MemberScheduleWithType[] = [];
 
     try {
       const $ = await this.addDOMSelector({ url, scraperId: 'shiraishimai' });
@@ -156,10 +152,10 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
     return shiraishiSchedules;
   }
 
-  public async getMarikaSchedules(date: ScheduleDate): Promise<ScheduleWithTypeLLC[]> {
+  public async getMarikaSchedules(date: ScheduleDate): Promise<MemberScheduleWithType[]> {
     const { year, month, day } = date;
     const url = `https://itomarika.com/s/m03/media/list?dy=${year}${month}`;
-    const marikaSchedules: ScheduleWithTypeLLC[] = [];
+    const marikaSchedules: MemberScheduleWithType[] = [];
 
     try {
       const $ = await this.addDOMSelector({ url, scraperId: 'itoumarika' });
@@ -185,10 +181,10 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
     return marikaSchedules;
   }
 
-  public async getIkomaSchedules(date: ScheduleDate): Promise<ScheduleWithTypeLLC[]> {
+  public async getIkomaSchedules(date: ScheduleDate): Promise<MemberScheduleWithType[]> {
     const { year, month, day } = date;
     const url = `https://ikomarina.com/schedule/list/${year}/${month}/?cat=L_ALL,live02,live03,live04,live05,live06,live07,live08,live09,live10`;
-    const ikomaSchedules: ScheduleWithTypeLLC[] = [];
+    const ikomaSchedules: MemberScheduleWithType[] = [];
 
     try {
       const $ = await this.addDOMSelector({ url, scraperId: 'ikomarina' });
@@ -229,10 +225,10 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
     return ikomaSchedules;
   }
 
-  public async getWakatsukiSchedules(date: ScheduleDate): Promise<ScheduleWithTypeLLC[]> {
+  public async getWakatsukiSchedules(date: ScheduleDate): Promise<MemberScheduleWithType[]> {
     const { year, month, day } = date;
     const url = 'https://yumiwakatsuki.com/';
-    const wakatsukiSchedules: ScheduleWithTypeLLC[] = [];
+    const wakatsukiSchedules: MemberScheduleWithType[] = [];
 
     try {
       const $ = await this.addDOMSelector({ url, scraperId: 'wakatsukiyumi' });
@@ -260,10 +256,10 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
     return wakatsukiSchedules;
   }
 
-  public async getFukagawaSchedules(date: ScheduleDate): Promise<ScheduleWithTypeLLC[]> {
+  public async getFukagawaSchedules(date: ScheduleDate): Promise<MemberScheduleWithType[]> {
     const { year, month, day } = date;
     const url = 'https://fukagawamai.com/contents/schedule';
-    const fukagawaSchedules: ScheduleWithTypeLLC[] = [];
+    const fukagawaSchedules: MemberScheduleWithType[] = [];
 
     try {
       const $ = await this.addDOMSelector({ url, scraperId: 'fukagawamai' });
@@ -291,10 +287,10 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
     return fukagawaSchedules;
   }
 
-  public async getMionaSchedules(date: ScheduleDate): Promise<ScheduleWithTypeLLC[]> {
+  public async getMionaSchedules(date: ScheduleDate): Promise<MemberScheduleWithType[]> {
     const { year, month, day } = date;
     const url = `https://hori-miona.com/schedule/list/${year}/${month}/`;
-    const mionaSchedules: ScheduleWithTypeLLC[] = [];
+    const mionaSchedules: MemberScheduleWithType[] = [];
 
     try {
       const $ = await this.addDOMSelector({ url, scraperId: 'horimiona' });

@@ -9,11 +9,13 @@ export type ScheduleWithType = {
   schedule: string[];
 };
 
-export type ScheduleWithTypeLLC = {
+export type MemberSchedule = {
+  title: string;
+  date: string;
+  memberName: string;
+};
+
+export type MemberScheduleWithType = {
   type: string;
-  schedule: {
-    title: string;
-    date: string;
-    memberName: string;
-  };
+  schedule: MemberSchedule;
 };

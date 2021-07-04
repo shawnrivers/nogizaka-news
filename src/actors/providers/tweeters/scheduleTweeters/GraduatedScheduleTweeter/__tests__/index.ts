@@ -1,5 +1,5 @@
 import { GraduatedScheduleTweeter } from '..';
-import { ScheduleWithTypeLLC, ScheduleWithType } from '../../BaseScheduleTweeter/types';
+import { MemberScheduleWithType, ScheduleWithType } from '../../BaseScheduleTweeter/types';
 
 /**
  * CI doesn't have the tokens to make Twitter requests, so skip it.
@@ -8,13 +8,13 @@ import { ScheduleWithTypeLLC, ScheduleWithType } from '../../BaseScheduleTweeter
 xdescribe('GraduatedScheduleTweeter', () => {
   let graduatedScheduleTweeter: GraduatedScheduleTweeter;
 
-  let nishinoSchedules: ScheduleWithTypeLLC[] = [];
-  let shiraishiSchedules: ScheduleWithTypeLLC[] = [];
-  let marikaSchedules: ScheduleWithTypeLLC[] = [];
-  let ikomaSchedules: ScheduleWithTypeLLC[] = [];
-  let wakatsukiSchedules: ScheduleWithTypeLLC[] = [];
-  let fukagawaSchedules: ScheduleWithTypeLLC[] = [];
-  let mionaSchedules: ScheduleWithTypeLLC[] = [];
+  let nishinoSchedules: MemberScheduleWithType[] = [];
+  let shiraishiSchedules: MemberScheduleWithType[] = [];
+  let marikaSchedules: MemberScheduleWithType[] = [];
+  let ikomaSchedules: MemberScheduleWithType[] = [];
+  let wakatsukiSchedules: MemberScheduleWithType[] = [];
+  let fukagawaSchedules: MemberScheduleWithType[] = [];
+  let mionaSchedules: MemberScheduleWithType[] = [];
 
   let allSchedules: ScheduleWithType[] = [];
 
