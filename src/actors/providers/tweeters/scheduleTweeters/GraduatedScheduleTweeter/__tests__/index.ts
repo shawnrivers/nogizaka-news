@@ -15,6 +15,7 @@ xdescribe('GraduatedScheduleTweeter', () => {
   let wakatsukiSchedules: MemberScheduleWithType[] = [];
   let fukagawaSchedules: MemberScheduleWithType[] = [];
   let mionaSchedules: MemberScheduleWithType[] = [];
+  let sakuraiSchedules: MemberScheduleWithType[] = [];
 
   let allSchedules: ScheduleWithType[] = [];
 
@@ -43,6 +44,9 @@ xdescribe('GraduatedScheduleTweeter', () => {
       }),
       graduatedScheduleTweeter.getMionaSchedules({ year: '2021', month: '06', day: '09' }).then((schedules) => {
         mionaSchedules = schedules;
+      }),
+      graduatedScheduleTweeter.getSakuraiSchedules({ year: '2021', month: '09', day: '28' }).then((schedules) => {
+        sakuraiSchedules = schedules;
       }),
       graduatedScheduleTweeter.getSchedules({ year: '2020', month: '11', day: '21' }).then((schedules) => {
         allSchedules = schedules;
@@ -192,6 +196,27 @@ xdescribe('GraduatedScheduleTweeter', () => {
           date: '',
           title: 'テレビ朝日「声優パーク建設計画 VR部」に生出演！',
           memberName: '堀未央奈',
+        },
+      },
+    ]);
+  });
+
+  it("should get Sakurai's schedules", async () => {
+    expect(sakuraiSchedules).toEqual([
+      {
+        type: 'STAGE',
+        schedule: {
+          date: '',
+          title: 'ロック☆オペラ『ザ・パンデモニアム・ロック・ショー〜The Pandemonium Rock Show〜』',
+          memberName: '桜井玲香',
+        },
+      },
+      {
+        type: 'MAGAZINE',
+        schedule: {
+          date: '',
+          title: '「CLASSY.」',
+          memberName: '桜井玲香',
         },
       },
     ]);

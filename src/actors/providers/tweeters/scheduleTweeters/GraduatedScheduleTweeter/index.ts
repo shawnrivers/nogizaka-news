@@ -34,6 +34,7 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
         this.getWakatsukiSchedules(date),
         this.getFukagawaSchedules(date),
         this.getMionaSchedules(date),
+        this.getSakuraiSchedules(date),
       ])
     ).flat();
 
@@ -301,7 +302,7 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
         dayElements.map((_, element) => {
           const type = $(element).find('.list__txt .category').text().trim();
           const date = $(element).find('.list__date .d').text().trim();
-          const title = $(element).find('.list__txt  .tit').text().trim();
+          const title = $(element).find('.list__txt .tit').text().trim();
 
           if (date === day) {
             mionaSchedules.push({
@@ -316,5 +317,34 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
     }
 
     return mionaSchedules;
+  }
+
+  public async getSakuraiSchedules(date: ScheduleDate): Promise<MemberScheduleWithType[]> {
+    const { year, month, day } = date;
+    const url = `https://reikasakurai.com/s/m08/media/list?dy=${year}${month}`;
+    const sakuraiSchedules: MemberScheduleWithType[] = [];
+
+    try {
+      const $ = await this.addDOMSelector({ url, scraperId: 'sakuraireika' });
+
+      if ($ !== null) {
+        const dayElements = $(`.list_card > a[href*="year=${year}&mont=${month}&day=${day}"]`);
+
+        dayElements.map((_, element) => {
+          const type = $(element).find('.category').text().trim();
+          const date = $(element).find('.date').text().trim();
+          const title = $(element).find('.title').text().trim();
+
+          sakuraiSchedules.push({
+            type,
+            schedule: { date, title, memberName: NogizakaName.SakuraiReika },
+          });
+        });
+      }
+    } catch (error) {
+      console.log('Error:', error);
+    }
+
+    return sakuraiSchedules;
   }
 }
