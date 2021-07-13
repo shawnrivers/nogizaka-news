@@ -56,7 +56,7 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
 
     // Categorize schedules by type
     rawSchedules.forEach((rawSchedule) => {
-      const typeIndex = LLC_SCHEDULE_TYPE_LIST.indexOf(rawSchedule.type);
+      const typeIndex = LLC_SCHEDULE_TYPE_LIST.indexOf(rawSchedule.type.toUpperCase());
 
       if (typeIndex !== -1) {
         denormalizedSchedules[LLC_SCHEDULE_TYPE_LIST[typeIndex]].schedule.push(rawSchedule.schedule);
