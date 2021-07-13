@@ -16,6 +16,7 @@ xdescribe('GraduatedScheduleTweeter', () => {
   let fukagawaSchedules: MemberScheduleWithType[] = [];
   let mionaSchedules: MemberScheduleWithType[] = [];
   let sakuraiSchedules: MemberScheduleWithType[] = [];
+  let matsumuraSchedules: MemberScheduleWithType[] = [];
 
   let allSchedules: ScheduleWithType[] = [];
 
@@ -47,6 +48,9 @@ xdescribe('GraduatedScheduleTweeter', () => {
       }),
       graduatedScheduleTweeter.getSakuraiSchedules({ year: '2021', month: '09', day: '28' }).then((schedules) => {
         sakuraiSchedules = schedules;
+      }),
+      graduatedScheduleTweeter.getMatsumuraSchedules({ year: '2021', month: '07', day: '13' }).then((schedules) => {
+        matsumuraSchedules = schedules;
       }),
       graduatedScheduleTweeter.getSchedules({ year: '2020', month: '11', day: '21' }).then((schedules) => {
         allSchedules = schedules;
@@ -217,6 +221,59 @@ xdescribe('GraduatedScheduleTweeter', () => {
           date: '',
           title: '「CLASSY.」',
           memberName: '桜井玲香',
+        },
+      },
+    ]);
+  });
+
+  it("should get Sayuringo's schedules", async () => {
+    expect(matsumuraSchedules).toEqual([
+      {
+        type: 'MAGAZINE',
+        schedule: {
+          date: '',
+          title: '「松村沙友理 乃木坂46卒業記念写真集『次、いつ会える？』」',
+          memberName: '松村沙友理',
+        },
+      },
+      {
+        type: 'TV',
+        schedule: {
+          date: '22:00～23:12',
+          title: 'TBS系「火曜ドラマ『プロミス・シンデレラ』」',
+          memberName: '松村沙友理',
+        },
+      },
+      {
+        type: 'WEB',
+        schedule: {
+          date: '',
+          title: '「ORICON NEWS」',
+          memberName: '松村沙友理',
+        },
+      },
+      {
+        type: 'WEB',
+        schedule: {
+          date: '',
+          title: '「cancam.jp」',
+          memberName: '松村沙友理',
+        },
+      },
+      {
+        type: 'WEB',
+        schedule: {
+          date: '',
+          title: '「モデルプレス」',
+          memberName: '松村沙友理',
+        },
+      },
+      {
+        type: 'RADIO',
+        schedule: {
+          date: '25:00～26:00',
+          title: 'MBSラジオ「イマドキッ」',
+          memberName: '松村沙友理',
         },
       },
     ]);

@@ -35,6 +35,7 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
         this.getFukagawaSchedules(date),
         this.getMionaSchedules(date),
         this.getSakuraiSchedules(date),
+        this.getMatsumuraSchedules(date)
       ])
     ).flat();
 
@@ -346,5 +347,35 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
     }
 
     return sakuraiSchedules;
+  }
+
+  public async getMatsumuraSchedules(date: ScheduleDate): Promise<MemberScheduleWithType[]> {
+    const { year, month, day } = date;
+    const url = `https://sayurimatsumura.com/s/m10/media/list?dy=${year}${month}`;
+    const matsumuraSchedules: MemberScheduleWithType[] = [];
+
+    try {
+      const $ = await this.addDOMSelector({ url, scraperId: 'matsumurasayuri' });
+
+      if ($ !== null) {
+        const dayElements = $(`.listTitle > a[href*="year=${year}&mont=${month}&day=${day}"]`);
+
+        dayElements.map((_, element) => {
+          const type = $(element).find('.cate').text().trim();
+          const date = $(element).find('.time').text().trim();
+          const contentsLength = $(element).contents().length;
+          const title = $(element).contents()[contentsLength - 1].nodeValue.trim();
+
+          matsumuraSchedules.push({
+            type,
+            schedule: { date, title, memberName: NogizakaName.MatsumuraSayuri },
+          });
+        });
+      }
+    } catch (error) {
+      console.log('Error:', error);
+    }
+
+    return matsumuraSchedules;
   }
 }
