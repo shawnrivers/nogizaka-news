@@ -35,7 +35,8 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
         this.getFukagawaSchedules(date),
         this.getMionaSchedules(date),
         this.getSakuraiSchedules(date),
-        this.getMatsumuraSchedules(date)
+        this.getMatsumuraSchedules(date),
+        this.getMahiroSchedules(date),
       ])
     ).flat();
 
@@ -377,5 +378,39 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
     }
 
     return matsumuraSchedules;
+  }
+
+  public async getMahiroSchedules(date: ScheduleDate): Promise<MemberScheduleWithType[]> {
+    const { year, month, day } = date;
+    const url = `https://mahiro.jp/schedule?month=${year}-${month}`;
+    const mahiroSchedules: MemberScheduleWithType[] = [];
+
+    try {
+      const $ = await this.addDOMSelector({ url, scraperId: 'kawamuramahiro' });
+
+      if ($ !== null) {
+        const dayElements = $(`.item.have-events`);
+
+        dayElements.map((_, element) => {
+          if (day == $(element).find('.day').text().trim()) {
+            const elements = $(element).find('.item__info');
+
+            elements.map((_, infoElement) => {
+              const type = $(infoElement).find('.label').text().trim();
+              const title = $(infoElement).find('.item__title').text().trim();
+
+              mahiroSchedules.push({
+                type,
+                schedule: { date: '', title, memberName: NogizakaName.KawamuraMahiro },
+              });
+            });
+          }
+        });
+      }
+    } catch (error) {
+      console.log('Error:', error);
+    }
+
+    return mahiroSchedules;
   }
 }

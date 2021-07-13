@@ -17,6 +17,7 @@ xdescribe('GraduatedScheduleTweeter', () => {
   let mionaSchedules: MemberScheduleWithType[] = [];
   let sakuraiSchedules: MemberScheduleWithType[] = [];
   let matsumuraSchedules: MemberScheduleWithType[] = [];
+  let mahiroSchedules: MemberScheduleWithType[] = [];
 
   let allSchedules: ScheduleWithType[] = [];
 
@@ -51,6 +52,9 @@ xdescribe('GraduatedScheduleTweeter', () => {
       }),
       graduatedScheduleTweeter.getMatsumuraSchedules({ year: '2021', month: '07', day: '13' }).then((schedules) => {
         matsumuraSchedules = schedules;
+      }),
+      graduatedScheduleTweeter.getMahiroSchedules({ year: '2021', month: '07', day: '23' }).then((schedules) => {
+        mahiroSchedules = schedules;
       }),
       graduatedScheduleTweeter.getSchedules({ year: '2020', month: '11', day: '21' }).then((schedules) => {
         allSchedules = schedules;
@@ -279,6 +283,27 @@ xdescribe('GraduatedScheduleTweeter', () => {
     ]);
   });
 
+  it("should get Mahiro's schedules", async () => {
+    expect(mahiroSchedules).toEqual([
+      {
+        type: 'LIVE',
+        schedule: {
+          date: '',
+          title: '18:30〜 配信LIVE「真洋(mahiro) Birthday Party」',
+          memberName: '川村真洋',
+        },
+      },
+      {
+        type: 'RELEASE',
+        schedule: {
+          date: '',
+          title: '1st Single「GDBD」配信Release',
+          memberName: '川村真洋',
+        },
+      },
+    ]);
+  });
+
   it("should get all graduated members' schedules", () => {
     expect(allSchedules).toEqual([
       {
@@ -303,6 +328,14 @@ xdescribe('GraduatedScheduleTweeter', () => {
       },
       {
         type: 'EVENT',
+        schedule: [],
+      },
+      {
+        type: 'RELEASE',
+        schedule: [],
+      },
+      {
+        type: 'LIVE',
         schedule: [],
       },
       {

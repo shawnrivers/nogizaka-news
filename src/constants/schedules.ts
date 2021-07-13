@@ -81,7 +81,7 @@ export const NOGIZAKA_SCHEDULE_TYPES: {
   },
 ];
 
-export const LLC_SCHEDULE_TYPE_LIST = ['TV', 'RADIO', 'MAGAZINE', 'WEB', 'STAGE', 'EVENT', 'OTHER'];
+export const LLC_SCHEDULE_TYPE_LIST = ['TV', 'RADIO', 'MAGAZINE', 'WEB', 'STAGE', 'EVENT', 'RELEASE', 'LIVE', 'OTHER'];
 
 export const HOURS = {
   jp: [
