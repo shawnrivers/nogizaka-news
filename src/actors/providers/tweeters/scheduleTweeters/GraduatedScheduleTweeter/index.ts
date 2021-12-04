@@ -37,6 +37,7 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
         this.getSakuraiSchedules(date),
         this.getMatsumuraSchedules(date),
         this.getMahiroSchedules(date),
+        this.getTakayamaSchedules(date),
       ])
     ).flat();
 
@@ -412,5 +413,34 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
     }
 
     return mahiroSchedules;
+  }
+
+  public async getTakayamaSchedules(date: ScheduleDate): Promise<MemberScheduleWithType[]> {
+    const { year, month, day } = date;
+    const url = `https://kazumitakayama.com/s/m11/media/list?dy=${year}${month}`;
+    const takayamaSchedules: MemberScheduleWithType[] = [];
+
+    try {
+      const $ = await this.addDOMSelector({ url, scraperId: 'takayamakazumi' });
+
+      if ($ !== null) {
+        const dayElements = $(`.list_card > a[href*="year=${year}&mont=${month}&day=${day}"]`);
+
+        dayElements.map((_, element) => {
+          const type = $(element).find('.category').text().trim();
+          const date = $(element).find('.date').text().trim();
+          const title = $(element).find('.title').text().trim();
+
+          takayamaSchedules.push({
+            type,
+            schedule: { date, title, memberName: NogizakaName.TakayamaKazumi },
+          });
+        });
+      }
+    } catch (error) {
+      console.log('Error:', error);
+    }
+
+    return takayamaSchedules;
   }
 }

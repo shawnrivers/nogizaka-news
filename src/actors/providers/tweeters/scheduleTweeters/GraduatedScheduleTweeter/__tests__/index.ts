@@ -18,6 +18,7 @@ xdescribe('GraduatedScheduleTweeter', () => {
   let sakuraiSchedules: MemberScheduleWithType[] = [];
   let matsumuraSchedules: MemberScheduleWithType[] = [];
   let mahiroSchedules: MemberScheduleWithType[] = [];
+  let takayamaSchedules: MemberScheduleWithType[] = [];
 
   let allSchedules: ScheduleWithType[] = [];
 
@@ -55,6 +56,9 @@ xdescribe('GraduatedScheduleTweeter', () => {
       }),
       graduatedScheduleTweeter.getMahiroSchedules({ year: '2021', month: '07', day: '23' }).then((schedules) => {
         mahiroSchedules = schedules;
+      }),
+      graduatedScheduleTweeter.getTakayamaSchedules({ year: '2021', month: '12', day: '06' }).then((schedules) => {
+        takayamaSchedules = schedules;
       }),
       graduatedScheduleTweeter.getSchedules({ year: '2020', month: '11', day: '21' }).then((schedules) => {
         allSchedules = schedules;
@@ -299,6 +303,19 @@ xdescribe('GraduatedScheduleTweeter', () => {
           date: '',
           title: '1st Single「GDBD」配信Release',
           memberName: '川村真洋',
+        },
+      },
+    ]);
+  });
+
+  it("should get Takayama's schedules", async () => {
+    expect(takayamaSchedules).toEqual([
+      {
+        type: 'TV',
+        schedule: {
+          date: '20:30～21:48',
+          title: 'テレビ朝日系「Qさま!!」',
+          memberName: '高山一実',
         },
       },
     ]);
