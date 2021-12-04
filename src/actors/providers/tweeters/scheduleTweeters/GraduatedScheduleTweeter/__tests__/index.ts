@@ -92,16 +92,16 @@ xdescribe('GraduatedScheduleTweeter', () => {
       {
         type: 'TV',
         schedule: {
-          date: '23:30～24:30',
-          title: '全力！脱力タイムズ 新春SP',
+          date: '18:00〜21:00',
+          title: 'TBSテレビ系「ジョブチューン お正月スペシャル」',
           memberName: '白石麻衣',
         },
       },
       {
         type: 'TV',
         schedule: {
-          date: '18:00〜21:00',
-          title: 'ジョブチューン お正月スペシャル',
+          date: '23:30～24:30',
+          title: 'フジテレビ「全力！脱力タイムズ 新春SP」',
           memberName: '白石麻衣',
         },
       },
@@ -302,6 +302,14 @@ xdescribe('GraduatedScheduleTweeter', () => {
         schedule: {
           date: '',
           title: '1st Single「GDBD」配信Release',
+          memberName: '川村真洋',
+        },
+      },
+      {
+        type: 'RADIO',
+        schedule: {
+          date: '',
+          title: '24:58〜 ニッポン放送「ミュージックパーティー」',
           memberName: '川村真洋',
         },
       },
