@@ -18,6 +18,7 @@ xdescribe('GraduatedScheduleTweeter', () => {
   let sakuraiSchedules: MemberScheduleWithType[] = [];
   let matsumuraSchedules: MemberScheduleWithType[] = [];
   let mahiroSchedules: MemberScheduleWithType[] = [];
+  let takayamaSchedules: MemberScheduleWithType[] = [];
 
   let allSchedules: ScheduleWithType[] = [];
 
@@ -56,6 +57,9 @@ xdescribe('GraduatedScheduleTweeter', () => {
       graduatedScheduleTweeter.getMahiroSchedules({ year: '2021', month: '07', day: '23' }).then((schedules) => {
         mahiroSchedules = schedules;
       }),
+      graduatedScheduleTweeter.getTakayamaSchedules({ year: '2021', month: '12', day: '06' }).then((schedules) => {
+        takayamaSchedules = schedules;
+      }),
       graduatedScheduleTweeter.getSchedules({ year: '2020', month: '11', day: '21' }).then((schedules) => {
         allSchedules = schedules;
       }),
@@ -88,16 +92,16 @@ xdescribe('GraduatedScheduleTweeter', () => {
       {
         type: 'TV',
         schedule: {
-          date: '23:30～24:30',
-          title: '全力！脱力タイムズ 新春SP',
+          date: '18:00〜21:00',
+          title: 'TBSテレビ系「ジョブチューン お正月スペシャル」',
           memberName: '白石麻衣',
         },
       },
       {
         type: 'TV',
         schedule: {
-          date: '18:00〜21:00',
-          title: 'ジョブチューン お正月スペシャル',
+          date: '23:30～24:30',
+          title: 'フジテレビ「全力！脱力タイムズ 新春SP」',
           memberName: '白石麻衣',
         },
       },
@@ -299,6 +303,27 @@ xdescribe('GraduatedScheduleTweeter', () => {
           date: '',
           title: '1st Single「GDBD」配信Release',
           memberName: '川村真洋',
+        },
+      },
+      {
+        type: 'RADIO',
+        schedule: {
+          date: '',
+          title: '24:58〜 ニッポン放送「ミュージックパーティー」',
+          memberName: '川村真洋',
+        },
+      },
+    ]);
+  });
+
+  it("should get Takayama's schedules", async () => {
+    expect(takayamaSchedules).toEqual([
+      {
+        type: 'TV',
+        schedule: {
+          date: '20:30～21:48',
+          title: 'テレビ朝日系「Qさま!!」',
+          memberName: '高山一実',
         },
       },
     ]);
