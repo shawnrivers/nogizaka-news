@@ -8,12 +8,14 @@ const RuleMap: Record<AccountId, TweetRelativeCallback> = {
   // Nogizaka official
   [AccountId.Nogizaka46]: () => true,
   [AccountId.NogizakaKoujichu]: () => true,
+
   // Showroom
   [AccountId.Showroom]: (text) =>
     (text.includes('のぎおび') && containsHour(text)) ||
     (text.includes('猫舌') && containsNogizakaNames(text) && containsHour(text)) ||
     text.includes('showroom-live.com/46_') ||
     text.includes('nogizaka46'),
+
   // Media
   [AccountId.OriconNews]: (text) => containsNogizakaNames(text),
   [AccountId.OngakuNatalie]: (text) => containsNogizakaNames(text),
@@ -29,6 +31,7 @@ const RuleMap: Record<AccountId, TweetRelativeCallback> = {
     containsNogizakaNames(text),
   [AccountId.NikkanSports]: (text) => !text.includes('芸能社会ニュース') && containsNogizakaNames(text),
   [AccountId.MantanWeb]: (text) => !text.includes('今週の美女図鑑') && containsNogizakaNames(text),
+
   // Members
   [AccountId.IkomaRina]: (text) => text.includes('出演情報'),
   [AccountId.KawagoHina]: (text) =>
@@ -42,6 +45,8 @@ const RuleMap: Record<AccountId, TweetRelativeCallback> = {
     text.includes('本日の動画') || text.includes('YouTubeで生配信') || text.includes('#せいたんちゃんねる'),
   [AccountId.ShiraishiMai]: () => true,
   [AccountId.NishinoNanase]: () => true,
+  [AccountId.IkutaErika]: () => true,
+  [AccountId.MatsumuraSayuri]: () => true,
 };
 
 export const getWatchingAccountWithCallback = (
