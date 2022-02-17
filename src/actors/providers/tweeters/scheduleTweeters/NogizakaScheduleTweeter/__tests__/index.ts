@@ -5,7 +5,7 @@ import { MemberScheduleWithType, ScheduleWithType } from '../../BaseScheduleTwee
  * CI doesn't have the tokens to make Twitter requests, so skip it.
  * Run it on local environment.
  */
-describe('NogizakaScheduleTweeter', () => {
+xdescribe('NogizakaScheduleTweeter', () => {
   let nogizakaScheduleTweeter: NogizakaScheduleTweeter;
 
   let schedules: ScheduleWithType[] = [];
