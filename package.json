@@ -5,6 +5,7 @@
   "private": "true",
   "dependencies": {
     "@babel/runtime": "^7.10.2",
+    "axios": "^0.26.0",
     "cheerio": "^1.0.0-rc.3",
     "request": "^2.88.2",
     "request-promise": "^4.2.5",
@@ -17,6 +18,7 @@
     "@babel/plugin-transform-runtime": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-typescript": "^7.10.1",
+    "@types/axios": "^0.14.0",
     "@types/cheerio": "^0.22.17",
     "@types/jest": "^25.2.3",
     "@types/request": "^2.48.4",

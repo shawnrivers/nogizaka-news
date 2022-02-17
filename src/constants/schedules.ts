@@ -1,83 +1,43 @@
-export enum NogizakaScheduleType {
-  Live = 'live',
-  Handshake = 'handshake',
-  Tv = 'tv',
-  Radio = 'radio',
-  Magazine = 'magazine',
-  Web = 'web',
-  Movie = 'movie',
-  Theatre = 'theatre',
-  Release = 'release',
-  Birthday = 'birthday',
-}
-
-export enum NogizakaScheduleTypeName {
-  Live = 'LIVE/EVENT',
-  Handshake = '握手会',
-  Tv = 'TV',
-  Radio = 'RADIO',
-  Magazine = 'MAGAZINE',
-  Web = 'WEB',
-  Movie = 'MOVIE',
-  Theatre = 'THEATRE',
-  Release = 'RELEASE',
-  Birthday = '誕生日',
-}
-
-export const NOGIZAKA_SCHEDULE_TYPES: {
-  type: NogizakaScheduleType;
-  className: string;
-  displayName: NogizakaScheduleTypeName;
-}[] = [
+export const NOGIZAKA_SCHEDULE_TYPES = [
   {
-    type: NogizakaScheduleType.Live,
-    className: '.live',
-    displayName: NogizakaScheduleTypeName.Live,
+    type: 'live',
+    displayName: 'ライブ/イベント',
   },
   {
-    type: NogizakaScheduleType.Handshake,
-    className: '.handshake',
-    displayName: NogizakaScheduleTypeName.Handshake,
+    type: 'meet',
+    displayName: '握手会',
   },
   {
-    type: NogizakaScheduleType.Tv,
-    className: '.tv',
-    displayName: NogizakaScheduleTypeName.Tv,
+    type: 'tv',
+    displayName: 'TV',
   },
   {
-    type: NogizakaScheduleType.Radio,
-    className: '.radio',
-    displayName: NogizakaScheduleTypeName.Radio,
+    type: 'radio',
+    displayName: 'ラジオ',
   },
   {
-    type: NogizakaScheduleType.Magazine,
-    className: '.magazine',
-    displayName: NogizakaScheduleTypeName.Magazine,
+    type: 'book',
+    displayName: '書籍',
   },
   {
-    type: NogizakaScheduleType.Web,
-    className: '.web',
-    displayName: NogizakaScheduleTypeName.Web,
+    type: 'web',
+    displayName: 'WEB',
   },
   {
-    type: NogizakaScheduleType.Movie,
-    className: '.movie',
-    displayName: NogizakaScheduleTypeName.Movie,
+    type: 'movie',
+    displayName: '映画',
   },
   {
-    type: NogizakaScheduleType.Theatre,
-    className: '.theatre',
-    displayName: NogizakaScheduleTypeName.Theatre,
+    type: 'musical',
+    displayName: '舞台/ミュージカル',
   },
   {
-    type: NogizakaScheduleType.Release,
-    className: '.release',
-    displayName: NogizakaScheduleTypeName.Release,
+    type: 'release',
+    displayName: 'リリース',
   },
   {
-    type: NogizakaScheduleType.Birthday,
-    className: '.bd',
-    displayName: NogizakaScheduleTypeName.Birthday,
+    type: 'birthday',
+    displayName: '誕生日',
   },
 ];
 

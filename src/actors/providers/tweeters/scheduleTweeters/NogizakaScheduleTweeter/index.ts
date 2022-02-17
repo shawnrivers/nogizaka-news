@@ -4,6 +4,17 @@ import { getOneDigitDate } from '../../../../../utils/date';
 import { BaseScheduleTweeter } from '../BaseScheduleTweeter';
 import { getTweetableSchedulesWithType } from '../BaseScheduleTweeter/converters';
 import { ScheduleDate, ScheduleWithType } from '../BaseScheduleTweeter/types';
+import axios from 'axios';
+
+type ScheduleResponse = {
+  data: {
+    cate: string;
+    date: string;
+    start_time: string;
+    end_time: string;
+    title: string;
+  }[];
+};
 
 export class NogizakaScheduleTweeter extends BaseScheduleTweeter {
   constructor(twitter: Twit) {
@@ -16,31 +27,39 @@ export class NogizakaScheduleTweeter extends BaseScheduleTweeter {
     this.tweetPoster.tweetThread(formattedSchedules);
   }
 
-  private async getSchedules(date: ScheduleDate): Promise<ScheduleWithType[]> {
-    const schedules = [];
-    const url = `https://www.nogizaka46.com/schedule/?to=${date.year}${date.month}`;
-    const $ = await this.addDOMSelector({ url, scraperId: 'nogizaka' });
+  public async getSchedules(date: ScheduleDate): Promise<ScheduleWithType[]> {
+    const { year, month, day } = date;
 
-    if ($ !== null) {
-      const dayElement = $(`#d${date.day}`);
+    const schedules: ScheduleWithType[] = [];
+
+    try {
+      const response = await axios.get(
+        `https://www.nogizaka46.com/s/n46/api/list/schedule?dy=${year}${month}&callback=res`,
+      );
+
+      const { data } = JSON.parse(response.data.slice(4).slice(0, -2)) as ScheduleResponse;
+
+      const dayData = data.filter((item) => item.date === `${year}/${month}/${day}`);
 
       for (const NogizakaScheduleType of NOGIZAKA_SCHEDULE_TYPES) {
-        const typeSchedulesData = [];
-        const typeSchedulesElement = dayElement.find(NogizakaScheduleType.className).get();
+        const schedulesByType: string[] = [];
 
-        if (typeSchedulesElement.length !== 0) {
-          for (const typeScheduleElement of typeSchedulesElement) {
-            const scheduleData = typeScheduleElement.children[0].data as string;
-            typeSchedulesData.push(scheduleData);
-          }
-        }
+        dayData
+          .filter((data) => data.cate === NogizakaScheduleType.type)
+          .forEach((data) => {
+            const durationText = `${data.start_time}〜${data.end_time}`;
+            const text = durationText !== `〜` ? `${durationText} ${data.title}` : data.title;
 
-        const typeSchedules = {
+            schedulesByType.push(text);
+          });
+
+        schedules.push({
           type: NogizakaScheduleType.displayName,
-          schedule: typeSchedulesData,
-        };
-        schedules.push(typeSchedules);
+          schedule: schedulesByType,
+        });
       }
+    } catch (error) {
+      console.log('Error:', error);
     }
 
     return schedules;
