@@ -58,7 +58,7 @@ xdescribe('GraduatedScheduleTweeter', () => {
       graduatedScheduleTweeter.getMahiroSchedules({ year: '2021', month: '07', day: '23' }).then((schedules) => {
         mahiroSchedules = schedules;
       }),
-      graduatedScheduleTweeter.getTakayamaSchedules({ year: '2021', month: '12', day: '06' }).then((schedules) => {
+      graduatedScheduleTweeter.getTakayamaSchedules({ year: '2022', month: '01', day: '31' }).then((schedules) => {
         takayamaSchedules = schedules;
       }),
       graduatedScheduleTweeter.getIkutaSchedules({ year: '2022', month: '03', day: '07' }).then((schedules) => {
@@ -325,7 +325,7 @@ xdescribe('GraduatedScheduleTweeter', () => {
       {
         type: 'TV',
         schedule: {
-          date: '20:30～21:48',
+          date: '20:30～21:54',
           title: 'テレビ朝日系「Qさま!!」',
           memberName: '高山一実',
         },
