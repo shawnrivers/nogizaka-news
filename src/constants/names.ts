@@ -75,6 +75,14 @@ export enum NogizakaName {
   KashiwaYukina = '柏幸奈',
   AndouMikumo = '安藤美雲',
   IwaseYumiko = '岩瀬佑美子',
+  InoueNagi = '井上和',
+  IchinoseMiku = '一ノ瀬美空',
+  SugawaraSatsuki = '菅原咲月',
+  OgawaAya = '小川彩',
+  TomisatoNao = '冨里奈央',
+  OkudaIroha = '奥田いろは',
+  NakanishiAruno = '中西アルノ',
+  IokiMao = '五百城茉央',
 }
 
 export const NOGIZAKA_NAMES: NogizakaName[] = [
@@ -154,4 +162,12 @@ export const NOGIZAKA_NAMES: NogizakaName[] = [
   NogizakaName.KashiwaYukina,
   NogizakaName.AndouMikumo,
   NogizakaName.IwaseYumiko,
+  NogizakaName.InoueNagi,
+  NogizakaName.IchinoseMiku,
+  NogizakaName.SugawaraSatsuki,
+  NogizakaName.OgawaAya,
+  NogizakaName.TomisatoNao,
+  NogizakaName.OkudaIroha,
+  NogizakaName.NakanishiAruno,
+  NogizakaName.IokiMao,
 ];
