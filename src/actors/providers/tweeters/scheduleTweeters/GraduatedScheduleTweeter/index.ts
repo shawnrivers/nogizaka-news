@@ -38,6 +38,7 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
         this.getMatsumuraSchedules(date),
         this.getMahiroSchedules(date),
         this.getTakayamaSchedules(date),
+        this.getIkutaSchedules(date),
       ])
     ).flat();
 
@@ -442,5 +443,34 @@ export class GraduatedScheduleTweeter extends BaseScheduleTweeter {
     }
 
     return takayamaSchedules;
+  }
+
+  public async getIkutaSchedules(date: ScheduleDate): Promise<MemberScheduleWithType[]> {
+    const { year, month, day } = date;
+    const url = `https://erikaikuta.jp/s/m12/media/list?dy=${year}${month}`;
+    const ikutaSchedules: MemberScheduleWithType[] = [];
+
+    try {
+      const $ = await this.addDOMSelector({ url, scraperId: 'ikutaerika' });
+
+      if ($ !== null) {
+        const dayElements = $(`.list_card > a[href*="year=${year}&mont=${month}&day=${day}"]`);
+
+        dayElements.map((_, element) => {
+          const type = $(element).find('.category').text().trim();
+          const date = $(element).find('.date').text().trim();
+          const title = $(element).find('.title').text().trim();
+
+          ikutaSchedules.push({
+            type,
+            schedule: { date, title, memberName: NogizakaName.IkutaErika },
+          });
+        });
+      }
+    } catch (error) {
+      console.log('Error:', error);
+    }
+
+    return ikutaSchedules;
   }
 }

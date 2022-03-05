@@ -19,6 +19,7 @@ xdescribe('GraduatedScheduleTweeter', () => {
   let matsumuraSchedules: MemberScheduleWithType[] = [];
   let mahiroSchedules: MemberScheduleWithType[] = [];
   let takayamaSchedules: MemberScheduleWithType[] = [];
+  let ikutaSchedules: MemberScheduleWithType[] = [];
 
   let allSchedules: ScheduleWithType[] = [];
 
@@ -59,6 +60,9 @@ xdescribe('GraduatedScheduleTweeter', () => {
       }),
       graduatedScheduleTweeter.getTakayamaSchedules({ year: '2021', month: '12', day: '06' }).then((schedules) => {
         takayamaSchedules = schedules;
+      }),
+      graduatedScheduleTweeter.getIkutaSchedules({ year: '2022', month: '03', day: '07' }).then((schedules) => {
+        ikutaSchedules = schedules;
       }),
       graduatedScheduleTweeter.getSchedules({ year: '2020', month: '11', day: '21' }).then((schedules) => {
         allSchedules = schedules;
@@ -324,6 +328,19 @@ xdescribe('GraduatedScheduleTweeter', () => {
           date: '20:30～21:48',
           title: 'テレビ朝日系「Qさま!!」',
           memberName: '高山一実',
+        },
+      },
+    ]);
+  });
+
+  it("should get Ikuta's schedules", async () => {
+    expect(ikutaSchedules).toEqual([
+      {
+        type: 'TV',
+        schedule: {
+          date: '23:15～00:15',
+          title: 'テレビ朝日「激レアさんを連れてきた。」',
+          memberName: '生田絵梨花',
         },
       },
     ]);
