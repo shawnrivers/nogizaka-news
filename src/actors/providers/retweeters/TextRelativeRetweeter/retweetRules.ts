@@ -33,7 +33,7 @@ const RuleMap: Record<AccountId, TweetRelativeCallback> = {
   [AccountId.MantanWeb]: (text) => !text.includes('今週の美女図鑑') && containsNogizakaNames(text),
 
   // Members
-  [AccountId.IkomaRina]: (text) => text.includes('出演情報'),
+  [AccountId.IkomaRina]: () => true,
   [AccountId.KawagoHina]: (text) =>
     text.includes('お知らせ') ||
     (text.includes('動画') && (text.includes('公開') || text.includes('新作') || text.includes('更新'))) ||
